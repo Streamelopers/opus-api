@@ -1,0 +1,23 @@
+{
+   "name": "workio",
+   "version": "0.0.0",
+   "private": true,
+   "scripts": {
+      "build": "rm -rf build && tsc",
+      "start": "ts-node server.ts",
+      "migrate": "ts-node node_modules/.bin/typeorm migration:run"
+   },
+   "dependencies": {
+      "debug": "~2.6.9",
+      "express": "~4.16.1",
+      "morgan": "~1.9.1",
+      "sqlite3": "^4.0.3",
+      "typeorm": "0.2.29"
+   },
+   "devDependencies": {
+      "@types/express": "^4.17.9",
+      "@types/node": "^8.0.29",
+      "ts-node": "3.3.0",
+      "typescript": "^3.3.3333"
+   }
+}
