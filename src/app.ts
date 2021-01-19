@@ -1,15 +1,22 @@
 var express = require('express');
 var logger = require('morgan');
+require('dotenv').config();
 import {createConnection} from "typeorm";
 
-createConnection({
-    type: "sqlite",
-    database: "../database.sqlite",
-    entities: [`${__dirname}/entities/**/*.js`],
-}).then(connection => {
-    console.log('me conecte yeih');
-});
 
+if (process.env.ENVIRONMENT == 'dev'){    
+    createConnection({
+        type: "sqlite",
+        database: "../database.sqlite",
+        entities: [`${__dirname}/entities/**/*.js`],
+    }).then(connection => {
+        console.log('me conecte yeih');
+    });
+}
+else
+{
+    console.log("Need to configure db in prod");
+}
 
 
 var usersRouter = require('./users/route');

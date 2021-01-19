@@ -16,6 +16,22 @@ router.post('/', function(req, res, next) {
   })
 });
 
+router.post('login', function(req, res, next){
+  UserController.login(req.body).then(response => {
+    res.status(201).send(response);
+  }).catch(error => {
+    res.status(500).send(error);
+  })
+});
+
+router.post('signup', function(req, res, next){
+  UserController.signup(req.body).then(response => {
+    res.status(201).send(response);
+  }).catch(error => {
+    res.status(500).send(error);
+  })
+});
+
 router.put('/', function(req, res, next) {
   res.send('respond with a resource');
 });
