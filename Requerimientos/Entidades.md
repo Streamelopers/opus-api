@@ -10,7 +10,9 @@ El nombre de las tablas debe estar en plural, por ejemplo: Users, Currencies, Co
 |---|---|---|
 | Id | int | identity, primary key, autoincrement, Not null|
 | CreatedAt | DateTime | Not null|
-| IsActive | boolean | Not Null |
+| UpdatedAt | DateTime | Not null|
+| DeletedAt | DateTime | Nullable|
+| IsActive | boolean | Not null |
 | Name | varchar(255) | Not null |
 | Website | varchar(255) | Not null |
 | Description | varchar(8000) | Not null |
@@ -23,7 +25,9 @@ El nombre de las tablas debe estar en plural, por ejemplo: Users, Currencies, Co
 |---|---|---|
 | Id | int | identity, primary key, autoincrement, Not null|
 | CreatedAt | DateTime | Not null|
-| IsActive | Boolean | Not Null |
+| UpdatedAt | DateTime | Not null|
+| DeletedAt | DateTime | Nullable|
+| IsActive | Boolean | Not null |
 | Name | varchar(255) | Not null |
 | Symbol | varchar(10) | Not null |
 | ISOCode | varchar(10) | Not null |
@@ -34,7 +38,9 @@ El nombre de las tablas debe estar en plural, por ejemplo: Users, Currencies, Co
 |---|---|---|
 | Id | int | identity, primary key, autoincrement, Not null|
 | CreatedAt | DateTime | Not null|
-| IsActive | Boolean | Not Null |
+| UpdatedAt | DateTime | Not null|
+| DeletedAt | DateTime | Nullable|
+| IsActive | Boolean | Not null |
 | LocationId | int | Not null |
 | CompanyId | int | Not null |
 | UserId | int | Not null |
@@ -44,19 +50,20 @@ El nombre de las tablas debe estar en plural, por ejemplo: Users, Currencies, Co
 | LevelId | int | Not null |
 | Description | varchar(8000) | Not null |
 | HowToApply | varchar(8000) | Not null |
-| MinSalary | varchar(8000) | Not null |
-| MaxSalary | varchar(8000) | Not null |
-| IsRemote | Boolean | Not Null |
-| IsRemoteOnly | Boolean | Not Null |
-| IsHighlighted | Boolean | Not Null |
+| MinSalary | double | Nullable |
+| MaxSalary | double | Nullable |
+| IsRemote | Boolean | Not null |
+| IsRemoteOnly | Boolean | Not null |
 
 ### JobType
 
 | **Columna**| **Tipo** | **Características** |
 |---|---|---|
 | Id | int | identity, primary key, autoincrement, Not null|
-| CreatedAt | DateTime | Not null|
-| IsActive | Boolean | Not Null |
+| CreatedAt | DateTime | Not null |
+| UpdatedAt | DateTime | Not null |
+| DeletedAt | DateTime | Nullable |
+| IsActive | Boolean | Not null |
 | Name | varchar(255) | Not null |
 
 ### Level
@@ -65,7 +72,9 @@ El nombre de las tablas debe estar en plural, por ejemplo: Users, Currencies, Co
 |---|---|---|
 | Id | int | identity, primary key, autoincrement, Not null|
 | CreatedAt | DateTime | Not null|
-| IsActive | Boolean | Not Null |
+| UpdatedAt | DateTime | Not null|
+| DeletedAt | DateTime | Nullable|
+| IsActive | Boolean | Not null |
 | Name | varchar(255) | Not null |
 
 ### Location
@@ -73,8 +82,10 @@ El nombre de las tablas debe estar en plural, por ejemplo: Users, Currencies, Co
 | **Columna**| **Tipo** | **Características** |
 |---|---|---|
 | Id | int | identity, primary key, autoincrement, Not null|
-| CreatedAt | DateTime | Not null|
-| IsActive | Boolean | Not Null |
+| CreatedAt | DateTime | Not null |
+| UpdatedAt | DateTime | Not null |
+| DeletedAt | DateTime | Nullable |
+| IsActive | Boolean | Not null |
 | PlaceId | varchar(8000) | Not null |
 | Name | varchar(8000) | Not null |
 | Latitude | varchar(8000) | Not null |
@@ -85,8 +96,10 @@ El nombre de las tablas debe estar en plural, por ejemplo: Users, Currencies, Co
 | **Columna**| **Tipo** | **Características** |
 |---|---|---|
 | Id | int | identity, primary key, autoincrement, Not null|
-| CreatedAt | DateTime | Not null|
-| IsActive | Boolean | Not Null |
+| CreatedAt | DateTime | Not null |
+| UpdatedAt | DateTime | Not null |
+| DeletedAt | DateTime | Nullable |
+| IsActive | Boolean | Not null |
 | Name | varchar(255) | Not null|
 | Email | varchar(255) | Not null|
 | Password | varchar(255) | Not null|
@@ -97,7 +110,9 @@ El nombre de las tablas debe estar en plural, por ejemplo: Users, Currencies, Co
 |---|---|---|
 | Id | int | identity, primary key, autoincrement, Not null|
 | CreatedAt | DateTime | Not null|
-| IsActive | Boolean | Not Null |
+| UpdatedAt | DateTime | Not null|
+| DeletedAt | DateTime | Nullable|
+| IsActive | Boolean | Not null |
 | Name | varchar(255) | Not null |
 
 ### Picture
@@ -105,7 +120,9 @@ El nombre de las tablas debe estar en plural, por ejemplo: Users, Currencies, Co
 | **Columna**| **Tipo** | **Características** |
 |---|---|---|
 | Id | int | identity, primary key, autoincrement, Not null|
-| CreatedAt | DateTime | Not null|
+| CreatedAt | DateTime | Not null |
+| UpdatedAt | DateTime | Not null |
+| DeletedAt | DateTime | Nullable |
 | IsActive | Boolean | Not Null |
 | FileName | varchar(255) | Not null |
 | Data | byte array(MAX) | Not null |
@@ -115,6 +132,8 @@ El nombre de las tablas debe estar en plural, por ejemplo: Users, Currencies, Co
 | **Columna**| **Tipo** | **Características** |
 |---|---|---|
 | Id | int | identity, primary key, autoincrement, Not null|
-| CreatedAt | DateTime | Not null|
+| CreatedAt | DateTime | Not null |
+| UpdatedAt | DateTime | Not null |
+| DeletedAt | DateTime | Nullable |
 | IsActive | Boolean | Not Null |
 | Name | varchar(255) | Not null |
