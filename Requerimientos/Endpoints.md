@@ -63,7 +63,7 @@
 |GetPage|pageNumber,pageLength|/picture|GET| |
 |GetById|id|/picture/{id}|GET| |
 |Delete|id|/picture/{id}|DELETE| |
-|Create|name|/picture/|POST| |
+|Create|filename,data|/picture/|POST| |
 |Update|id,name|/picture/{id}|PUT| |
 
 ### TagController
