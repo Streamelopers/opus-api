@@ -1,18 +1,45 @@
-import {getRepository} from "typeorm";
-import {User} from "../framework/entities/User";
+import {DeleteResult, getRepository, UpdateResult} from "typeorm";
+import {Users} from "../framework/entities/User";
 
 export default class UserRepository {
-    static async create(payload: any): Promise<User> {
-        const user = new User();
+    static async create(payload: any): Promise<Users> {
+        const user = new Users();
         user.firstname = payload.firstname;
         user.lastname = payload.lastname;
         user.email = payload.email
         user.password = payload.password;
-        return await getRepository(User).create(user);
+        await getRepository(Users).insert(user);
+        return user;
     }
 
-    static async getByCredentials(email:string, password: string) : Promise<User>{
-        return await getRepository(User).findOne({ email, password });
+    static async getByCredentials(email:string, password: string) : Promise<Users>{
+        return await getRepository(Users).findOne({ email, password });
+    }
+
+    static async getPage(payload): Promise<Users[]> {
+        return await getRepository(Users).find({
+            skip: payload.page * payload.pageSize,
+            take: payload.pageSize
+        });
+    }
+
+    static async getById(userId: string) : Promise<Users>{
+        return await getRepository(Users).findOne(userId);
+    }
+
+    static async update(user: Users): Promise<Users> {
+        const updated = await getRepository(Users).update(user.id, user);
+        if (updated.affected > 0) {
+            return user;
+        }
+    }
+
+    static async delete(userId: string): Promise<boolean> {
+        const deleted = await getRepository(Users).delete(userId);
+        if (deleted.affected > 0) {
+            return true;
+        }
+        return false;
     }
 }
 
