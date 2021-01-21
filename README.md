@@ -1,7 +1,10 @@
 # Opus API
 
-## Comenzando ##
-Instala npm
+## Requerimientos ##
+
+- Node LTS (14.x.x)
+- npm
+
 Corre el comando ```npm install```
 
 

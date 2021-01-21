@@ -116,6 +116,7 @@ El nombre de las tablas debe estar en plural, por ejemplo: Users, Currencies, Co
 | Name | varchar(255) | Not null |
 
 ### Picture
+TODO: NO hay que implementar ahora mismo
 
 | **Columna**| **Tipo** | **Características** |
 |---|---|---|

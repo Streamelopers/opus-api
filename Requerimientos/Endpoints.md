@@ -1,12 +1,12 @@
 # Requerimientos
 
-## Endpoints
+## Endpoints (V1)
 
 ### CompanyController
 
 |Método|Parámetros|Ruta|Verbo|Status|
 |---|---|---|---|---|
-|GetPage|pageNumber,pageLength|/|GET| |
+|GetPage|page,pageSize|/|GET| |
 |GetById|id|/{id}|GET| |
 |Delete|id|/{id}|DELETE| |
 |Create|name,website,description,userid,pictureid|/|POST| |
@@ -16,7 +16,7 @@
 
 |Método|Parámetros|Ruta|Verbo|Status|
 |---|---|---|---|---|
-|GetPage|pageNumber,pageLength|/currency|GET| |
+|GetPage|page,pageSize|/currency|GET| |
 |GetById|id|/currency/{id}|GET| |
 |Delete|id|/currency/{id}|DELETE| |
 |Create|name|/currency|POST| |
@@ -26,7 +26,7 @@
 
 |Método|Parámetros|Ruta|Verbo|Status|
 |---|---|---|---|---|
-|GetPage|pageNumber,pageLength|/job|GET| |
+|GetPage|page,pageSize|/job|GET| |
 |GetById|id|/job/{id}|GET| |
 |Delete|id|/job/{id}|DELETE| |
 |Create|Job, Location|/job/|POST| |
@@ -36,7 +36,7 @@
 
 |Método|Parámetros|Ruta|Verbo|Status|
 |---|---|---|---|---|
-|GetPage|pageNumber,pageLength|/jobtype|GET| |
+|GetPage|page,pageSize|/jobtype|GET| |
 |GetById|id|/jobtype/{id}|GET| |
 |Delete|id|/jobtype/{id}|DELETE| |
 |Create|name|/jobtype/|POST| |
@@ -46,7 +46,7 @@
 
 |Método|Parámetros|Ruta|Verbo|Status|
 |---|---|---|---|---|
-|GetPage|pageNumber,pageLength|/level|GET| |
+|GetPage|page,pageSize|/level|GET| |
 |GetById|id|/level/{id}|GET| |
 |Delete|id|/level/{id}|DELETE| |
 |Create|name|/level/|POST| |
@@ -57,10 +57,10 @@
 - No lleva controller
 
 ### PictureController
-
+No hay que hacerlo ahora mismo
 |Método|Parámetros|Ruta|Verbo|Status|
 |---|---|---|---|---|
-|GetPage|pageNumber,pageLength|/picture|GET| |
+|GetPage|page,pageSize|/picture|GET| |
 |GetById|id|/picture/{id}|GET| |
 |Delete|id|/picture/{id}|DELETE| |
 |Create|filename,data|/picture/|POST| |
@@ -70,7 +70,7 @@
 
 |Método|Parámetros|Ruta|Verbo|Status|
 |---|---|---|---|---|
-|GetPage|pageNumber,pageLength|/tag|GET| |
+|GetPage|page,pageSize|/tag|GET| |
 |GetById|id|/tag/{id}|GET| |
 |Delete|id|/tag/{id}|DELETE| |
 |Create|name|/tag/|POST| |
@@ -82,7 +82,7 @@
 |---|---|---|---|---|
 |Login|email,password|/user/login|POST|✅ |
 |SignOn|name,email,password|/user/signon|POST|🚶‍♂️|
-|GetPage|pageNumber,pageLength|/user|GET| |
+|GetPage|page,pageSize|/user|GET| |
 |GetById|id|/user/{d}|GET| |
 |Create|name,email,password|/user|POST| |
 |Update|id,name,email,password|/user/{id}|PUT| |
