@@ -4,7 +4,7 @@
 
 El nombre de las tablas debe estar en plural, por ejemplo: Users, Currencies, Companies, ...
 
-### Company
+### Company ✅
 
 | **Columna**| **Tipo** | **Características** |
 |---|---|---|
