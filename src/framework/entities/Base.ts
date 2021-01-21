@@ -6,4 +6,13 @@ export abstract class Base {
 
   @Column()
   isActive: boolean;
+
+  @Column({ type: "date" })
+  updatedAt: Date;
+
+  @Column({ type: "date" })
+  createdAt: Date;
+
+  @Column({ type: "date" })
+  deletedAt: Date;
 }

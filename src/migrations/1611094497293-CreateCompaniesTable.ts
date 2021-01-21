@@ -13,11 +13,6 @@ export class CreateCompaniesTable1611094497293 implements MigrationInterface {
                     isGenerated: true,
                 },
                 {
-                    name: "createdat",
-                    type: "datetime",
-                    isNullable: false
-                },
-                {
                     name: "isactive",
                     type: "boolean",
                     isNullable: false,
@@ -31,6 +26,21 @@ export class CreateCompaniesTable1611094497293 implements MigrationInterface {
                 {
                     name: "userid",
                     type: "integer"
+                },
+                {
+                    name: "createdat",
+                    type: "datetime",
+                    isNullable: false
+                },
+                {
+                    name: "updatedat",
+                    type: "datetime",
+                    isNullable: false
+                },
+                {
+                    name: "deletedat",
+                    type: "datetime",
+                    isNullable: true
                 }
             ]
         }));

@@ -14,11 +14,6 @@ export class CreateUserTable1609986995247 implements MigrationInterface {
                     isGenerated: true,
                 },
                 {
-                    name: "createdat",
-                    type: "datetime",
-                    isNullable: false
-                },
-                {
                     name: "isactive",
                     type: "boolean",
                     isNullable: false,
@@ -40,6 +35,21 @@ export class CreateUserTable1609986995247 implements MigrationInterface {
                 {
                     name: "email",
                     type: "varchar",
+                },
+                {
+                    name: "createdat",
+                    type: "datetime",
+                    isNullable: false
+                },
+                {
+                    name: "updatedat",
+                    type: "datetime",
+                    isNullable: false
+                },
+                {
+                    name: "deletedat",
+                    type: "datetime",
+                    isNullable: true
                 }
             ]
         }))
