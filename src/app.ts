@@ -1,16 +1,17 @@
-var express = require('express');
-var logger = require('morgan');
+import express from 'express';
+import logger from 'morgan';
+import {createConnection} from 'typeorm';
+import usersRouter from './users/route';
 require('dotenv').config();
-import {createConnection} from "typeorm";
-
 
 if (process.env.ENVIRONMENT == 'dev'){    
     createConnection({
         type: "sqlite",
+        synchronize: false,
         database: "../database.sqlite",
-        entities: [`${__dirname}/entities/**/*.js`],
+        entities: [`${__dirname}/framework/entities/**/*.ts`],
     }).then(connection => {
-        console.log('me conecte yeih');
+        console.log('Database connected');
     });
 }
 else
@@ -19,14 +20,13 @@ else
 }
 
 
-var usersRouter = require('./users/route');
+
 
 var app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
-app.use('/users', usersRouter);
+app.use('v1/user', usersRouter);
 
 module.exports = app;
