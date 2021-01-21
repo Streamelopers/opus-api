@@ -1,5 +1,5 @@
-import {DeleteResult, getRepository, UpdateResult} from "typeorm";
-import {Users} from "../framework/entities/User";
+import {getRepository} from "typeorm";
+import {Users} from "../framework/entities/Users";
 
 export default class UserRepository {
     static async create(payload: any): Promise<Users> {
