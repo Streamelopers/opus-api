@@ -23,8 +23,8 @@ export default class UserRepository {
         });
     }
 
-    static async getById(userId: string) : Promise<Users>{
-        return await getRepository(Users).findOne(userId);
+    static async getById(id: string) : Promise<Users>{
+        return await getRepository(Users).findOne(id);
     }
 
     static async update(user: Users): Promise<Users> {
@@ -34,8 +34,8 @@ export default class UserRepository {
         }
     }
 
-    static async delete(userId: string): Promise<boolean> {
-        const deleted = await getRepository(Users).delete(userId);
+    static async delete(id: string): Promise<boolean> {
+        const deleted = await getRepository(Users).delete(id);
         if (deleted.affected > 0) {
             return true;
         }

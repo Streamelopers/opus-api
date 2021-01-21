@@ -1,4 +1,4 @@
-import { Users } from '../framework/entities/User';
+import { Users } from '../framework/entities/Users';
 import { LoginResult } from '../framework/dto/LoginResult';
 import UserRepository from './repository';
 
@@ -25,22 +25,22 @@ export default class UserController
         return await UserRepository.getPage(payload);
     }
 
-    static async getById(userId: string): Promise<Users> {
-        return await UserRepository.getById(userId);
+    static async getById(id: string): Promise<Users> {
+        return await UserRepository.getById(id);
     }
 
     static async create(payload: any): Promise<Users> {
         return await UserRepository.create(payload);
     }
 
-    static async update(userId: string, payload: any): Promise<Users> {
-        const getUser = await this.getById(userId);
+    static async update(id: string, payload: any): Promise<Users> {
+        const getUser = await this.getById(id);
         getUser.firstname = payload.firstname;
-        getUser.lastname = payload.firstname;
+        getUser.lastname = payload.lastname;
         return await UserRepository.update(getUser);
     }
 
-    static async delete(userId: string): Promise<boolean> {
-        return await UserRepository.delete(userId);
+    static async delete(id: string): Promise<boolean> {
+        return await UserRepository.delete(id);
     }
 }
