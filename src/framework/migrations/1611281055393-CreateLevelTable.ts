@@ -15,23 +15,22 @@ export class CreateLevelTable1611281055393 implements MigrationInterface {
                 {
                     name: "isactive",
                     type: "boolean",
-                    isNullable: false,
                     default: true
                 },
                 {
                     name: "name",
                     type: "varchar",
-                    isNullable: false
+                    
                 },
                 {
                     name: "createdat",
                     type: "datetime",
-                    isNullable: false
+                    
                 },
                 {
                     name: "updatedat",
                     type: "datetime",
-                    isNullable: false
+                    
                 },
                 {
                     name: "deletedat",

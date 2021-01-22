@@ -15,7 +15,6 @@ export class CreateCompaniesTable1611094497293 implements MigrationInterface {
                 {
                     name: "isactive",
                     type: "boolean",
-                    isNullable: false,
                     default: true
                 },
                 {
@@ -29,13 +28,11 @@ export class CreateCompaniesTable1611094497293 implements MigrationInterface {
                 },
                 {
                     name: "createdat",
-                    type: "datetime",
-                    isNullable: false
+                    type: "datetime"
                 },
                 {
                     name: "updatedat",
-                    type: "datetime",
-                    isNullable: false
+                    type: "datetime"
                 },
                 {
                     name: "deletedat",

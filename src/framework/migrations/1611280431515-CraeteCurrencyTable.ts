@@ -15,33 +15,32 @@ export class CraeteCurrencyTable1611280431515 implements MigrationInterface {
                 {
                     name: "isactive",
                     type: "boolean",
-                    isNullable: false,
                     default: true
                 },
                 {
                     name: "name",
                     type: "varchar",
-                    isNullable: false
+                    
                 },
                 {
                     name: "symbol",
                     type: "varchar",
-                    isNullable: false
+                    
                 },
                 {
                     name: "isocode",
                     type: "varchar",
-                    isNullable: false
+                    
                 },
                 {
                     name: "createdat",
                     type: "datetime",
-                    isNullable: false
+                    
                 },
                 {
                     name: "updatedat",
                     type: "datetime",
-                    isNullable: false
+                    
                 },
                 {
                     name: "deletedat",
