@@ -1,10 +1,10 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class CraeteCurrencyTable1611280431515 implements MigrationInterface {
+export class CreateLevelTable1611281055393 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.createTable(new Table({
-            name: "currencies",
+        queryRunner.createTable(new Table({
+            name: "levels",
             columns: [
                 {
                     name: "id",
@@ -20,16 +20,6 @@ export class CraeteCurrencyTable1611280431515 implements MigrationInterface {
                 },
                 {
                     name: "name",
-                    type: "varchar",
-                    isNullable: false
-                },
-                {
-                    name: "symbol",
-                    type: "varchar",
-                    isNullable: false
-                },
-                {
-                    name: "isocode",
                     type: "varchar",
                     isNullable: false
                 },
@@ -53,7 +43,7 @@ export class CraeteCurrencyTable1611280431515 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable("currencies");
+        await queryRunner.dropTable("levels");
     }
 
 }
