@@ -24,10 +24,10 @@ export class Jobs extends Base {
   @Column()
   maxSalary: number;
 
-  @Column()
+  @Column({ default: false })
   isRemote: boolean;
 
-  @Column()
+  @Column({ default: false })
   isRemoteOnly: boolean;
 
   @OneToOne(() => Companies)
