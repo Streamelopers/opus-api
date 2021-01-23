@@ -1,4 +1,5 @@
 import { Request, Response, Router } from 'express';
+import BaseHandler from '../framework/utils/BaseHandler';
 import UserController from './controller';
 
 const router = Router();
@@ -22,7 +23,7 @@ router.post('signup', function(req, res){
 
 router.get('', function(req, res) {
   UserController.getPage(req.query).then(response => {
-    res.status(200).send(response);
+    BaseHandler(res, response, 'User list');
   }).catch(error => {
     res.status(500).send(error);
   })
