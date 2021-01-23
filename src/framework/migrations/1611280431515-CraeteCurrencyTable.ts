@@ -13,7 +13,7 @@ export class CraeteCurrencyTable1611280431515 implements MigrationInterface {
                     isGenerated: true
                 },
                 {
-                    name: "isactive",
+                    name: "is_active",
                     type: "boolean",
                     default: true
                 },

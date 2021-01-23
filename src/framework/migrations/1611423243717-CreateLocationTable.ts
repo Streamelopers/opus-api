@@ -14,7 +14,7 @@ export class CreateLocationTable1611423243717 implements MigrationInterface {
                     isGenerated: true,
                 },
                 {
-                    name: "isactive",
+                    name: "is_active",
                     type: "boolean",
                     default: true
                 },
@@ -24,12 +24,12 @@ export class CreateLocationTable1611423243717 implements MigrationInterface {
                     
                 },
                 {
-                    name: "lat",
+                    name: "latitude",
                     type: "varchar",
                     
                 },
                 {
-                    name: "lon",
+                    name: "longitude",
                     type: "varchar",
                     
                 },

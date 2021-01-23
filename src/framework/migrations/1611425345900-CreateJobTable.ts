@@ -13,7 +13,7 @@ export class CreateJobTable1611425345900 implements MigrationInterface {
                     isGenerated: true,
                 },
                 {
-                    name: "isactive",
+                    name: "is_active",
                     type: "boolean",
                     default: true
                 },
@@ -65,7 +65,7 @@ export class CreateJobTable1611425345900 implements MigrationInterface {
                     isNullable: true
                 },
                 {
-                    name: "paymenttype_id",
+                    name: "payment_type_id",
                     type: "integer",
                     isNullable: true
                 },
@@ -74,7 +74,7 @@ export class CreateJobTable1611425345900 implements MigrationInterface {
                     type: "integer",
                 },
                 {
-                    name: "jobtype_id",
+                    name: "job_type_id",
                     type: "integer",
                 },
                 {
@@ -122,9 +122,9 @@ export class CreateJobTable1611425345900 implements MigrationInterface {
                     onDelete: "CASCADE"
                 }),
                 new TableForeignKey({
-                    columnNames: ["paymenttype_id"],
+                    columnNames: ["payment_type_id"],
                     referencedColumnNames: ["id"],
-                    referencedTableName: "paymenttypes",
+                    referencedTableName: "payment_types",
                     onDelete: "CASCADE"
                 }),
                 new TableForeignKey({
@@ -134,9 +134,9 @@ export class CreateJobTable1611425345900 implements MigrationInterface {
                     onDelete: "CASCADE"
                 }),
                 new TableForeignKey({
-                    columnNames: ["jobtype_id"],
+                    columnNames: ["job_type_id"],
                     referencedColumnNames: ["id"],
-                    referencedTableName: "jobtypes",
+                    referencedTableName: "job_types",
                     onDelete: "CASCADE"
                 }),
                 new TableForeignKey({

@@ -7,8 +7,8 @@ export class Locations extends Base {
     name: string;
 
     @Column()
-    lat: string;
+    latitude: string;
 
     @Column()
-    lon: string;
+    longitude: string;
 }
