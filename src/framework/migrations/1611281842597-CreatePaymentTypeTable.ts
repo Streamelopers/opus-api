@@ -4,7 +4,7 @@ export class CreatePaymentTypeTable1611281842597 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(new Table({
-            name: "jobtypaymenttypespes",
+            name: "paymenttypes",
             columns: [
                 {
                     name: "id",
