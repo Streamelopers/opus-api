@@ -16,7 +16,6 @@ export class CreateUserTable1609986995247 implements MigrationInterface {
                 {
                     name: "isactive",
                     type: "boolean",
-                    isNullable: false,
                     default: true
                 },
                 {
@@ -39,12 +38,12 @@ export class CreateUserTable1609986995247 implements MigrationInterface {
                 {
                     name: "createdat",
                     type: "datetime",
-                    isNullable: false
+                    
                 },
                 {
                     name: "updatedat",
                     type: "datetime",
-                    isNullable: false
+                    
                 },
                 {
                     name: "deletedat",

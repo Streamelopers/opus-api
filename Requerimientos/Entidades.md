@@ -19,7 +19,7 @@ El nombre de las tablas debe estar en plural, por ejemplo: Users, Currencies, Co
 | UserId | int | Not null |
 | PictureId | int | Not null |
 
-### Currency
+### Currency ✅
 
 | **Columna**| **Tipo** | **Características** |
 |---|---|---|
@@ -55,7 +55,7 @@ El nombre de las tablas debe estar en plural, por ejemplo: Users, Currencies, Co
 | IsRemote | Boolean | Not null |
 | IsRemoteOnly | Boolean | Not null |
 
-### JobType
+### JobType ✅
 
 | **Columna**| **Tipo** | **Características** |
 |---|---|---|
@@ -66,7 +66,7 @@ El nombre de las tablas debe estar en plural, por ejemplo: Users, Currencies, Co
 | IsActive | Boolean | Not null |
 | Name | varchar(255) | Not null |
 
-### Level
+### Level ✅
 
 | **Columna**| **Tipo** | **Características** |
 |---|---|---|
@@ -104,7 +104,7 @@ El nombre de las tablas debe estar en plural, por ejemplo: Users, Currencies, Co
 | Email | varchar(255) | Not null|
 | Password | varchar(255) | Not null|
 
-### PaymentType
+### PaymentType ✅
 
 | **Columna**| **Tipo** | **Características** |
 |---|---|---|
@@ -128,7 +128,7 @@ TODO: NO hay que implementar ahora mismo
 | FileName | varchar(255) | Not null |
 | Data | byte array(MAX) | Not null |
 
-### Tag
+### Tag ✅
 
 | **Columna**| **Tipo** | **Características** |
 |---|---|---|
