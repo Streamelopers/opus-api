@@ -1,6 +1,5 @@
 import {Entity, Column, OneToOne, JoinColumn} from "typeorm";
-import {Base} from "./Base";
-import {Users} from "./Users";
+import {Base, Users} from "./index";
 
 @Entity()
 export class Companies extends Base {

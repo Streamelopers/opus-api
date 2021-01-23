@@ -5,7 +5,7 @@ export class CreateJobTypeTable1611281640603 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(new Table({
-            name: "jobtypes",
+            name: "job_types",
             columns: [
                 {
                     name: "id",
@@ -14,7 +14,7 @@ export class CreateJobTypeTable1611281640603 implements MigrationInterface {
                     isGenerated: true,
                 },
                 {
-                    name: "isactive",
+                    name: "is_active",
                     type: "boolean",
                     default: true
                 },
@@ -43,7 +43,7 @@ export class CreateJobTypeTable1611281640603 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable("jobtypes");
+        await queryRunner.dropTable("job_types");
     }
 
 }

@@ -1,9 +1,11 @@
+import { query } from "express";
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class CreateTagTable1611281314455 implements MigrationInterface {
+export class CreateLocationTable1611423243717 implements MigrationInterface {
+
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(new Table({
-            name: "tags",
+            name: "locations",
             columns: [
                 {
                     name: "id",
@@ -18,6 +20,16 @@ export class CreateTagTable1611281314455 implements MigrationInterface {
                 },
                 {
                     name: "name",
+                    type: "varchar",
+                    
+                },
+                {
+                    name: "latitude",
+                    type: "varchar",
+                    
+                },
+                {
+                    name: "longitude",
                     type: "varchar",
                     
                 },
@@ -41,6 +53,6 @@ export class CreateTagTable1611281314455 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable("tags");
+        await queryRunner.dropTable("locations");
     }
 }

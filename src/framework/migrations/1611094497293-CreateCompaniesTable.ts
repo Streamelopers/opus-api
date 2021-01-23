@@ -13,7 +13,7 @@ export class CreateCompaniesTable1611094497293 implements MigrationInterface {
                     isGenerated: true,
                 },
                 {
-                    name: "isactive",
+                    name: "is_active",
                     type: "boolean",
                     default: true
                 },
@@ -23,7 +23,7 @@ export class CreateCompaniesTable1611094497293 implements MigrationInterface {
                     length: "200",
                 },
                 {
-                    name: "userid",
+                    name: "user_id",
                     type: "integer"
                 },
                 {
@@ -44,7 +44,7 @@ export class CreateCompaniesTable1611094497293 implements MigrationInterface {
         await queryRunner.createForeignKey(
             'companies',
             new TableForeignKey({
-                columnNames: ["userid"],
+                columnNames: ["user_id"],
                 referencedColumnNames: ["id"],
                 referencedTableName: "users",
                 onDelete: "CASCADE"
