@@ -1,24 +1,42 @@
 import { Users } from '../framework/entities/Users';
 import { LoginResult } from '../framework/dto/LoginResult';
 import UserRepository from './repository';
-
+import crypto from 'crypto';
+import JWT from 'jsonwebtoken';
 export default class UserController 
 {
 
     static async login(payload:any): Promise<LoginResult> {
         const { email, password } = payload;
+
+        const hash = crypto.createHmac('sha512', process.env.OPUS_SALT); /** Hashing algorithm sha512 */
+        hash.update(password);
+        const saltedPassword = hash.digest('hex');
+
+        const userResult = await UserRepository.getByCredentials(email, saltedPassword); 
+
+        if (userResult.id === undefined) {
+            throw "Wrong email or password";
+        }
         
-        let saltedPassword = process.env.OPUS_SALT + password;
-        //TODO Encrypt password before passing it to function
-        let userResult = await UserRepository.getByCredentials(email, saltedPassword); 
-        return null;
+        const sessionToken = JWT.sign({id: userResult.id}, process.env.OPTUS_JWT_KEY, { expiresIn: '1h' });
+
+        return {
+            email,
+            name: `${userResult.firstname} ${userResult.lastname}`,
+            jwt: sessionToken,
+        }
     }
 
     static async signup(payload: any): Promise<Users> {
-        const { email, firstname, lastname, password } = payload; 
-        let saltedPassword = process.env.OPUS_SALT + password;
+        const { password } = payload; 
+        const hash = crypto.createHmac('sha512', process.env.OPUS_SALT); /** Hashing algorithm sha512 */
+        hash.update(password);
+        const saltedPassword = hash.digest('hex');
+
+        const user = {...payload, password: saltedPassword};
         
-        return await UserRepository.create(payload);
+        return await UserRepository.create(user);
     }
 
     static async getPage(payload: any): Promise<Users[]> {

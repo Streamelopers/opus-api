@@ -1,10 +1,11 @@
 import { Request, Response, Router } from 'express';
+import Token from '../framework/middleware/Token';
 import BaseHandler from '../framework/utils/BaseHandler';
 import UserController from './controller';
 
 const router = Router();
 
-router.post('login', function(req: Request, res: Response){
+router.post('/login', function(req: Request, res: Response){
   UserController.login(req.body).then(response => {
     res.status(201).send(response);
   }).catch(error => {
@@ -12,7 +13,7 @@ router.post('login', function(req: Request, res: Response){
   })
 });
 
-router.post('signup', function(req, res){
+router.post('/signup', function(req, res){
   UserController.signup(req.body).then(response => {
     res.status(201).send(response);
   }).catch(error => {
@@ -20,6 +21,7 @@ router.post('signup', function(req, res){
   })
 });
 
+router.use(new Token().init());
 
 router.get('', function(req, res) {
   UserController.getPage(req.query).then(response => {
