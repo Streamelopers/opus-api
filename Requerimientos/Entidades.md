@@ -32,7 +32,7 @@ El nombre de las tablas debe estar en plural, por ejemplo: Users, Currencies, Co
 | Symbol | varchar(10) | Not null |
 | ISOCode | varchar(10) | Not null |
 
-### Job
+### Job ✅
 
 | **Columna**| **Tipo** | **Características** |
 |---|---|---|
@@ -77,7 +77,7 @@ El nombre de las tablas debe estar en plural, por ejemplo: Users, Currencies, Co
 | IsActive | Boolean | Not null |
 | Name | varchar(255) | Not null |
 
-### Location
+### Location ✅
 
 | **Columna**| **Tipo** | **Características** |
 |---|---|---|
@@ -86,7 +86,6 @@ El nombre de las tablas debe estar en plural, por ejemplo: Users, Currencies, Co
 | UpdatedAt | DateTime | Not null |
 | DeletedAt | DateTime | Nullable |
 | IsActive | Boolean | Not null |
-| PlaceId | varchar(8000) | Not null |
 | Name | varchar(8000) | Not null |
 | Latitude | varchar(8000) | Not null |
 | Longitude | varchar(8000) | Not null |

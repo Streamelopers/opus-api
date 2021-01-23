@@ -13,7 +13,7 @@ export class CreateLevelTable1611281055393 implements MigrationInterface {
                     isGenerated: true
                 },
                 {
-                    name: "isactive",
+                    name: "is_active",
                     type: "boolean",
                     default: true
                 },

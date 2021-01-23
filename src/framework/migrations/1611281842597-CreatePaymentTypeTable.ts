@@ -4,7 +4,7 @@ export class CreatePaymentTypeTable1611281842597 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(new Table({
-            name: "jobtypaymenttypespes",
+            name: "payment_types",
             columns: [
                 {
                     name: "id",
@@ -13,7 +13,7 @@ export class CreatePaymentTypeTable1611281842597 implements MigrationInterface {
                     isGenerated: true,
                 },
                 {
-                    name: "isactive",
+                    name: "is_active",
                     type: "boolean",
                     default: true
                 },
@@ -42,7 +42,7 @@ export class CreatePaymentTypeTable1611281842597 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable("paymenttypes");
+        await queryRunner.dropTable("payment_types");
     }
 
 }

@@ -14,7 +14,7 @@ export class CreateUserTable1609986995247 implements MigrationInterface {
                     isGenerated: true,
                 },
                 {
-                    name: "isactive",
+                    name: "is_active",
                     type: "boolean",
                     default: true
                 },
