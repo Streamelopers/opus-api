@@ -14,19 +14,19 @@ if (process.env.ENVIRONMENT == 'dev'){
         console.log('Database connected');
     });
 }
-else
-{
+else {
     console.log("Need to configure db in prod");
 }
 
+// app server
+const app = express();
 
-
-
-var app = express();
-
+// app config
 app.use(logger(process.env.ENVIRONMENT));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// routes
 app.use('/v1/user', usersRouter);
 
 module.exports = app;
