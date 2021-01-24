@@ -9,7 +9,7 @@ if (process.env.ENVIRONMENT == 'dev'){
         type: "sqlite",
         synchronize: false,
         database: "../database.sqlite",
-        entities: [`${__dirname}/framework/entities/**/*.ts`],
+        entities: [`${__dirname}/framework/entities/*.ts`],
     }).then(connection => {
         console.log('Database connected');
     });
@@ -24,7 +24,7 @@ else
 
 var app = express();
 
-app.use(logger('dev'));
+app.use(logger(process.env.ENVIRONMENT));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use('/v1/user', usersRouter);
