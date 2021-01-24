@@ -1,4 +1,10 @@
-import {Entity, Column, OneToOne, OneToMany, JoinColumn} from "typeorm";
+import {Length, Max, Min} from "class-validator";
+import {
+  Entity,
+  Column,
+  OneToOne,
+  JoinColumn
+} from "typeorm";
 import {
   Base,
   Locations,
@@ -13,15 +19,21 @@ import {
 @Entity()
 export class Jobs extends Base {
   @Column()
+  @Length(20, 500)
   description: string;
 
   @Column()
+  @Length(20, 500)
   howToApply: string;
 
   @Column()
+  @Min(0)
+  @Max(1000000000)
   minSalary: number;
 
   @Column()
+  @Min(0)
+  @Max(1000000000)
   maxSalary: number;
 
   @Column({ default: false })
