@@ -4,7 +4,7 @@ export abstract class Base {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ default: true })
+  @Column({ default: true, name: "is_active" })
   isActive: boolean;
 
   @Column({ type: "date", default: () => "NOW()" })

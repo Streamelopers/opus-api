@@ -5,7 +5,8 @@
 - Node LTS (14.x.x)
 - npm
 
-Corre el comando ```npm install```
+1- Corre el comando ```npm install```
+2- Debes crear un archivo `.env` partiendo desde el `.env.example`.
 
 
 ## Migraciones ##
