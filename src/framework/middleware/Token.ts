@@ -13,22 +13,19 @@ export default class Token {
 
     init(): RequestHandler {
         return async (req: Request, res: Response, next: NextFunction) => {
-            if (req.headers.authorization) {
-                try {
-                    const authorization = req.headers.authorization.split(" ");
-                    if (authorization.length > 1) {
-                        const token = authorization[1];
-                        const err = this.validateToken(token);
-                        if (err) {
-                            return this.errorResponseHandler(res, err);
-                        }
-                    }
-                    return next();
-                } catch (e) {
-                    return BaseHandler(res, undefined, 'User not authorizared', HttpCodes.UNAUTHORIZARED)
-                }
-            }
-            return BaseHandler(res, undefined, 'User not authorizared', HttpCodes.UNAUTHORIZARED)
+          try {
+              const authorization = req.headers.authorization.split(" ");
+              if (authorization.length > 1) {
+                  const token = authorization[1];
+                  const err = this.validateToken(token);
+                  if (err) {
+                      return this.errorResponseHandler(res, err);
+                  }
+              }
+              return next();
+          } catch (e) {
+              return BaseHandler(res, undefined, 'User not authorizared', HttpCodes.UNAUTHORIZARED)
+          }
         }
     }
 
