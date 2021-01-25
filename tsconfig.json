@@ -4,13 +4,15 @@
          "es5",
          "es6"
       ],
+      "types": ["jest", "node"],
       "target": "es6",
       "module": "commonjs",
       "moduleResolution": "node",
       "outDir": "./build",
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
-      "sourceMap": true,
+      "sourceMap": true,   
       "esModuleInterop": true
-   }
+   },
+   "exclude": ["src/**/*.test.ts"]
 }

@@ -6,3 +6,5 @@ tmp/
 temp/
 *.sqlite
 .env
+
+coverage/
