@@ -5,3 +5,5 @@ build/
 tmp/
 temp/
 *.sqlite
+
+coverage/
