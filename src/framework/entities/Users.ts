@@ -1,16 +1,28 @@
 import {Entity, Column} from "typeorm";
+import {
+  Length,
+  IsEmail,
+  IsAlphanumeric,
+  MinLength
+} from "class-validator";
 import {Base} from "./Base";
+
 @Entity()
 export class Users extends Base {
-    @Column()
-    firstname: string;
+  @Column()
+  @Length(2, 40)
+  firstname: string;
 
-    @Column()
-    lastname: string;
+  @Column()
+  @Length(3, 40)
+  lastname: string;
 
-    @Column()
-    email: string;
+  @Column()
+  @IsEmail()
+  email: string;
 
-    @Column()
-    password: string;
+  @Column()
+  @MinLength(8)
+  @IsAlphanumeric()
+  password: string;
 }
