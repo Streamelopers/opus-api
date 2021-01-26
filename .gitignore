@@ -5,5 +5,6 @@ build/
 tmp/
 temp/
 *.sqlite
+.env
 
 coverage/
