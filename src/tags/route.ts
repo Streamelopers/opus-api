@@ -10,15 +10,6 @@ import Token from "../framework/middleware/Token";
 
 const router = Router();
 
-// router.use(new Token().init());
-
-router.post("/", function(req: Request, res: Response) {
-  TagController
-    .create(req.body)
-    .then(response => res.status(200).send(response))
-    .catch(err => res.status(500).send(err));
-});
-
 router.get("/", function(req: Request, res: Response) {
   TagController
     .getPage(req.query)
@@ -26,9 +17,18 @@ router.get("/", function(req: Request, res: Response) {
     .catch(err => res.status(500).send(err));
 });
 
+router.use(new Token().init());
+
 router.get("/:id", function(req: Request, res: Response) {
   TagController
     .getById(req.params.id)
+    .then(response => res.status(200).send(response))
+    .catch(err => res.status(500).send(err));
+});
+
+router.post("/", function(req: Request, res: Response) {
+  TagController
+    .create(req.body)
     .then(response => res.status(200).send(response))
     .catch(err => res.status(500).send(err));
 });

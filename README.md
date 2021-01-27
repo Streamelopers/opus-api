@@ -14,4 +14,19 @@
 Para las migraciones estamos utilizando el paquete [typeorm](https://typeorm.io/#/).
 Para crear una nueva migración usamos este comando:
 
-```npx typeorm migration:create -n NombreDeLaMigracion```
+```sh
+npm run migrate:create NombreDeLaMigracion
+```
+
+Correr migraciones
+
+```sh
+npm run migrate:run
+```
+
+## Seeders
+
+Para correr todos los seeders
+```sh
+npm run seed:run
+```

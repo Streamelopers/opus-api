@@ -5,14 +5,10 @@ import routes from "./routes";
 import {createConnection} from 'typeorm';
 
 if (process.env.ENVIRONMENT == 'dev'){    
-    createConnection({
-        type: "sqlite",
-        synchronize: true,
-        database: "../database.sqlite",
-        entities: [`${__dirname}/framework/entities/*.ts`],
-    }).then(connection => {
-        console.log('Database connected');
-    });
+    createConnection()
+        .then(connection => {
+            console.log('Database connected');
+        });
 }
 else {
     console.log("Need to configure db in prod");
