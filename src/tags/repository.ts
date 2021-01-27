@@ -11,7 +11,10 @@ export default class TagRepository {
   }
 
   static async getPage(payload: any): Promise<Tags[]> {
-    return await getRepository(Tags).find();
+    return await getRepository(Tags).find({
+      skip: payload.page * payload.pageSize,
+      take: payload.pageSize
+    });
   }
 
   static async getById(id: string) : Promise<Tags>{
