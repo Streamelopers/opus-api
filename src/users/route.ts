@@ -21,7 +21,7 @@ router.post('/signup', function(req, res){
   })
 });
 
-router.use(new Token().init());
+// router.use(new Token().init());
 
 router.get('', function(req, res) {
   UserController.getPage(req.query).then(response => {

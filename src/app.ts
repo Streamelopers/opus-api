@@ -1,13 +1,13 @@
+require('dotenv').config();
 import express from 'express';
 import logger from 'morgan';
+import routes from "./routes";
 import {createConnection} from 'typeorm';
-import usersRouter from './users/route';
-require('dotenv').config();
 
 if (process.env.ENVIRONMENT == 'dev'){    
     createConnection({
         type: "sqlite",
-        synchronize: false,
+        synchronize: true,
         database: "../database.sqlite",
         entities: [`${__dirname}/framework/entities/*.ts`],
     }).then(connection => {
@@ -27,6 +27,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // routes
-app.use('/v1/user', usersRouter);
+app.use(routes);
 
 module.exports = app;

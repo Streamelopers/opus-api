@@ -4,7 +4,7 @@
    "private": true,
    "scripts": {
       "build": "rm -rf build && tsc",
-      "start": "ts-node server.ts",
+      "start": "nodemon server.ts",
       "test": "jest",
       "test:coverage": "jest --coverage",
       "migrate": "ts-node node_modules/.bin/typeorm migration:run"
