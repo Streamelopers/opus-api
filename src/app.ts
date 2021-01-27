@@ -1,18 +1,14 @@
+require('dotenv').config();
 import express from 'express';
 import logger from 'morgan';
+import routes from "./routes";
 import {createConnection} from 'typeorm';
-import usersRouter from './users/route';
-require('dotenv').config();
 
 if (process.env.ENVIRONMENT == 'dev'){    
-    createConnection({
-        type: "sqlite",
-        synchronize: false,
-        database: "../database.sqlite",
-        entities: [`${__dirname}/framework/entities/*.ts`],
-    }).then(connection => {
-        console.log('Database connected');
-    });
+    createConnection()
+        .then(connection => {
+            console.log('Database connected');
+        });
 }
 else {
     console.log("Need to configure db in prod");
@@ -27,6 +23,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // routes
-app.use('/v1/user', usersRouter);
+app.use(routes);
 
 module.exports = app;
