@@ -1,7 +1,7 @@
 import { JobTypes } from "../framework/entities";
 import JobTypeRepository from "./repository";
 
-export default class CurrencyController {
+export default class JobTypeController {
   static async getPage(payload: any): Promise<JobTypes[]> {
     return await JobTypeRepository.getPage(payload);
   }
