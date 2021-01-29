@@ -7,10 +7,10 @@ export abstract class Base {
   @Column({ default: true, name: "is_active" })
   isActive: boolean;
 
-  @Column({ type: "date", default: () => "NOW()" })
+  @Column({ type: "date", default: () => "date('now')" })
   updatedAt: Date;
 
-  @Column({ type: "date", default: () => "NOW()"})
+  @Column({ type: "date", default: () => "date('now')"})
   createdAt: Date;
 
   @Column({ type: "date", nullable: true })
