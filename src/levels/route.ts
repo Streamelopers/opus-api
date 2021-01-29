@@ -4,45 +4,45 @@ import {
   Router
 } from "express";
 import BaseHandler from "../framework/utils/BaseHandler";
-import TagController from "./controller";
+import LevelRepository from "./controller";
 import Token from "../framework/middleware/Token";
 
 const router = Router();
 
+router.use(new Token().init());
+
 router.get("/", function(req: Request, res: Response) {
-  TagController
+  LevelRepository
     .getPage(req.query)
-    .then(response => BaseHandler(res, response, "Tag list"))
+    .then(response => BaseHandler(res, response, "Level list"))
     .catch(err => res.status(500).send(err));
 });
 
-router.use(new Token().init());
-
 router.get("/:id", function(req: Request, res: Response) {
-  TagController
+  LevelRepository
     .getById(req.params.id)
-    .then(response => BaseHandler(res, response, "Tag retrieve"))
+    .then(response => BaseHandler(res, response, "Level retrieve"))
     .catch(err => res.status(500).send(err));
 });
 
 router.post("/", function(req: Request, res: Response) {
-  TagController
+  LevelRepository
     .create(req.body)
-    .then(response => BaseHandler(res, response, "Tag created"))
+    .then(response => BaseHandler(res, response, "Level created"))
     .catch(err => res.status(500).send(err));
 });
 
 router.put("/:id", function(req: Request, res: Response) {
-  TagController
+  LevelRepository
     .update(req.params.id, req.body)
-    .then(response => BaseHandler(res, response, "Tag updated"))
+    .then(response => BaseHandler(res, response, "Level updated"))
     .catch(err => res.status(500).send(err));
 });
 
 router.delete("/:id", function(req: Request, res: Response) {
-  TagController
+  LevelRepository
     .delete(req.params.id)
-    .then(response => BaseHandler(res, response, "Tag deleted"))
+    .then(response => BaseHandler(res, response, "Level deleted"))
     .catch(err => res.status(500).send(err));
 });
 
