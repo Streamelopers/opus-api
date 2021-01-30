@@ -14,22 +14,20 @@ export default class Token {
     init(): RequestHandler {
         return async (req: Request, res: Response, next: NextFunction) => {
           try {
-              const authorization = req.headers.authorization.split(" ");
-              if (authorization.length > 1) {
-                  const token = authorization[1];
-                  const err = this.validateToken(token);
-                  if (err) {
-                      return this.errorResponseHandler(res, err);
-                  }
-              }
+              const token = req.headers.authorization.split(" ")[1];
+              const userId = this.validateToken(token);
+              
+              // save user id on locals
+              // res.locals.userId = userId;
+              
               return next();
-          } catch (e) {
-              return BaseHandler(res, undefined, 'User not authorizared', HttpCodes.UNAUTHORIZARED)
+          } catch (err) {
+            return this.errorResponseHandler(res, err);
           }
         }
     }
 
-    private errorResponseHandler(res: Response, error: any) {
+  private errorResponseHandler(res: Response, error: any) {
     switch (error.name) {
       case this.EXPIRED_TOKEN:
         return BaseHandler(res, undefined, 'User token expired', HttpCodes.AUTH_EXPIRED)
@@ -39,12 +37,7 @@ export default class Token {
     }
   }
 
-    private validateToken(token: string): any {
-    try {
-      JWT.verify(token, process.env.OPTUS_JWT_KEY);
-      return;
-    } catch (e) {
-      return e;
-    }
+  private validateToken(token: string): any {
+    return JWT.verify(token, process.env.OPTUS_JWT_KEY);
   }
 }
