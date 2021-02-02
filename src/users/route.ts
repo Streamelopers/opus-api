@@ -3,7 +3,7 @@ import middlewareValidator from '../framework/middleware/Validator';
 import BaseHandler from '../framework/utils/BaseHandler';
 import UserController from './controller';
 import UserRepository from './repository';
-import {check} from 'express-validator';
+import { check, param } from 'express-validator';
 import { Request, Response, Router } from 'express';
 
 const router = Router();
@@ -43,12 +43,18 @@ router.post(
 
 router.use(new Token().init());
 
-router.get('', function(req, res) {
-  UserController.getPage(req.query).then(response => {
-    BaseHandler(res, response, 'User list');
-  }).catch(error => {
-    res.status(500).send(error);
-  })
+router.get(
+  '/',
+  [
+    param('page').default(1),
+    param('pageSize').default(50)
+  ],
+  middlewareValidator,
+  function(req, res) {
+  UserController
+    .getPage(req.query)
+    .then(response => BaseHandler(res, response, 'User list'))
+    .catch(error => BaseHandler(res, error, 'User list'))
 });
 
 router.get(
