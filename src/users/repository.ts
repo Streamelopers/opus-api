@@ -28,9 +28,7 @@ export default class UserRepository {
     }
 
     static async getByEmail(email: string): Promise<Users> {
-        return await getRepository(Users).findOne({
-            email: email
-        });
+        return await getRepository(Users).findOne({ email });
     }
 
     static async update(user: Users): Promise<Users> {
