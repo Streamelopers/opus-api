@@ -19,6 +19,10 @@ import {
 @Entity()
 export class Jobs extends Base {
   @Column()
+  @Length(5, 50)
+  title: string;
+
+  @Column()
   @Length(20, 500)
   description: string;
 
