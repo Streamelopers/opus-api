@@ -19,8 +19,7 @@ export class CreateJobTable1611425345900 implements MigrationInterface {
                 },
                 {
                     name: "title",
-                    type: "varchar",
-                    
+                    type: "varchar"
                 },
                 {
                     name: "description",
