@@ -3,8 +3,6 @@ import BaseHandler from "../utils/BaseHandler";
 import JWT from "jsonwebtoken";
 import { HttpCodes } from "../utils/HttpCodes";
 
-
-
 export default class Token {
     EXPIRED_TOKEN = "TokenExpiredError";
     INVALID_TOKEN = "JsonWebTokenError";
@@ -12,24 +10,19 @@ export default class Token {
     constructor() {}
 
     init(): RequestHandler {
-        return async (req: Request, res: Response, next: NextFunction) => {
-          try {
-              const authorization = req.headers.authorization.split(" ");
-              if (authorization.length > 1) {
-                  const token = authorization[1];
-                  const err = this.validateToken(token);
-                  if (err) {
-                      return this.errorResponseHandler(res, err);
-                  }
-              }
-              return next();
-          } catch (e) {
-              return BaseHandler(res, undefined, 'User not authorizared', HttpCodes.UNAUTHORIZARED)
-          }
+      return async (req: Request, res: Response, next: NextFunction) => {
+        try {
+          const token = req.headers.authorization.split(" ")[1];
+          const _userId: TokenPayload = this.validateToken(token);
+
+          return next();
+        } catch (err) {
+          return this.errorResponseHandler(res, err);
         }
+      }
     }
 
-    private errorResponseHandler(res: Response, error: any) {
+  private errorResponseHandler(res: Response, error: any) {
     switch (error.name) {
       case this.EXPIRED_TOKEN:
         return BaseHandler(res, undefined, 'User token expired', HttpCodes.AUTH_EXPIRED)
@@ -39,12 +32,7 @@ export default class Token {
     }
   }
 
-    private validateToken(token: string): any {
-    try {
-      JWT.verify(token, process.env.OPTUS_JWT_KEY);
-      return;
-    } catch (e) {
-      return e;
-    }
+  private validateToken(token: string): TokenPayload {
+    return JWT.verify(token, process.env.OPTUS_JWT_KEY);
   }
 }
