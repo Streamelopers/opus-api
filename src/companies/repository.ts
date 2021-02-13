@@ -1,8 +1,8 @@
-import {getRepository} from "typeorm";
+import {getRepository, UpdateResult} from "typeorm";
 import {Companies} from "../framework/entities";
 
 export default class CompanyRepository {
-  static async create(payload: any): Promise<Companies> {
+  static async create(payload: CompanyPayload): Promise<Companies> {
     const company = new Companies();
     company.name = payload.name;
     company.website = payload.website;
@@ -24,14 +24,13 @@ export default class CompanyRepository {
     return await getRepository(Companies).findOne(id);
   }
 
-  static async update(company: Companies): Promise<Companies> {
-    const updated = await getRepository(Companies).update(company.id, company);
-    if (updated.affected > 0) return company;
+  static async update(company: Companies): Promise<UpdateResult> {
+    return await getRepository(Companies).update(company.id, company);
   }
 
   static async delete(id: string): Promise<boolean> {
     const deleted = await getRepository(Companies).delete(id);
-    if (deleted.affected > 0) return true;
-    return false;
+
+    return deleted.affected > 0;
   }
 }

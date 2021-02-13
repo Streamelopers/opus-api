@@ -10,11 +10,11 @@ export default class CompanyController {
     return await CompanyRepository.getById(id);
   }
 
-  static async create(payload: any): Promise<Companies> {
+  static async create(payload: CompanyPayload): Promise<Companies> {
     return await CompanyRepository.create(payload);
   }
 
-  static async update(id: string, payload: any): Promise<Companies> {
+  static async update(id: string, payload: CompanyPayload): Promise<Companies> {
     const company = await this.getById(id);
     company.name = payload.name;
     company.website = payload.website;

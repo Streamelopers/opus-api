@@ -1,11 +1,11 @@
 import {
-    Request,
-    Response,
-    Router
-  } from "express";
-  import BaseHandler from "../framework/utils/BaseHandler";
-  import CompanyController from "./controller";
-  import Token from "../framework/middleware/Token";
+  Request,
+  Response,
+  Router
+} from "express";
+import BaseHandler from "../framework/utils/BaseHandler";
+import CompanyController from "./controller";
+import Token from "../framework/middleware/Token";
 import { HttpCodes } from "../framework/utils/HttpCodes";
   
   const router = Router();
