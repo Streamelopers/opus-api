@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+  api:
+    container_name: api
+    image: node:12
+    working_dir: /app
+    command: npm run start:dev
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./:/app
+  database:
+    container_name: database
+    image: postgres:12
+    environment:
+      POSTGRES_USER: 'opus-admin'
+      POSTGRES_PASSWORD: 'p4ssW0rd'
+      POSTGRES_DB: 'opus'
+    ports:
+      - '5432:5432'
