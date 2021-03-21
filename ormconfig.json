@@ -1,0 +1,10 @@
+{
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "opus-admin",
+    "password": "p4ssW0rd",
+    "database": "opus",
+    "entities": ["dist/**/*.entity{.ts,.js}"],
+    "synchronize": false
+  }
