@@ -7,10 +7,10 @@
     "database": "opus",
     "entities": ["dist/**/*.entity{.ts,.js}"],
     "migrations": [
-      "src/framework/migrations/*.ts"
+      "dist/framework/migrations/*.js"
     ],
     "cli": {
-      "migrationsDir": "src/framework/migrations"
+      "migrationsDir": "framework/migrations"
    },
     "synchronize": false
   }
