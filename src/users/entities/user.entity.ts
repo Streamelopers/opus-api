@@ -1,7 +1,8 @@
 import { Base } from "../../../framework/entities/base";
 import { Entity, Column} from "typeorm";
+
 @Entity()
-export class Users extends Base {
+export class User extends Base {
   @Column({name:"first_name"})
   firstname: string;
 
