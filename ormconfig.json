@@ -1,6 +1,6 @@
 {
     "type": "postgres",
-    "host": "localhost",
+    "host": "opus-database",
     "port": 5432,
     "username": "opus-admin",
     "password": "p4ssW0rd",
