@@ -11,7 +11,7 @@ import {
 import { TagsService } from './tags.service';
 import { CreateTagDto } from './dto/create-tag.dto';
 import { UpdateTagDto } from './dto/update-tag.dto';
-import { QueryParams } from 'src/common/utils/query';
+import { QueryParams } from '../../framework/utils/query';
 
 @Controller('tags')
 export class TagsController {
