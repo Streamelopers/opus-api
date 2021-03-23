@@ -13,9 +13,7 @@ services:
   database:
     container_name: opus-database
     image: postgres:12
-    environment:
-      POSTGRES_USER: 'opus-admin'
-      POSTGRES_PASSWORD: 'p4ssW0rd'
-      POSTGRES_DB: 'opus'
+    env_file:
+      - ./.env
     ports:
       - '5432:5432'
