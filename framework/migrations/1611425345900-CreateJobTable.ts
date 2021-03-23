@@ -115,43 +115,43 @@ export class CreateJobTable1611425345900 implements MigrationInterface {
                     columnNames: ["user_id"],
                     referencedColumnNames: ["id"],
                     referencedTableName: "users",
-                    onDelete: "CASCADE"
+                    onDelete: "NO ACTION"
                 }),
                 new TableForeignKey({
                     columnNames: ["company_id"],
                     referencedColumnNames: ["id"],
                     referencedTableName: "companies",
-                    onDelete: "CASCADE"
+                    onDelete: "NO ACTION"
                 }),
                 new TableForeignKey({
                     columnNames: ["currency_id"],
                     referencedColumnNames: ["id"],
                     referencedTableName: "currencies",
-                    onDelete: "CASCADE"
+                    onDelete: "NO ACTION"
                 }),
                 new TableForeignKey({
                     columnNames: ["payment_type_id"],
                     referencedColumnNames: ["id"],
                     referencedTableName: "payment_types",
-                    onDelete: "CASCADE"
+                    onDelete: "NO ACTION"
                 }),
                 new TableForeignKey({
                     columnNames: ["location_id"],
                     referencedColumnNames: ["id"],
                     referencedTableName: "locations",
-                    onDelete: "CASCADE"
+                    onDelete: "NO ACTION"
                 }),
                 new TableForeignKey({
                     columnNames: ["job_type_id"],
                     referencedColumnNames: ["id"],
                     referencedTableName: "job_types",
-                    onDelete: "CASCADE"
+                    onDelete: "NO ACTION"
                 }),
                 new TableForeignKey({
                     columnNames: ["level_id"],
                     referencedColumnNames: ["id"],
                     referencedTableName: "levels",
-                    onDelete: "CASCADE"
+                    onDelete: "NO ACTION"
                 })
             ]
         );

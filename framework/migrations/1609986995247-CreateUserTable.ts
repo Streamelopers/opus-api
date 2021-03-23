@@ -19,11 +19,11 @@ export class CreateUserTable1609986995247 implements MigrationInterface {
                     default: true
                 },
                 {
-                    name: "firstname",
+                    name: "first_name",
                     type: "varchar",
                 },
                 {
-                    name: "lastname",
+                    name: "last_name",
                     type: "varchar",
                 },
                 {

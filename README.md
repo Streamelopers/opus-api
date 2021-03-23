@@ -2,25 +2,29 @@
 
 ## Requerimientos ##
 
+- nvm
 - Node LTS (14.x.x)
 - npm
 - Docker
 
-1. Corre el comando `npm run build:docker`. 
-2. En caso de que no quieras usar docker, puedes proceder con `npm run build:local`.
+## Comenzando ##
 
+0. Instala todas las dependencias
+1. Para levantar la imagen de Docker, Corre el comando `npm run build:docker`. 
+2. Podrás acceder al API desde esta url: https://localhost:3000
 
 ## Migraciones ##
 
 Para las migraciones estamos utilizando el paquete [typeorm](https://typeorm.io/#/).
+
 Para crear una nueva migración usamos este comando:
 
 ```sh
-npm run migrate:create NombreDeLaMigracion
+docker exec -it opus-api npm run migrate:create NombreDeLaMigracion
 ```
 
-Correr migraciones
+Para correr migraciones debes correrlas dentro del contenedor
 
 ```sh
-npm run migrate:run
+docker exec -it opus-api npm run migrate:run
 ```
