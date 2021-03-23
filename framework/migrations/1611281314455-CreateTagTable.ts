@@ -1,16 +1,15 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class CreateLevelTable1611281055393 implements MigrationInterface {
-
+export class CreateTagTable1611281314455 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
-        queryRunner.createTable(new Table({
-            name: "levels",
+        await queryRunner.createTable(new Table({
+            name: "tags",
             columns: [
                 {
                     name: "id",
                     type: "int",
                     isPrimary: true,
-                    isGenerated: true
+                    isGenerated: true,
                 },
                 {
                     name: "is_active",
@@ -23,17 +22,17 @@ export class CreateLevelTable1611281055393 implements MigrationInterface {
                     
                 },
                 {
-                    name: "createdat",
+                    name: "created_at",
                     type: "timestamp",
                     
                 },
                 {
-                    name: "updatedat",
+                    name: "updated_at",
                     type: "timestamp",
                     
                 },
                 {
-                    name: "deletedat",
+                    name: "deleted_at",
                     type: "timestamp",
                     isNullable: true
                 }
@@ -42,7 +41,6 @@ export class CreateLevelTable1611281055393 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable("levels");
+        await queryRunner.dropTable("tags");
     }
-
 }

@@ -1,17 +1,16 @@
-import { query } from "express";
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class CreateJobTypeTable1611281640603 implements MigrationInterface {
+export class CraeteCurrencyTable1611280431515 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(new Table({
-            name: "job_types",
+            name: "currencies",
             columns: [
                 {
                     name: "id",
                     type: "int",
                     isPrimary: true,
-                    isGenerated: true,
+                    isGenerated: true
                 },
                 {
                     name: "is_active",
@@ -24,17 +23,27 @@ export class CreateJobTypeTable1611281640603 implements MigrationInterface {
                     
                 },
                 {
-                    name: "createdat",
+                    name: "symbol",
+                    type: "varchar",
+                    
+                },
+                {
+                    name: "isocode",
+                    type: "varchar",
+                    
+                },
+                {
+                    name: "created_at",
                     type: "timestamp",
                     
                 },
                 {
-                    name: "updatedat",
+                    name: "updated_at",
                     type: "timestamp",
                     
                 },
                 {
-                    name: "deletedat",
+                    name: "deleted_at",
                     type: "timestamp",
                     isNullable: true
                 }
@@ -43,7 +52,7 @@ export class CreateJobTypeTable1611281640603 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable("job_types");
+        await queryRunner.dropTable("currencies");
     }
 
 }

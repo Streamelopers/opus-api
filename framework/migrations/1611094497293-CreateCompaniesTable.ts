@@ -27,15 +27,15 @@ export class CreateCompaniesTable1611094497293 implements MigrationInterface {
                     type: "integer"
                 },
                 {
-                    name: "createdat",
+                    name: "created_at",
                     type: "timestamp"
                 },
                 {
-                    name: "updatedat",
+                    name: "updated_at",
                     type: "timestamp"
                 },
                 {
-                    name: "deletedat",
+                    name: "deleted_at",
                     type: "timestamp",
                     isNullable: true
                 }

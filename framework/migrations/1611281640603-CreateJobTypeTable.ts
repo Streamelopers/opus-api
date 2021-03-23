@@ -1,9 +1,11 @@
+import { query } from "express";
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class CreateTagTable1611281314455 implements MigrationInterface {
+export class CreateJobTypeTable1611281640603 implements MigrationInterface {
+
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(new Table({
-            name: "tags",
+            name: "job_types",
             columns: [
                 {
                     name: "id",
@@ -22,17 +24,17 @@ export class CreateTagTable1611281314455 implements MigrationInterface {
                     
                 },
                 {
-                    name: "createdat",
+                    name: "created_at",
                     type: "timestamp",
                     
                 },
                 {
-                    name: "updatedat",
+                    name: "updated_at",
                     type: "timestamp",
                     
                 },
                 {
-                    name: "deletedat",
+                    name: "deleted_at",
                     type: "timestamp",
                     isNullable: true
                 }
@@ -41,6 +43,7 @@ export class CreateTagTable1611281314455 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable("tags");
+        await queryRunner.dropTable("job_types");
     }
+
 }

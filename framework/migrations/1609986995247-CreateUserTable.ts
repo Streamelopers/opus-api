@@ -1,10 +1,11 @@
+
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class CreatePaymentTypeTable1611281842597 implements MigrationInterface {
+export class CreateUserTable1609986995247 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(new Table({
-            name: "payment_types",
+            name: "users",
             columns: [
                 {
                     name: "id",
@@ -18,31 +19,43 @@ export class CreatePaymentTypeTable1611281842597 implements MigrationInterface {
                     default: true
                 },
                 {
-                    name: "name",
+                    name: "firstname",
                     type: "varchar",
-                    
                 },
                 {
-                    name: "createdat",
+                    name: "lastname",
+                    type: "varchar",
+                },
+                {
+                    name: "password",
+                    type: "varchar",
+                    length: "1000",
+                },
+                {
+                    name: "email",
+                    type: "varchar",
+                },
+                {
+                    name: "created_at",
                     type: "timestamp",
                     
                 },
                 {
-                    name: "updatedat",
+                    name: "updated_at",
                     type: "timestamp",
                     
                 },
                 {
-                    name: "deletedat",
+                    name: "deleted_at",
                     type: "timestamp",
                     isNullable: true
                 }
             ]
-        }));
+        }))
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable("payment_types");
+        await queryRunner.dropTable("users");
     }
 
 }

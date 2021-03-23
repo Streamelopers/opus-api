@@ -34,17 +34,17 @@ export class CreateLocationTable1611423243717 implements MigrationInterface {
                     
                 },
                 {
-                    name: "createdat",
+                    name: "created_at",
                     type: "timestamp",
                     
                 },
                 {
-                    name: "updatedat",
+                    name: "updated_at",
                     type: "timestamp",
                     
                 },
                 {
-                    name: "deletedat",
+                    name: "deleted_at",
                     type: "timestamp",
                     isNullable: true
                 }
