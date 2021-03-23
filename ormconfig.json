@@ -6,5 +6,11 @@
     "password": "p4ssW0rd",
     "database": "opus",
     "entities": ["dist/**/*.entity{.ts,.js}"],
+    "migrations": [
+      "src/framework/migrations/*.ts"
+    ],
+    "cli": {
+      "migrationsDir": "src/framework/migrations"
+   },
     "synchronize": false
   }

@@ -7,5 +7,6 @@ temp/
 *.sqlite
 .env
 dist/
+.DS_Store
 
 coverage/
