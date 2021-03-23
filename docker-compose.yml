@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   api:
-    container_name: api
+    container_name: opus-api
     image: node:12
     working_dir: /app
     command: npm run start:dev
@@ -11,7 +11,7 @@ services:
     volumes:
       - ./:/app
   database:
-    container_name: database
+    container_name: opus-database
     image: postgres:12
     environment:
       POSTGRES_USER: 'opus-admin'

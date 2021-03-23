@@ -18,7 +18,11 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "migrate:run": "typeorm migration:run",
+    "migrate:create": "typeorm migration:create -n",
+    "build:docker": "npm i && docker-compose up -d",
+    "build:local": "npm install && npm run migrate:run && npm run start:dev"
   },
   "dependencies": {
     "@nestjs/common": "^7.6.13",
