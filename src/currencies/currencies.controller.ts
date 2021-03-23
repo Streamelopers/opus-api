@@ -1,7 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query
+} from '@nestjs/common';
 import { CurrenciesService } from './currencies.service';
 import { CreateCurrencyDto } from './dto/create-currency.dto';
 import { UpdateCurrencyDto } from './dto/update-currency.dto';
+import { QueryParams } from '../../framework/utils/query';
 
 @Controller('currencies')
 export class CurrenciesController {
@@ -13,8 +23,8 @@ export class CurrenciesController {
   }
 
   @Get()
-  findAll() {
-    return this.currenciesService.findAll();
+  findAll(@Query() params: QueryParams) {
+    return this.currenciesService.findAll(params);
   }
 
   @Get(':id')
