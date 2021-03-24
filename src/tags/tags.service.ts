@@ -1,26 +1,50 @@
+import { Repository, Like } from 'typeorm';
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { CreateTagDto } from './dto/create-tag.dto';
 import { UpdateTagDto } from './dto/update-tag.dto';
+import { Tag } from './entities/tag.entity';
+import { QueryParams } from '../../framework/utils/query';
 
 @Injectable()
 export class TagsService {
-  create(createTagDto: CreateTagDto) {
-    return 'This action adds a new tag';
+  constructor(@InjectRepository(Tag) private tagRepository: Repository<Tag>) {}
+
+  async create(createTagDto: CreateTagDto): Promise<CreateTagDto> {
+    await this.tagRepository.insert(createTagDto);
+
+    return createTagDto;
   }
 
-  findAll() {
-    return `This action returns all tags`;
+  findAll(query: QueryParams): Promise<Tag[]> {
+    return this.tagRepository.find({
+      skip: query.page * query.pageSize,
+      take: query.pageSize,
+      where: {
+        isActive: true,
+        name: Like(`%${query.q}%`)
+      }
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} tag`;
+  findOne(id: number): Promise<Tag> {
+    return this.tagRepository.findOne({
+      id, isActive: true
+    });
   }
 
-  update(id: number, updateTagDto: UpdateTagDto) {
-    return `This action updates a #${id} tag`;
+  async update(id: number, updateTagDto: UpdateTagDto): Promise<UpdateTagDto> {
+    await this.tagRepository.update(id, updateTagDto);
+
+    return UpdateTagDto;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} tag`;
+  async remove(id: number): Promise<string> {
+    await this.tagRepository.update(id, {
+      isActive: false,
+      deletedAt: new Date()
+    });
+
+    return 'El tag fue desactivado correctamente';
   }
 }
