@@ -40,7 +40,10 @@ export class TagsService {
   }
 
   async remove(id: number): Promise<string> {
-    await this.tagRepository.update(id, { isActive: false });
+    await this.tagRepository.update(id, {
+      isActive: false,
+      deletedAt: new Date()
+    });
 
     return 'El tag fue desactivado correctamente';
   }

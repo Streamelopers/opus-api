@@ -42,7 +42,10 @@ export class CurrenciesService {
   }
 
   async remove(id: number): Promise<string> {
-    await this.currencyRepository.update(id, { isActive: false });
+    await this.currencyRepository.update(id, {
+      isActive: false,
+      deletedAt: new Date()
+    });
 
     return 'El currency fue desactivado correctamente';
   }

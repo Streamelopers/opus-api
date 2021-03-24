@@ -1,7 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query
+} from '@nestjs/common';
 import { LevelsService } from './levels.service';
 import { CreateLevelDto } from './dto/create-level.dto';
 import { UpdateLevelDto } from './dto/update-level.dto';
+import { QueryParams } from '../../framework/utils/query'; 
 
 @Controller('levels')
 export class LevelsController {
@@ -13,8 +23,8 @@ export class LevelsController {
   }
 
   @Get()
-  findAll() {
-    return this.levelsService.findAll();
+  findAll(@Query() params: QueryParams) {
+    return this.levelsService.findAll(params);
   }
 
   @Get(':id')
