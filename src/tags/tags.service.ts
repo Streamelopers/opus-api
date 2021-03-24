@@ -36,7 +36,7 @@ export class TagsService {
   async update(id: number, updateTagDto: UpdateTagDto): Promise<UpdateTagDto> {
     await this.tagRepository.update(id, updateTagDto);
 
-    return UpdateTagDto;
+    return updateTagDto;
   }
 
   async remove(id: number): Promise<string> {
