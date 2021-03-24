@@ -1,34 +1,53 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, Like } from 'typeorm';
 import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { QueryParams } from '../../framework/utils/query';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)
-    private usersRepository: Repository<User>,
+    private userRepository: Repository<User>,
   ) {}
 
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  async create(createUserDto: CreateUserDto): Promise<CreateUserDto> {
+    await this.userRepository.insert(createUserDto);
+
+    return createUserDto;
   }
 
-  findAll(): Promise<User[]> {
-    return this.usersRepository.find();
+  findAll(query: QueryParams): Promise<User[]> {
+    return this.userRepository.find({
+      skip: query.page * query.pageSize,
+      take: query.pageSize,
+      where: {
+        isActive: true,
+        name: Like(`%${query.q}%`)
+      }
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  findOne(id: number): Promise<User> {
+    return this.userRepository.findOne({
+      id, isActive: true
+    });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: number, updateUserDto: UpdateUserDto): Promise<UpdateUserDto> {
+    await this.userRepository.update(id, updateUserDto);
+
+    return updateUserDto;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: number): Promise<string> {
+    await this.userRepository.update(id, {
+      isActive: false,
+      deletedAt: new Date()
+    });
+    
+    return 'El usuario fue desactivado correctamente';
   }
 }

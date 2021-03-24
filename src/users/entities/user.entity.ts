@@ -1,5 +1,5 @@
-import { Base } from "../../../framework/entities/base";
 import { Entity, Column} from "typeorm";
+import { Base } from "../../../framework/entities/base";
 
 @Entity()
 export class User extends Base {
