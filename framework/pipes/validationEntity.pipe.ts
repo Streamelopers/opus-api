@@ -32,6 +32,6 @@ export class ValidationEntity implements PipeTransform {
     if (dataEntity) return { [this.field]: dataEntity, ...value };
 
     // raise error if not exists data.
-    throw new BadRequestException('El usuario no existe!');
+    throw new BadRequestException(`La entidad (${this.field}) no existe.`);
   }
 }
