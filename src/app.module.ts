@@ -10,7 +10,17 @@ import { LevelsModule } from './levels/levels.module';
 import { JobtypesModule } from './jobtypes/jobtypes.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(), UsersModule, CompaniesModule, CurrenciesModule, JobsModule, TagsModule, PicturesModule, LevelsModule, JobtypesModule],
+  imports: [
+    TypeOrmModule.forRoot(),
+    UsersModule,
+    CompaniesModule,
+    CurrenciesModule,
+    JobsModule,
+    TagsModule,
+    PicturesModule,
+    LevelsModule,
+    JobtypesModule
+  ],
   controllers: [],
   providers: [],
 })

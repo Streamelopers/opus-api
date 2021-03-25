@@ -26,4 +26,6 @@ export class CreateCompanyDto {
   @IsNotEmpty()
   @IsPositive()
   user_id: number;
+
+  user: object;
 }
