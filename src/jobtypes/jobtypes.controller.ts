@@ -1,7 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query
+} from '@nestjs/common';
 import { JobtypesService } from './jobtypes.service';
 import { CreateJobtypeDto } from './dto/create-jobtype.dto';
 import { UpdateJobtypeDto } from './dto/update-jobtype.dto';
+import { QueryParams } from '../../framework/utils/query';
 
 @Controller('jobtypes')
 export class JobtypesController {
@@ -13,8 +23,8 @@ export class JobtypesController {
   }
 
   @Get()
-  findAll() {
-    return this.jobtypesService.findAll();
+  findAll(@Query() params: QueryParams) {
+    return this.jobtypesService.findAll(params);
   }
 
   @Get(':id')
