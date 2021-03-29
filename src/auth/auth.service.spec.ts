@@ -27,46 +27,6 @@ describe("AuthService", () => {
   it("should be defined", () => {
     expect(service).toBeDefined();
   });
-});
-
-describe("validateUser", () => {
-  let service: AuthService;
-
-  beforeEach(async () => {
-    const moduleRef: TestingModule = await Test.createTestingModule({
-      imports: [
-        ConfigModule.forRoot(),
-        PassportModule,
-        JwtModule.register({
-          secret: process.env.JWT_KEY,
-          signOptions: { expiresIn: "60s" },
-        }),
-      ],
-      providers: [AuthService, JwtStrategy],
-    }).compile();
-
-    service = moduleRef.get<AuthService>(AuthService);
-  });
-});
-
-describe("validateLogin", () => {
-  let service: AuthService;
-
-  beforeEach(async () => {
-    const moduleRef: TestingModule = await Test.createTestingModule({
-      imports: [
-        ConfigModule.forRoot(),
-        PassportModule,
-        JwtModule.register({
-          secret: process.env.JWT_KEY,
-          signOptions: { expiresIn: "60s" },
-        }),
-      ],
-      providers: [AuthService, JwtStrategy],
-    }).compile();
-
-    service = moduleRef.get<AuthService>(AuthService);
-  });
 
   it("should return JWT object when credentials are valid", async () => {
     const res = await service.login({ email: "maria", userId: 3 });
