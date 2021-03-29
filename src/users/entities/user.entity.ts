@@ -1,12 +1,12 @@
-import { Entity, Column} from "typeorm";
+import { Entity, Column } from "typeorm";
 import { Base } from "../../../framework/entities/base";
 
 @Entity()
 export class User extends Base {
-  @Column({name:"first_name"})
+  @Column({ name: "first_name" })
   firstname: string;
 
-  @Column({name:"last_name"})
+  @Column({ name: "last_name" })
   lastname: string;
 
   @Column()

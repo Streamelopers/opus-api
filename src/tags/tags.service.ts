@@ -1,10 +1,10 @@
-import { Repository, Like } from 'typeorm';
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { CreateTagDto } from './dto/create-tag.dto';
-import { UpdateTagDto } from './dto/update-tag.dto';
-import { Tag } from './entities/tag.entity';
-import { QueryParams } from '../../framework/utils/query';
+import { Repository, Like } from "typeorm";
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { CreateTagDto } from "./dto/create-tag.dto";
+import { UpdateTagDto } from "./dto/update-tag.dto";
+import { Tag } from "./entities/tag.entity";
+import { QueryParams } from "../../framework/utils/query";
 
 @Injectable()
 export class TagsService {
@@ -22,14 +22,15 @@ export class TagsService {
       take: query.pageSize,
       where: {
         isActive: true,
-        name: Like(`%${query.q}%`)
-      }
+        name: Like(`%${query.q}%`),
+      },
     });
   }
 
   findOne(id: number): Promise<Tag> {
     return this.tagRepository.findOne({
-      id, isActive: true
+      id,
+      isActive: true,
     });
   }
 
@@ -42,9 +43,9 @@ export class TagsService {
   async remove(id: number): Promise<string> {
     await this.tagRepository.update(id, {
       isActive: false,
-      deletedAt: new Date()
+      deletedAt: new Date(),
     });
 
-    return 'El tag fue desactivado correctamente';
+    return "El tag fue desactivado correctamente";
   }
 }

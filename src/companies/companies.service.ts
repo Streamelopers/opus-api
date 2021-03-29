@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, Like } from 'typeorm';
-import { CreateCompanyDto } from './dto/create-company.dto';
-import { UpdateCompanyDto } from './dto/update-company.dto';
-import { QueryParams } from '../../framework/utils/query';
-import { Company } from './entities/company.entity';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository, Like } from "typeorm";
+import { CreateCompanyDto } from "./dto/create-company.dto";
+import { UpdateCompanyDto } from "./dto/update-company.dto";
+import { QueryParams } from "../../framework/utils/query";
+import { Company } from "./entities/company.entity";
 
 @Injectable()
 export class CompaniesService {
@@ -25,18 +25,22 @@ export class CompaniesService {
       take: query.pageSize,
       where: {
         isActive: true,
-        name: Like(`%${query.q}%`)
-      }
+        name: Like(`%${query.q}%`),
+      },
     });
   }
 
   findOne(id: number): Promise<Company> {
     return this.companyRepository.findOne({
-      id, isActive: true
+      id,
+      isActive: true,
     });
   }
 
-  async update(id: number, updateCompanyDto: UpdateCompanyDto): Promise<UpdateCompanyDto> {
+  async update(
+    id: number,
+    updateCompanyDto: UpdateCompanyDto
+  ): Promise<UpdateCompanyDto> {
     await this.companyRepository.update(id, updateCompanyDto);
 
     return updateCompanyDto;
@@ -45,9 +49,9 @@ export class CompaniesService {
   async remove(id: number): Promise<string> {
     await this.companyRepository.update(id, {
       isActive: false,
-      deletedAt: new Date()
+      deletedAt: new Date(),
     });
 
-    return 'La empresa fue desactivado correctamente';
+    return "La empresa fue desactivado correctamente";
   }
 }

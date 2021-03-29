@@ -6,14 +6,14 @@ import {
   Patch,
   Param,
   Delete,
-  Query
-} from '@nestjs/common';
-import { LevelsService } from './levels.service';
-import { CreateLevelDto } from './dto/create-level.dto';
-import { UpdateLevelDto } from './dto/update-level.dto';
-import { QueryParams } from '../../framework/utils/query'; 
+  Query,
+} from "@nestjs/common";
+import { LevelsService } from "./levels.service";
+import { CreateLevelDto } from "./dto/create-level.dto";
+import { UpdateLevelDto } from "./dto/update-level.dto";
+import { QueryParams } from "../../framework/utils/query";
 
-@Controller('levels')
+@Controller("levels")
 export class LevelsController {
   constructor(private readonly levelsService: LevelsService) {}
 
@@ -27,18 +27,18 @@ export class LevelsController {
     return this.levelsService.findAll(params);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
+  @Get(":id")
+  findOne(@Param("id") id: string) {
     return this.levelsService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateLevelDto: UpdateLevelDto) {
+  @Patch(":id")
+  update(@Param("id") id: string, @Body() updateLevelDto: UpdateLevelDto) {
     return this.levelsService.update(+id, updateLevelDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
+  @Delete(":id")
+  remove(@Param("id") id: string) {
     return this.levelsService.remove(+id);
   }
 }

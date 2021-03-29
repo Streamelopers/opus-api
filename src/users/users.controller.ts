@@ -1,3 +1,6 @@
+import { AuthService } from "./../auth/auth.service";
+import { LoginUserDto } from "./dto/login-user.dto";
+import { JwtAuthGuard } from "./../auth/guards/jwt-auth.guard";
 import {
   Controller,
   Get,
@@ -6,39 +9,61 @@ import {
   Patch,
   Param,
   Delete,
-  Query
-} from '@nestjs/common';
-import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { QueryParams } from '../../framework/utils/query';
+  Query,
+  UseGuards,
+} from "@nestjs/common";
+import { UsersService } from "./users.service";
+import { CreateUserDto } from "./dto/create-user.dto";
+import { UpdateUserDto } from "./dto/update-user.dto";
+import { QueryParams } from "../../framework/utils/query";
 
-@Controller('users')
+@Controller("users")
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly authService: AuthService
+  ) {}
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   findAll(@Query() params: QueryParams) {
     return this.usersService.findAll(params);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
+  @UseGuards(JwtAuthGuard)
+  @Get(":id")
+  findOne(@Param("id") id: string) {
     return this.usersService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+  @UseGuards(JwtAuthGuard)
+  @Patch(":id")
+  update(@Param("id") id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(+id, updateUserDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
+  @UseGuards(JwtAuthGuard)
+  @Delete(":id")
+  remove(@Param("id") id: string) {
     return this.usersService.remove(+id);
+  }
+
+  @Post("login")
+  async login(@Body() loginUserDto: LoginUserDto) {
+    const getUser = await this.usersService.findByEmail(loginUserDto.email);
+    if (getUser && getUser.password === loginUserDto.password) {
+      const { password, ...result } = getUser;
+      const token = await this.authService.login(loginUserDto);
+      return {
+        user: result,
+        ...token,
+      };
+    }
+    return null;
   }
 }

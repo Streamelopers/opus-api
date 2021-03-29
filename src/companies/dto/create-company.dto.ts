@@ -4,8 +4,8 @@ import {
   IsInt,
   IsString,
   IsNotEmpty,
-  IsPositive
-} from 'class-validator';
+  IsPositive,
+} from "class-validator";
 
 export class CreateCompanyDto {
   @IsString()

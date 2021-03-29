@@ -1,5 +1,5 @@
-import { Base } from '../../../framework/entities/base';
-import { Entity, Column } from 'typeorm';
+import { Base } from "../../../framework/entities/base";
+import { Entity, Column } from "typeorm";
 
 @Entity()
 export class Tag extends Base {
