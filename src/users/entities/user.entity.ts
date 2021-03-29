@@ -4,10 +4,10 @@ import { Base } from "../../../framework/entities/base";
 @Entity()
 export class User extends Base {
   @Column({ name: "first_name" })
-  firstname: string;
+  firstName: string;
 
   @Column({ name: "last_name" })
-  lastname: string;
+  lastName: string;
 
   @Column()
   email: string;

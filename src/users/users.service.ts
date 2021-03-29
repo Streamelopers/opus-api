@@ -25,7 +25,7 @@ export class UsersService {
       take: query.pageSize,
       where: {
         isActive: true,
-        firstname: Like(`%${query.q}%`),
+        firstName: Like(`%${query.q}%`),
       },
     });
   }
