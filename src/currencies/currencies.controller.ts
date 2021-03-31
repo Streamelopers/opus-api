@@ -6,14 +6,14 @@ import {
   Patch,
   Param,
   Delete,
-  Query
-} from '@nestjs/common';
-import { CurrenciesService } from './currencies.service';
-import { CreateCurrencyDto } from './dto/create-currency.dto';
-import { UpdateCurrencyDto } from './dto/update-currency.dto';
-import { QueryParams } from '../../framework/utils/query';
+  Query,
+} from "@nestjs/common";
+import { CurrenciesService } from "./currencies.service";
+import { CreateCurrencyDto } from "./dto/create-currency.dto";
+import { UpdateCurrencyDto } from "./dto/update-currency.dto";
+import { QueryParams } from "../../framework/utils/query";
 
-@Controller('currencies')
+@Controller("currencies")
 export class CurrenciesController {
   constructor(private readonly currenciesService: CurrenciesService) {}
 
@@ -27,18 +27,21 @@ export class CurrenciesController {
     return this.currenciesService.findAll(params);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
+  @Get(":id")
+  findOne(@Param("id") id: string) {
     return this.currenciesService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCurrencyDto: UpdateCurrencyDto) {
+  @Patch(":id")
+  update(
+    @Param("id") id: string,
+    @Body() updateCurrencyDto: UpdateCurrencyDto
+  ) {
     return this.currenciesService.update(+id, updateCurrencyDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
+  @Delete(":id")
+  remove(@Param("id") id: string) {
     return this.currenciesService.remove(+id);
   }
 }

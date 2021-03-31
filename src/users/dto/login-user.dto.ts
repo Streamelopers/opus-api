@@ -1,5 +1,4 @@
 import {
-  Length,
   IsEmail,
   IsString,
   IsNotEmpty,
@@ -7,17 +6,7 @@ import {
   IsAlphanumeric,
 } from "class-validator";
 
-export class CreateUserDto {
-  @IsString()
-  @IsNotEmpty()
-  @Length(2, 20)
-  firstName: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @Length(2, 20)
-  lastName: string;
-
+export class LoginUserDto {
   @IsString()
   @IsNotEmpty()
   @IsEmail()

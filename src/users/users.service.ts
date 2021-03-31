@@ -1,16 +1,16 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, Like } from 'typeorm';
-import { User } from './entities/user.entity';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { QueryParams } from '../../framework/utils/query';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository, Like } from "typeorm";
+import { User } from "./entities/user.entity";
+import { CreateUserDto } from "./dto/create-user.dto";
+import { UpdateUserDto } from "./dto/update-user.dto";
+import { QueryParams } from "../../framework/utils/query";
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)
-    private userRepository: Repository<User>,
+    private userRepository: Repository<User>
   ) {}
 
   async create(createUserDto: CreateUserDto): Promise<CreateUserDto> {
@@ -25,18 +25,22 @@ export class UsersService {
       take: query.pageSize,
       where: {
         isActive: true,
-        name: Like(`%${query.q}%`)
-      }
+        firstName: Like(`%${query.q}%`),
+      },
     });
   }
 
   findOne(id: number): Promise<User> {
     return this.userRepository.findOne({
-      id, isActive: true
+      id,
+      isActive: true,
     });
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto): Promise<UpdateUserDto> {
+  async update(
+    id: number,
+    updateUserDto: UpdateUserDto
+  ): Promise<UpdateUserDto> {
     await this.userRepository.update(id, updateUserDto);
 
     return updateUserDto;
@@ -45,9 +49,15 @@ export class UsersService {
   async remove(id: number): Promise<string> {
     await this.userRepository.update(id, {
       isActive: false,
-      deletedAt: new Date()
+      deletedAt: new Date(),
     });
-    
-    return 'El usuario fue desactivado correctamente';
+
+    return "El usuario fue desactivado correctamente";
+  }
+
+  async findByEmail(email: string): Promise<User> {
+    return await this.userRepository.findOne({
+      email,
+    });
   }
 }

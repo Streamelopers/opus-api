@@ -1,18 +1,20 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Currency } from './entities/currency.entity';
-import { CreateCurrencyDto } from './dto/create-currency.dto';
-import { UpdateCurrencyDto } from './dto/update-currency.dto';
-import { QueryParams } from '../../framework/utils/query';
-import { Repository, Like } from 'typeorm';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Currency } from "./entities/currency.entity";
+import { CreateCurrencyDto } from "./dto/create-currency.dto";
+import { UpdateCurrencyDto } from "./dto/update-currency.dto";
+import { QueryParams } from "../../framework/utils/query";
+import { Repository, Like } from "typeorm";
 
 @Injectable()
 export class CurrenciesService {
   constructor(
-    @InjectRepository(Currency) private currencyRepository: Repository<Currency> 
+    @InjectRepository(Currency) private currencyRepository: Repository<Currency>
   ) {}
 
-  async create(createCurrencyDto: CreateCurrencyDto): Promise<CreateCurrencyDto> {
+  async create(
+    createCurrencyDto: CreateCurrencyDto
+  ): Promise<CreateCurrencyDto> {
     await this.currencyRepository.insert(createCurrencyDto);
 
     return createCurrencyDto;
@@ -24,29 +26,33 @@ export class CurrenciesService {
       take: query.pageSize,
       where: {
         isActive: true,
-        name: Like(`%${query.q}%`)
-      }
+        name: Like(`%${query.q}%`),
+      },
     });
   }
 
   findOne(id: number) {
     return this.currencyRepository.findOne({
-      id, isActive: true
+      id,
+      isActive: true,
     });
   }
 
-  async update(id: number, updateCurrencyDto: UpdateCurrencyDto): Promise<UpdateCurrencyDto>{
+  async update(
+    id: number,
+    updateCurrencyDto: UpdateCurrencyDto
+  ): Promise<UpdateCurrencyDto> {
     await this.currencyRepository.update(id, updateCurrencyDto);
-    
+
     return updateCurrencyDto;
   }
 
   async remove(id: number): Promise<string> {
     await this.currencyRepository.update(id, {
       isActive: false,
-      deletedAt: new Date()
+      deletedAt: new Date(),
     });
 
-    return 'El currency fue desactivado correctamente';
+    return "El currency fue desactivado correctamente";
   }
 }

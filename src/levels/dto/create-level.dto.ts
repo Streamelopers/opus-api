@@ -1,4 +1,4 @@
-import { Length, IsNotEmpty, IsString } from 'class-validator';
+import { Length, IsNotEmpty, IsString } from "class-validator";
 
 export class CreateLevelDto {
   @IsString()

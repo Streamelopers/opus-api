@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { CreateJobtypeDto } from './dto/create-jobtype.dto';
-import { UpdateJobtypeDto } from './dto/update-jobtype.dto';
-import { QueryParams } from '../../framework/utils/query';
-import { Jobtype } from './entities/jobtype.entity';
-import { Like, Repository } from 'typeorm';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { CreateJobtypeDto } from "./dto/create-jobtype.dto";
+import { UpdateJobtypeDto } from "./dto/update-jobtype.dto";
+import { QueryParams } from "../../framework/utils/query";
+import { Jobtype } from "./entities/jobtype.entity";
+import { Like, Repository } from "typeorm";
 
 @Injectable()
 export class JobtypesService {
@@ -24,18 +24,22 @@ export class JobtypesService {
       take: query.pageSize,
       where: {
         isActive: true,
-        name: Like(`%${query.q}%`)
-      }
+        name: Like(`%${query.q}%`),
+      },
     });
   }
 
   findOne(id: number): Promise<Jobtype> {
     return this.jobtypeRepository.findOne({
-      id, isActive: true
+      id,
+      isActive: true,
     });
   }
 
-  async update(id: number, updateJobtypeDto: UpdateJobtypeDto): Promise<UpdateJobtypeDto> {
+  async update(
+    id: number,
+    updateJobtypeDto: UpdateJobtypeDto
+  ): Promise<UpdateJobtypeDto> {
     await this.jobtypeRepository.update(id, updateJobtypeDto);
 
     return updateJobtypeDto;
@@ -44,9 +48,9 @@ export class JobtypesService {
   async remove(id: number): Promise<string> {
     await this.jobtypeRepository.update(id, {
       isActive: false,
-      deletedAt: new Date()
+      deletedAt: new Date(),
     });
 
-    return 'El tag fue desactivado correctamente';
+    return "El tag fue desactivado correctamente";
   }
 }

@@ -6,14 +6,14 @@ import {
   Patch,
   Param,
   Delete,
-  Query
-} from '@nestjs/common';
-import { JobtypesService } from './jobtypes.service';
-import { CreateJobtypeDto } from './dto/create-jobtype.dto';
-import { UpdateJobtypeDto } from './dto/update-jobtype.dto';
-import { QueryParams } from '../../framework/utils/query';
+  Query,
+} from "@nestjs/common";
+import { JobtypesService } from "./jobtypes.service";
+import { CreateJobtypeDto } from "./dto/create-jobtype.dto";
+import { UpdateJobtypeDto } from "./dto/update-jobtype.dto";
+import { QueryParams } from "../../framework/utils/query";
 
-@Controller('jobtypes')
+@Controller("jobtypes")
 export class JobtypesController {
   constructor(private readonly jobtypesService: JobtypesService) {}
 
@@ -27,18 +27,18 @@ export class JobtypesController {
     return this.jobtypesService.findAll(params);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
+  @Get(":id")
+  findOne(@Param("id") id: string) {
     return this.jobtypesService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateJobtypeDto: UpdateJobtypeDto) {
+  @Patch(":id")
+  update(@Param("id") id: string, @Body() updateJobtypeDto: UpdateJobtypeDto) {
     return this.jobtypesService.update(+id, updateJobtypeDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
+  @Delete(":id")
+  remove(@Param("id") id: string) {
     return this.jobtypesService.remove(+id);
   }
 }

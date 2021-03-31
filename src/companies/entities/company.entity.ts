@@ -1,6 +1,6 @@
-import { Entity, Column, OneToOne, JoinColumn } from 'typeorm';
-import { Base } from '../../../framework/entities/base';
-import { User } from 'src/users/entities/user.entity';
+import { Entity, Column, OneToOne, JoinColumn } from "typeorm";
+import { Base } from "../../../framework/entities/base";
+import { User } from "src/users/entities/user.entity";
 
 @Entity()
 export class Company extends Base {
@@ -13,7 +13,7 @@ export class Company extends Base {
   @Column()
   description: string;
 
-  @OneToOne(type => User)
+  @OneToOne((type) => User)
   @JoinColumn()
   user: User;
 }
