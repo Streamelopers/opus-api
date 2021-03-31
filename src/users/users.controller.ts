@@ -58,7 +58,11 @@ export class UsersController {
     const getUser = await this.usersService.findByEmail(loginUserDto.email);
     if (getUser && getUser.password === loginUserDto.password) {
       const { password, ...result } = getUser;
-      const token = await this.authService.login(loginUserDto);
+      const authDto = {
+        email: result.email,
+        userId: result.id,
+      }
+      const token = await this.authService.login(authDto);
       return {
         user: result,
         ...token,
