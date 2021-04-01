@@ -19,5 +19,6 @@ module.exports = {
   synchronize: process.env.NODE_ENV !== 'production' ? true : false,
   extra: {
        ssl: process.env.NODE_ENV !== 'local' ? true : false,
+       rejectUnauthorized: false
   }
 }
