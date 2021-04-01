@@ -12,8 +12,8 @@ import { AuthModule } from "./auth/auth.module";
 
 @Module({
   imports: [
-    AuthModule,
-    //TypeOrmModule.forRoot(),
+   /* AuthModule,
+    TypeOrmModule.forRoot(),
     UsersModule,
     CompaniesModule,
     CurrenciesModule,
@@ -21,7 +21,7 @@ import { AuthModule } from "./auth/auth.module";
     TagsModule,
     PicturesModule,
     LevelsModule,
-    JobtypesModule,
+    JobtypesModule,*/
   ],
   controllers: [],
   providers: [],
