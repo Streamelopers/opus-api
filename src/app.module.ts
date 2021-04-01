@@ -12,7 +12,7 @@ import { AuthModule } from "./auth/auth.module";
 
 @Module({
   imports: [
-   /* AuthModule,
+    AuthModule,
     TypeOrmModule.forRoot(),
     UsersModule,
     CompaniesModule,
@@ -21,7 +21,7 @@ import { AuthModule } from "./auth/auth.module";
     TagsModule,
     PicturesModule,
     LevelsModule,
-    JobtypesModule,*/
+    JobtypesModule,
   ],
   controllers: [],
   providers: [],
