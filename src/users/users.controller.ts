@@ -61,7 +61,7 @@ export class UsersController {
       const authDto = {
         email: result.email,
         userId: result.id,
-      }
+      };
       const token = await this.authService.login(authDto);
       return {
         user: result,

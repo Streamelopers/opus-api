@@ -1,4 +1,4 @@
-import { AuthDto } from './dto/auth.dto';
+import { AuthDto } from "./dto/auth.dto";
 import { Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 
