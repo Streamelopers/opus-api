@@ -1,3 +1,4 @@
+import * as bcrypt from 'bcrypt';
 import { AuthService } from "./../auth/auth.service";
 import { LoginUserDto } from "./dto/login-user.dto";
 import { JwtAuthGuard } from "./../auth/guards/jwt-auth.guard";
@@ -17,7 +18,6 @@ import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { QueryParams } from "../../framework/utils/query";
 import { ApiTags, ApiHeader } from "@nestjs/swagger";
-
 
 @ApiTags("Users")
 @Controller("users")
@@ -75,17 +75,20 @@ export class UsersController {
   @Post("login")
   async login(@Body() loginUserDto: LoginUserDto) {
     const getUser = await this.usersService.findByEmail(loginUserDto.email);
-    if (getUser && getUser.password === loginUserDto.password) {
+    if (getUser) {
       const { password, ...result } = getUser;
-      const authDto = {
-        email: result.email,
-        userId: result.id,
-      };
-      const token = await this.authService.login(authDto);
-      return {
-        user: result,
-        ...token,
-      };
+      const isValid = await bcrypt.compare(loginUserDto.password, password);
+      if (isValid) {
+        const authDto = {
+          email: result.email,
+          userId: result.id,
+        };
+        const token = await this.authService.login(authDto);
+        return {
+          user: result,
+          ...token,
+        };
+      }
     }
     return null;
   }
