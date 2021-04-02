@@ -1,7 +1,12 @@
 import { NestFactory } from "@nestjs/core";
 import { ValidationPipe } from "@nestjs/common";
 import { AppModule } from "./app.module";
-import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
+import {
+  SwaggerModule,
+  DocumentBuilder,
+  SwaggerCustomOptions,
+  SwaggerDocumentOptions
+} from "@nestjs/swagger";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -11,8 +16,22 @@ async function bootstrap() {
     .setDescription("An API to manage all resource from Opus.io")
     .setVersion("1.0")
     .build();
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup("swagger", app, document);
+  
+  const options: SwaggerDocumentOptions =  {
+    operationIdFactory: (
+      controllerKey: string,
+      methodKey: string
+    ) => methodKey
+  };
+  const document = SwaggerModule.createDocument(app, config, options);
+  
+  const optionsSetup: SwaggerCustomOptions = {
+    customSiteTitle: "Opus - API",
+    explorer: true
+  };
+
+  // setup
+  SwaggerModule.setup("swagger", app, document, optionsSetup);
 
   // added pipe to validate params and body
   app.useGlobalPipes(
