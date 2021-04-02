@@ -16,11 +16,7 @@ import { UsersService } from "./users.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { QueryParams } from "../../framework/utils/query";
-import {
-  ApiTags,
-  ApiBody,
-  ApiHeader
-} from "@nestjs/swagger";
+import { ApiTags, ApiHeader } from "@nestjs/swagger";
 
 
 @ApiTags("Users")
@@ -32,7 +28,6 @@ export class UsersController {
   ) {}
 
   @Post()
-  @ApiBody({ type: CreateUserDto })
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
@@ -63,7 +58,6 @@ export class UsersController {
   })
   @UseGuards(JwtAuthGuard)
   @Patch(":id")
-  @ApiBody({ type: CreateUserDto })
   update(@Param("id") id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(+id, updateUserDto);
   }
@@ -78,9 +72,7 @@ export class UsersController {
     return this.usersService.remove(+id);
   }
 
-  @ApiTags("Authorization")
   @Post("login")
-  @ApiBody({ type: LoginUserDto })
   async login(@Body() loginUserDto: LoginUserDto) {
     const getUser = await this.usersService.findByEmail(loginUserDto.email);
     if (getUser && getUser.password === loginUserDto.password) {
