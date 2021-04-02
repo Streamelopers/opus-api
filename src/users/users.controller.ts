@@ -19,7 +19,6 @@ import { QueryParams } from "../../framework/utils/query";
 import {
   ApiTags,
   ApiBody,
-  ApiQuery,
   ApiHeader
 } from "@nestjs/swagger";
 
@@ -64,6 +63,7 @@ export class UsersController {
   })
   @UseGuards(JwtAuthGuard)
   @Patch(":id")
+  @ApiBody({ type: CreateUserDto })
   update(@Param("id") id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(+id, updateUserDto);
   }
