@@ -12,7 +12,9 @@ import { LevelsService } from "./levels.service";
 import { CreateLevelDto } from "./dto/create-level.dto";
 import { UpdateLevelDto } from "./dto/update-level.dto";
 import { QueryParams } from "../../framework/utils/query";
+import { ApiTags } from "@nestjs/swagger";
 
+@ApiTags("Levels")
 @Controller("levels")
 export class LevelsController {
   constructor(private readonly levelsService: LevelsService) {}

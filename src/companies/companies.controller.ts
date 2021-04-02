@@ -15,7 +15,10 @@ import { UpdateCompanyDto } from "./dto/update-company.dto";
 import { QueryParams } from "../../framework/utils/query";
 import { ValidationEntity } from "../../framework/pipes/validationEntity.pipe";
 import { User } from "../users/entities/user.entity";
+import { ApiTags } from "@nestjs/swagger";
 
+
+@ApiTags("Companies")
 @Controller("companies")
 export class CompaniesController {
   constructor(private readonly companiesService: CompaniesService) {}

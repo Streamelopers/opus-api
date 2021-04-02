@@ -10,13 +10,16 @@ import {
   Param,
   Delete,
   Query,
-  UseGuards,
+  UseGuards
 } from "@nestjs/common";
 import { UsersService } from "./users.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { QueryParams } from "../../framework/utils/query";
+import { ApiTags, ApiHeader } from "@nestjs/swagger";
 
+
+@ApiTags("Users")
 @Controller("users")
 export class UsersController {
   constructor(
@@ -29,24 +32,40 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
+  @ApiHeader({
+    name: "Authorization",
+    description: "Bearer token authorization for access endpoint"
+  })
   @UseGuards(JwtAuthGuard)
   @Get()
   findAll(@Query() params: QueryParams) {
     return this.usersService.findAll(params);
   }
 
+  @ApiHeader({
+    name: "Authorization",
+    description: "Bearer token authorization for access endpoint"
+  })
   @UseGuards(JwtAuthGuard)
   @Get(":id")
   findOne(@Param("id") id: string) {
     return this.usersService.findOne(+id);
   }
 
+  @ApiHeader({
+    name: "Authorization",
+    description: "Bearer token authorization for access endpoint"
+  })
   @UseGuards(JwtAuthGuard)
   @Patch(":id")
   update(@Param("id") id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(+id, updateUserDto);
   }
 
+  @ApiHeader({
+    name: "Authorization",
+    description: "Bearer token authorization for access endpoint"
+  })
   @UseGuards(JwtAuthGuard)
   @Delete(":id")
   remove(@Param("id") id: string) {

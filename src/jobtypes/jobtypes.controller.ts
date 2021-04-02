@@ -12,7 +12,10 @@ import { JobtypesService } from "./jobtypes.service";
 import { CreateJobtypeDto } from "./dto/create-jobtype.dto";
 import { UpdateJobtypeDto } from "./dto/update-jobtype.dto";
 import { QueryParams } from "../../framework/utils/query";
+import { ApiTags } from "@nestjs/swagger";
 
+
+@ApiTags("Job-Types")
 @Controller("jobtypes")
 export class JobtypesController {
   constructor(private readonly jobtypesService: JobtypesService) {}
