@@ -6,12 +6,15 @@ import {
   Patch,
   Param,
   Delete,
+  UseInterceptors
 } from "@nestjs/common";
 import { PicturesService } from "./pictures.service";
 import { CreatePictureDto } from "./dto/create-picture.dto";
 import { UpdatePictureDto } from "./dto/update-picture.dto";
+import { ResponseInterceptor } from "framework/interceptors/response.interceptor";
 
 @Controller("pictures")
+@UseInterceptors(ResponseInterceptor)
 export class PicturesController {
   constructor(private readonly picturesService: PicturesService) {}
 

@@ -11,16 +11,19 @@ import {
   Param,
   Delete,
   Query,
-  UseGuards
+  UseGuards,
+  UseInterceptors
 } from "@nestjs/common";
 import { UsersService } from "./users.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { QueryParams } from "../../framework/utils/query";
 import { ApiTags, ApiHeader } from "@nestjs/swagger";
+import { ResponseInterceptor } from 'framework/interceptors/response.interceptor';
 
 @ApiTags("Users")
 @Controller("users")
+@UseInterceptors(ResponseInterceptor)
 export class UsersController {
   constructor(
     private readonly usersService: UsersService,

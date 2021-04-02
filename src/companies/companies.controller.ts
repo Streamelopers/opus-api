@@ -8,6 +8,7 @@ import {
   Delete,
   Query,
   UsePipes,
+  UseInterceptors,
 } from "@nestjs/common";
 import { CompaniesService } from "./companies.service";
 import { CreateCompanyDto } from "./dto/create-company.dto";
@@ -16,10 +17,12 @@ import { QueryParams } from "../../framework/utils/query";
 import { ValidationEntity } from "../../framework/pipes/validationEntity.pipe";
 import { User } from "../users/entities/user.entity";
 import { ApiTags } from "@nestjs/swagger";
+import { ResponseInterceptor } from "framework/interceptors/response.interceptor";
 
 
 @ApiTags("Companies")
 @Controller("companies")
+@UseInterceptors(ResponseInterceptor)
 export class CompaniesController {
   constructor(private readonly companiesService: CompaniesService) {}
 

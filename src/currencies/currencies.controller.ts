@@ -7,16 +7,19 @@ import {
   Param,
   Delete,
   Query,
+  UseInterceptors,
 } from "@nestjs/common";
 import { CurrenciesService } from "./currencies.service";
 import { CreateCurrencyDto } from "./dto/create-currency.dto";
 import { UpdateCurrencyDto } from "./dto/update-currency.dto";
 import { QueryParams } from "../../framework/utils/query";
 import { ApiTags } from "@nestjs/swagger";
+import { ResponseInterceptor } from "framework/interceptors/response.interceptor";
 
 
 @ApiTags("Currencies")
 @Controller("currencies")
+@UseInterceptors(ResponseInterceptor)
 export class CurrenciesController {
   constructor(private readonly currenciesService: CurrenciesService) {}
 
