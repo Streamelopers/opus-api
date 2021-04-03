@@ -26,6 +26,9 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config, options);
   
   const optionsSetup: SwaggerCustomOptions = {
+    swaggerOptions: {
+      persistAuthorization: true,
+    },
     customSiteTitle: "Opus - API",
     explorer: true
   };
