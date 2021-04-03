@@ -16,7 +16,7 @@ import { UsersService } from "./users.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { QueryParams } from "../../framework/utils/query";
-import { ApiTags, ApiHeader, ApiBearerAuth } from "@nestjs/swagger";
+import { ApiTags, ApiBearerAuth } from "@nestjs/swagger";
 
 
 @ApiTags("Users")
