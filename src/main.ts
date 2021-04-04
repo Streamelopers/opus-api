@@ -15,6 +15,10 @@ async function bootstrap() {
     .setTitle("OPUS API")
     .setDescription("An API to manage all resource from Opus.io")
     .setVersion("1.0")
+    .addBearerAuth(
+      { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
+      'access-token',
+    )
     .build();
   
   const options: SwaggerDocumentOptions =  {
@@ -26,6 +30,9 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config, options);
   
   const optionsSetup: SwaggerCustomOptions = {
+    swaggerOptions: {
+      persistAuthorization: true,
+    },
     customSiteTitle: "Opus - API",
     explorer: true
   };

@@ -7,15 +7,18 @@ import {
   Param,
   Delete,
   Query,
+  UseInterceptors
 } from "@nestjs/common";
 import { LevelsService } from "./levels.service";
 import { CreateLevelDto } from "./dto/create-level.dto";
 import { UpdateLevelDto } from "./dto/update-level.dto";
 import { QueryParams } from "../../framework/utils/query";
 import { ApiTags } from "@nestjs/swagger";
+import { ResponseInterceptor } from "framework/interceptors/response.interceptor";
 
 @ApiTags("Levels")
 @Controller("levels")
+@UseInterceptors(ResponseInterceptor)
 export class LevelsController {
   constructor(private readonly levelsService: LevelsService) {}
 

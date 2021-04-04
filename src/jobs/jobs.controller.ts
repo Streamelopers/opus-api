@@ -6,12 +6,15 @@ import {
   Patch,
   Param,
   Delete,
+  UseInterceptors
 } from "@nestjs/common";
 import { JobsService } from "./jobs.service";
 import { CreateJobDto } from "./dto/create-job.dto";
 import { UpdateJobDto } from "./dto/update-job.dto";
+import { ResponseInterceptor } from "framework/interceptors/response.interceptor";
 
 @Controller("jobs")
+@UseInterceptors(ResponseInterceptor)
 export class JobsController {
   constructor(private readonly jobsService: JobsService) {}
 
