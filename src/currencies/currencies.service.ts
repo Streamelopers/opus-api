@@ -31,7 +31,7 @@ export class CurrenciesService {
     });
   }
 
-  findOne(id: number) {
+  findOne(id: number): Promise<Currency> {
     return this.currencyRepository.findOne({
       id,
       isActive: true,
