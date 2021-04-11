@@ -7,7 +7,7 @@ import {
   Param,
   Delete,
   Query,
-  UseInterceptors
+  UseInterceptors,
 } from "@nestjs/common";
 import { LevelsService } from "./levels.service";
 import { CreateLevelDto } from "./dto/create-level.dto";

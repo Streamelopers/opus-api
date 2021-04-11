@@ -1,4 +1,4 @@
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from "bcrypt";
 import { AuthService } from "./../auth/auth.service";
 import { LoginUserDto } from "./dto/login-user.dto";
 import { JwtAuthGuard } from "./../auth/guards/jwt-auth.guard";
@@ -12,14 +12,14 @@ import {
   Delete,
   Query,
   UseGuards,
-  UseInterceptors
+  UseInterceptors,
 } from "@nestjs/common";
 import { UsersService } from "./users.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { QueryParams } from "../../framework/utils/query";
 import { ApiTags, ApiHeader, ApiBearerAuth } from "@nestjs/swagger";
-import { ResponseInterceptor } from 'framework/interceptors/response.interceptor';
+import { ResponseInterceptor } from "framework/interceptors/response.interceptor";
 
 @ApiTags("Users")
 @Controller("users")
@@ -35,7 +35,6 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
-
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Get()
@@ -49,7 +48,6 @@ export class UsersController {
   findOne(@Param("id") id: string) {
     return this.usersService.findOne(+id);
   }
-
 
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)

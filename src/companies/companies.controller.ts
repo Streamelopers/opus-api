@@ -19,7 +19,6 @@ import { User } from "../users/entities/user.entity";
 import { ApiTags } from "@nestjs/swagger";
 import { ResponseInterceptor } from "framework/interceptors/response.interceptor";
 
-
 @ApiTags("Companies")
 @Controller("companies")
 @UseInterceptors(ResponseInterceptor)

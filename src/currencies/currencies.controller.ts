@@ -16,7 +16,6 @@ import { QueryParams } from "../../framework/utils/query";
 import { ApiTags } from "@nestjs/swagger";
 import { ResponseInterceptor } from "framework/interceptors/response.interceptor";
 
-
 @ApiTags("Currencies")
 @Controller("currencies")
 @UseInterceptors(ResponseInterceptor)

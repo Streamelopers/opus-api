@@ -7,7 +7,7 @@ import {
   Param,
   Delete,
   Query,
-  UseInterceptors
+  UseInterceptors,
 } from "@nestjs/common";
 import { TagsService } from "./tags.service";
 import { CreateTagDto } from "./dto/create-tag.dto";
