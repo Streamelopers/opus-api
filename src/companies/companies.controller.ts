@@ -48,7 +48,7 @@ export class CompaniesController {
   update(
     @Param("id") id: string,
     @Body() updateCompanyDto: UpdateCompanyDto
-  ): Promise<any> {
+  ): Promise<UpdateCompanyDto> {
     return this.companiesService.update(+id, updateCompanyDto);
   }
 
