@@ -13,7 +13,7 @@ export class Company extends Base {
   @Column()
   description: string;
 
-  @OneToOne((type) => User)
+  @OneToOne(() => User)
   @JoinColumn()
   user: User;
 }
