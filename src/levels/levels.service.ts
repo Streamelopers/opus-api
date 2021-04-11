@@ -18,7 +18,7 @@ export class LevelsService {
     return createLevelDto;
   }
 
-  findAll(query: QueryParams) {
+  findAll(query: QueryParams): Promise<Level[]> {
     return this.levelRepository.find({
       skip: query.page * query.pageSize,
       take: query.pageSize,
@@ -29,7 +29,7 @@ export class LevelsService {
     });
   }
 
-  findOne(id: number) {
+  findOne(id: number): Promise<Level> {
     return this.levelRepository.findOne({
       id,
       isActive: false,
