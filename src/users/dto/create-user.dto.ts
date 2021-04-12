@@ -4,7 +4,6 @@ import {
   IsString,
   IsNotEmpty,
   MinLength,
-  IsAlphanumeric,
 } from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
 
