@@ -15,7 +15,7 @@ import { UpdateCurrencyDto } from "./dto/update-currency.dto";
 import { QueryParams } from "../../framework/utils/query";
 import { ApiTags } from "@nestjs/swagger";
 import { ResponseInterceptor } from "framework/interceptors/response.interceptor";
-
+import { Currency } from "./entities/currency.entity";
 
 @ApiTags("Currencies")
 @Controller("currencies")
@@ -24,17 +24,19 @@ export class CurrenciesController {
   constructor(private readonly currenciesService: CurrenciesService) {}
 
   @Post()
-  create(@Body() createCurrencyDto: CreateCurrencyDto) {
+  create(
+    @Body() createCurrencyDto: CreateCurrencyDto
+  ): Promise<CreateCurrencyDto> {
     return this.currenciesService.create(createCurrencyDto);
   }
 
   @Get()
-  findAll(@Query() params: QueryParams) {
+  findAll(@Query() params: QueryParams): Promise<Currency[]> {
     return this.currenciesService.findAll(params);
   }
 
   @Get(":id")
-  findOne(@Param("id") id: string) {
+  findOne(@Param("id") id: string): Promise<Currency> {
     return this.currenciesService.findOne(+id);
   }
 
@@ -42,12 +44,12 @@ export class CurrenciesController {
   update(
     @Param("id") id: string,
     @Body() updateCurrencyDto: UpdateCurrencyDto
-  ) {
+  ): Promise<UpdateCurrencyDto> {
     return this.currenciesService.update(+id, updateCurrencyDto);
   }
 
   @Delete(":id")
-  remove(@Param("id") id: string) {
+  remove(@Param("id") id: string): Promise<string> {
     return this.currenciesService.remove(+id);
   }
 }

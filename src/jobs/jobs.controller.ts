@@ -6,7 +6,7 @@ import {
   Patch,
   Param,
   Delete,
-  UseInterceptors
+  UseInterceptors,
 } from "@nestjs/common";
 import { JobsService } from "./jobs.service";
 import { CreateJobDto } from "./dto/create-job.dto";

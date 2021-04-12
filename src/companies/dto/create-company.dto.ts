@@ -14,7 +14,7 @@ export class CreateCompanyDto {
   @Length(3, 30)
   @ApiProperty({
     minLength: 3,
-    maxLength: 30
+    maxLength: 30,
   })
   name: string;
 
@@ -28,7 +28,7 @@ export class CreateCompanyDto {
   @Length(20, 150)
   @ApiProperty({
     minLength: 20,
-    maxLength: 150
+    maxLength: 150,
   })
   description: string;
 
@@ -38,5 +38,5 @@ export class CreateCompanyDto {
   @ApiProperty()
   user_id: number;
 
-  user: object;
+  user: any;
 }
