@@ -9,6 +9,10 @@ import { PicturesModule } from "./pictures/pictures.module";
 import { LevelsModule } from "./levels/levels.module";
 import { JobtypesModule } from "./jobtypes/jobtypes.module";
 import { AuthModule } from "./auth/auth.module";
+import { PaymenttyesModule } from './paymenttyes/paymenttyes.module';
+import { LocationsModule } from './locations/locations.module';
+import { PaymenttypesModule } from './paymenttypes/paymenttypes.module';
+import { LocationsModule } from './locations/locations.module';
 
 @Module({
   imports: [
@@ -22,6 +26,9 @@ import { AuthModule } from "./auth/auth.module";
     PicturesModule,
     LevelsModule,
     JobtypesModule,
+    PaymenttyesModule,
+    LocationsModule,
+    PaymenttypesModule,
   ],
   controllers: [],
   providers: [],
