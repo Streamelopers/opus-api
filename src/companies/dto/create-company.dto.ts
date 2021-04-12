@@ -38,5 +38,5 @@ export class CreateCompanyDto {
   @ApiProperty()
   user_id: number;
 
-  user: any;
+  user: unknown;
 }

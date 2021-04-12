@@ -9,11 +9,13 @@ import { PicturesModule } from "./pictures/pictures.module";
 import { LevelsModule } from "./levels/levels.module";
 import { JobtypesModule } from "./jobtypes/jobtypes.module";
 import { AuthModule } from "./auth/auth.module";
+import { PaymenttypesModule } from "./paymenttypes/paymenttypes.module";
+import { LocationsModule } from "./locations/locations.module";
 
 @Module({
   imports: [
-    AuthModule,
     TypeOrmModule.forRoot(),
+    AuthModule,
     UsersModule,
     CompaniesModule,
     CurrenciesModule,
@@ -22,6 +24,8 @@ import { AuthModule } from "./auth/auth.module";
     PicturesModule,
     LevelsModule,
     JobtypesModule,
+    LocationsModule,
+    PaymenttypesModule,
   ],
   controllers: [],
   providers: [],
