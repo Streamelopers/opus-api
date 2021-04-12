@@ -6,7 +6,7 @@ import {
   Patch,
   Param,
   Delete,
-  UseInterceptors
+  UseInterceptors,
 } from "@nestjs/common";
 import { PicturesService } from "./pictures.service";
 import { CreatePictureDto } from "./dto/create-picture.dto";

@@ -5,7 +5,7 @@ import {
   SwaggerModule,
   DocumentBuilder,
   SwaggerCustomOptions,
-  SwaggerDocumentOptions
+  SwaggerDocumentOptions,
 } from "@nestjs/swagger";
 
 async function bootstrap() {
@@ -16,25 +16,22 @@ async function bootstrap() {
     .setDescription("An API to manage all resource from Opus.io")
     .setVersion("1.0")
     .addBearerAuth(
-      { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
-      'access-token',
+      { type: "http", scheme: "bearer", bearerFormat: "JWT" },
+      "access-token"
     )
     .build();
-  
-  const options: SwaggerDocumentOptions =  {
-    operationIdFactory: (
-      controllerKey: string,
-      methodKey: string
-    ) => methodKey
+
+  const options: SwaggerDocumentOptions = {
+    operationIdFactory: (controllerKey: string, methodKey: string) => methodKey,
   };
   const document = SwaggerModule.createDocument(app, config, options);
-  
+
   const optionsSetup: SwaggerCustomOptions = {
     swaggerOptions: {
       persistAuthorization: true,
     },
     customSiteTitle: "Opus - API",
-    explorer: true
+    explorer: true,
   };
 
   // setup

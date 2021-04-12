@@ -19,7 +19,7 @@ export class CompaniesService {
     return createCompanyDto;
   }
 
-  findAll(query: QueryParams) {
+  findAll(query: QueryParams): Promise<Company[]> {
     return this.companyRepository.find({
       skip: query.page * query.pageSize,
       take: query.pageSize,
