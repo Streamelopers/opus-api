@@ -5,7 +5,7 @@ import {
   IsNotEmpty,
   MinLength,
   IsBoolean,
-  IsNumber
+  IsNumber,
 } from "class-validator";
 // import { ApiProperty } from "@nestjs/swagger";
 
@@ -27,7 +27,7 @@ export class CreateJobDto {
 
   @IsBoolean()
   isRemote: boolean;
-  
+
   @IsBoolean()
   isRemoteOnly: boolean;
 

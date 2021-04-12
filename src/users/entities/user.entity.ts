@@ -2,7 +2,7 @@ import { Entity, Column, ManyToMany, JoinTable } from "typeorm";
 import { Base } from "../../../framework/entities/base";
 import { Job } from "../../jobs/entities/job.entity";
 
-@Entity()
+@Entity("users")
 export class User extends Base {
   @Column({ name: "first_name" })
   firstName: string;

@@ -4,7 +4,7 @@ import {
   JoinColumn,
   OneToOne,
   OneToMany,
-  JoinTable
+  JoinTable,
 } from "typeorm";
 import { Base } from "../../../framework/entities/base";
 import { Jobtype } from "../../jobtypes/entities/jobtype.entity";
@@ -37,7 +37,7 @@ export class Job extends Base {
   @Column({ name: "is_remote_only" })
   isRemoteOnly: boolean;
 
-  @Column({ name: "application_target "})
+  @Column({ name: "application_target " })
   applicationTarget: string;
 
   @OneToOne(() => User)
@@ -60,7 +60,7 @@ export class Job extends Base {
   @JoinColumn()
   currency: Currency;
 
-  @OneToMany((type) => Tag, tag => tag.jobs)
+  @OneToMany((type) => Tag, (tag) => tag.jobs)
   @JoinTable()
   tags: Tag[];
 }
