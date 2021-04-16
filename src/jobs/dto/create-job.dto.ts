@@ -35,32 +35,17 @@ export class CreateJobDto {
   applicationTarget: string;
 
   @IsNumber()
-  user_id: number;
+  userId: number;
 
   @IsNumber()
-  company_id: number;
+  companyId: number;
 
   @IsNumber()
-  level_id: number;
-
-  @IsNumber()
-  jobtype_id: number;
-
-  @IsNumber()
-  currency_id: number;
+  levelId: number;
 
   // @IsNumber()
-  // tags: number;
+  // jobtype_id: number;
 
-  // user: object;
-
-  // company: object;
-
-  // level: object;
-
-  // jobtype: object;
-
-  // currency: object;
-
-  // tags: object[];
+  @IsNumber()
+  currencyId: number;
 }

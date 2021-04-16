@@ -13,15 +13,13 @@ export class JobsService {
   ) {}
 
   async create(createJobDto: CreateJobDto): Promise<CreateJobDto> {
-    // await this.jobRepository.insert(createJobDto);
-
-    // console.log(createJobDto)
+    await this.jobRepository.insert(createJobDto);
 
     return createJobDto;
   }
 
   findAll() {
-    return `This action returns all jobs`;
+    return this.jobRepository.find();
   }
 
   findOne(id: number) {

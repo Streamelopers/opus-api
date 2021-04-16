@@ -20,7 +20,6 @@ export class JobsController {
 
   @Post()
   create(@Body() createJobDto: CreateJobDto): Promise<CreateJobDto> {
-    console.log(createJobDto);
     return this.jobsService.create(createJobDto);
   }
 

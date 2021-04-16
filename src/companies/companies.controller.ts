@@ -7,14 +7,12 @@ import {
   Param,
   Delete,
   Query,
-  UsePipes,
   UseInterceptors,
 } from "@nestjs/common";
 import { CompaniesService } from "./companies.service";
 import { CreateCompanyDto } from "./dto/create-company.dto";
 import { UpdateCompanyDto } from "./dto/update-company.dto";
 import { QueryParams } from "../../framework/utils/query";
-import { User } from "../users/entities/user.entity";
 import { ApiTags } from "@nestjs/swagger";
 import { ResponseInterceptor } from "framework/interceptors/response.interceptor";
 import { Company } from "./entities/company.entity";

@@ -36,5 +36,5 @@ export class CreateCompanyDto {
   @IsNotEmpty()
   @IsPositive()
   @ApiProperty()
-  user_id: number;
+  userId: number;
 }

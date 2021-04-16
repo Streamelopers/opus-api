@@ -14,9 +14,9 @@ export class Company extends Base {
   description: string;
 
   @OneToOne(() => User)
-  @JoinColumn({
-    name: "user_id",
-    referencedColumnName: "id",
-  })
+  @JoinColumn()
   user: User;
+
+  @Column({ nullable: true })
+  userId: number;
 }
