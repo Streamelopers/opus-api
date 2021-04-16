@@ -7,7 +7,7 @@ export class Tag extends Base {
   @Column()
   name: string;
 
-  @ManyToMany((type) => Job, (job) => job.tags)
-  @JoinTable()
-  jobs: Job[];
+  // @ManyToMany((type) => Job, (job) => job.tags)
+  // @JoinTable()
+  // jobs: Job[];
 }

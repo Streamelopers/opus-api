@@ -19,7 +19,7 @@ export class JobsController {
   constructor(private readonly jobsService: JobsService) {}
 
   @Post()
-  create(@Body() createJobDto: CreateJobDto) {
+  create(@Body() createJobDto: CreateJobDto): Promise<CreateJobDto> {
     console.log(createJobDto);
     return this.jobsService.create(createJobDto);
   }

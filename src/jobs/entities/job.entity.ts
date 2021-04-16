@@ -41,26 +41,41 @@ export class Job extends Base {
   applicationTarget: string;
 
   @OneToOne(() => User)
-  @JoinColumn()
+  @JoinColumn({
+    name: "user_id",
+    referencedColumnName: "id",
+  })
   user: User;
 
   @OneToOne(() => Company)
-  @JoinColumn()
+  @JoinColumn({
+    name: "company_id",
+    referencedColumnName: "id",
+  })
   company: Company;
 
   @OneToOne(() => Level)
-  @JoinColumn()
+  @JoinColumn({
+    name: "level_id",
+    referencedColumnName: "id",
+  })
   level: Level;
 
   @OneToOne(() => Jobtype)
-  @JoinColumn()
+  @JoinColumn({
+    name: "jobtype_id",
+    referencedColumnName: "id",
+  })
   jobtype: Jobtype;
 
   @OneToOne(() => Currency)
-  @JoinColumn()
+  @JoinColumn({
+    name: "currency_id",
+    referencedColumnName: "id",
+  })
   currency: Currency;
 
-  @OneToMany((type) => Tag, (tag) => tag.jobs)
-  @JoinTable()
-  tags: Tag[];
+  // @OneToMany((type) => Tag, (tag) => tag.jobs)
+  // @JoinTable()
+  // tags: Tag[];
 }
