@@ -37,6 +37,4 @@ export class CreateCompanyDto {
   @IsPositive()
   @ApiProperty()
   user_id: number;
-
-  user: unknown;
 }
