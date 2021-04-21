@@ -49,7 +49,7 @@ export class LocationsController {
   }
 
   @Delete(":id")
-  remove(@Param("id") id: string): Promise<string>{
+  remove(@Param("id") id: string): Promise<string> {
     return this.locationsService.remove(+id);
   }
 }

@@ -17,7 +17,6 @@ import { ResponseInterceptor } from "framework/interceptors/response.interceptor
 import { ApiTags } from "@nestjs/swagger";
 import { Paymenttype } from "./entities/paymenttype.entity";
 
-
 @ApiTags("Payment Types")
 @Controller("paymenttypes")
 @UseInterceptors(ResponseInterceptor)

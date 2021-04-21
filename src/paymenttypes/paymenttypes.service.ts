@@ -9,7 +9,7 @@ import { Paymenttype } from "./entities/paymenttype.entity";
 @Injectable()
 export class PaymenttypesService {
   constructor(
-    @InjectRepository(Paymenttype) 
+    @InjectRepository(Paymenttype)
     private paymenttypeRepository: Repository<Paymenttype>
   ) {}
 
