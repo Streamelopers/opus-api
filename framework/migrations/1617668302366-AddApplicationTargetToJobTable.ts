@@ -6,7 +6,6 @@ export class AddApplicationTargetToJobTable1617668302366 implements MigrationInt
         await queryRunner.addColumn("jobs", new TableColumn({
             name: "application_target",
             type: "varchar",
-            default: "",
         }));
     }
 
