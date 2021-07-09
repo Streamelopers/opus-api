@@ -1,20 +1,13 @@
-import {
-  Entity,
-  Column,
-  // JoinColumn,
-  // OneToOne,
-  // OneToMany,
-  // JoinTable,
-} from "typeorm";
+import { Entity, Column, OneToOne, OneToMany, JoinColumn } from "typeorm";
 import { Base } from "framework/entities/base";
-// import { Jobtype } from "src/jobtypes/entities/jobtype.entity";
-// import { User } from "src/users/entities/user.entity";
-// import { Level } from "src/levels/entities/level.entity";
-// import { Tag } from "../../tags/entities/tag.entity";
-// import { Company } from "src/companies/entities/company.entity";
-// import { Currency } from "src/currencies/entities/currency.entity";
-// import { Paymenttype } from "src/paymenttypes/entities/paymenttype.entity";
-// import { Location } from "src/locations/entities/location.entity";
+import { Jobtype } from "src/jobtypes/entities/jobtype.entity";
+import { User } from "src/users/entities/user.entity";
+import { Level } from "src/levels/entities/level.entity";
+import { Tag } from "../../tags/entities/tag.entity";
+import { Company } from "src/companies/entities/company.entity";
+import { Currency } from "src/currencies/entities/currency.entity";
+import { Paymenttype } from "src/paymenttypes/entities/paymenttype.entity";
+import { Location } from "src/locations/entities/location.entity";
 
 @Entity("jobs")
 export class Job extends Base {
@@ -39,59 +32,37 @@ export class Job extends Base {
   @Column({ name: "is_remote_only" })
   isRemoteOnly: boolean;
 
-  @Column({ name: "application_target " })
+  @Column({ name: "application_target" })
   applicationTarget: string;
 
-  // @OneToOne(() => User)
-  // @JoinColumn()
-  // user: User;
+  @OneToOne(() => User)
+  @JoinColumn({ name: "user_id" })
+  user: User;
 
-  // @Column({ nullable: true })
-  // userId: number;
+  @OneToOne(() => Company)
+  @JoinColumn({ name: "company_id" })
+  company: Company;
 
-  // @OneToOne(() => Company)
-  // @JoinColumn()
-  // company: Company;
+  @OneToOne(() => Level)
+  @JoinColumn({ name: "level_id" })
+  level: Level;
 
-  // @Column({ nullable: true })
-  // companyId: number;
+  @OneToOne(() => Jobtype)
+  @JoinColumn({ name: "job_type_id" })
+  jobtype: Jobtype;
 
-  // @OneToOne(() => Level)
-  // @JoinColumn()
-  // level: Level;
+  @OneToOne(() => Currency)
+  @JoinColumn({ name: "currency_id" })
+  currency: Currency;
 
-  // @Column({ nullable: true })
-  // levelId: number;
+  @OneToOne(() => Location)
+  @JoinColumn({ name: "location_id" })
+  location: Location;
 
-  // @OneToOne(() => Jobtype)
-  // @JoinColumn()
-  // jobtype: Jobtype;
+  @OneToOne(() => Paymenttype)
+  @JoinColumn({ name: "payment_type_id" })
+  paymenttype: Paymenttype;
 
-  // @Column({ nullable: true })
-  // jobtypeId: number;
-
-  // @OneToOne(() => Currency)
-  // @JoinColumn()
-  // currency: Currency;
-
-  // @Column({ nullable: true })
-  // currencyId: number;
-
-  // @OneToOne(() => Location)
-  // @JoinColumn()
-  // location: Location;
-
-  // @Column({ nullable: true })
-  // locationId: number;
-
-  // @OneToOne(() => Paymenttype)
-  // @JoinColumn()
-  // paymenttype: Paymenttype;
-
-  // @Column({ nullable: true })
-  // paymenttypeId: number;
-
-  // @OneToMany((type) => Tag, (tag) => tag.jobs)
-  // @JoinTable()
-  // tags: Tag[];
+  @OneToMany((type) => Tag, (tag) => tag.jobs)
+  tags: Tag[];
 }
