@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common";
-import { TypeOrmModule } from "@nestjs/typeorm";
+
 import { UsersModule } from "./users/users.module";
 import { CompaniesModule } from "./companies/companies.module";
 import { CurrenciesModule } from "./currencies/currencies.module";
@@ -11,10 +11,13 @@ import { JobtypesModule } from "./jobtypes/jobtypes.module";
 import { AuthModule } from "./auth/auth.module";
 import { PaymenttypesModule } from "./paymenttypes/paymenttypes.module";
 import { LocationsModule } from "./locations/locations.module";
+import { DatabaseModule } from "framework/database/database.module";
+import { ConfigModule } from "@nestjs/config";
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(),
+    ConfigModule.forRoot({ isGlobal: true }),
+    DatabaseModule,
     AuthModule,
     UsersModule,
     CompaniesModule,
@@ -27,7 +30,5 @@ import { LocationsModule } from "./locations/locations.module";
     LocationsModule,
     PaymenttypesModule,
   ],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {}
