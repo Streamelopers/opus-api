@@ -1,0 +1,28 @@
+version: "3.7"
+
+services:
+  api:
+    container_name: opus-api
+    image: node:14
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/api
+    depends_on:
+      - database
+    tty: true
+
+  database:
+    container_name: opus-database
+    image: postgres:12
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
