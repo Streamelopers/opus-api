@@ -26,9 +26,9 @@ export const PostgresProvider: DynamicModule = TypeOrmModule.forRootAsync({
       database: config.get("POSTGRES_DB"),
       autoLoadEntities: true,
       synchronize: isDevelopmentEnv,
-      migrations: ["dist/database/migrations/*.js"],
+      migrations: ["dist/framework/database/migrations/*.js"],
       cli: {
-        migrationsDir: "src/database/migrations",
+        migrationsDir: "src/framework/database/migrations",
       },
       extra: {
         ssl: !isDevelopmentEnv,
