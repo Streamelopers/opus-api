@@ -2,13 +2,13 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { DynamicModule } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { ConnectionOptions } from "typeorm";
-import { writeFileSync } from "fs";
-import { join } from "path";
+import { writeFileSync, constants, promises } from "fs";
+import { dirname } from "path";
 
 import { Environmnet } from "framework/enums";
 
 async function createOrmConfigFile(dbConfig: ConnectionOptions) {
-  const path = join(__dirname, "../../");
+  const path = await getRootDirectory();
   writeFileSync(path + "ormconfig.json", JSON.stringify(dbConfig, null, 2));
 }
 
@@ -28,7 +28,7 @@ export const PostgresProvider: DynamicModule = TypeOrmModule.forRootAsync({
       synchronize: isDevelopmentEnv,
       migrations: ["dist/framework/database/migrations/*.js"],
       cli: {
-        migrationsDir: "src/framework/database/migrations",
+        migrationsDir: "framework/database/migrations",
       },
       extra: {
         ssl: !isDevelopmentEnv,
@@ -37,9 +37,20 @@ export const PostgresProvider: DynamicModule = TypeOrmModule.forRootAsync({
     } as ConnectionOptions;
 
     if (isDevelopmentEnv) {
-      createOrmConfigFile(dbConfig);
+      console.log("hello");
+      await createOrmConfigFile(dbConfig);
     }
 
     return dbConfig;
   },
 });
+
+async function getRootDirectory() {
+  for (let path of module.paths) {
+    try {
+      let prospectivePkgJsonDir = dirname(path);
+      await promises.access(path, constants.F_OK);
+      return prospectivePkgJsonDir;
+    } catch (e) {}
+  }
+}
