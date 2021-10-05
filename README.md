@@ -1,6 +1,6 @@
-[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/Streamelopers/opus-api/blob/main/README.en.md)
-
 # Opus API
+
+[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/Streamelopers/opus-api/blob/main/README.en.md)
 
 ## Requerimientos ##
 
