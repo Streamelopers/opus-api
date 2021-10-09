@@ -54,6 +54,7 @@ El nombre de las tablas debe estar en plural, por ejemplo: Users, Currencies, Co
 | MaxSalary | double | Nullable |
 | IsRemote | Boolean | Not null |
 | IsRemoteOnly | Boolean | Not null |
+| ApplicationTarget | varchar | Not null |
 
 ### JobType ✅
 

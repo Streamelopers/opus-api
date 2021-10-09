@@ -13,7 +13,7 @@ export class JobsService {
     private jobRepository: Repository<Job>
   ) {}
 
-  async create(createJobDto: CreateJobDto): Promise<CreateJobDto> {
+  async create(createJobDto: Job): Promise<Job> {
     await this.jobRepository.insert(createJobDto);
 
     return createJobDto;

@@ -15,15 +15,35 @@ import { UpdateJobDto } from "./dto/update-job.dto";
 import { ResponseInterceptor } from "framework/interceptors/response.interceptor";
 import { Job } from "./entities/job.entity";
 import { QueryParams } from "framework/utils/query";
+import { UsersService } from "src/users/users.service";
 
 @Controller("jobs")
 @UseInterceptors(ResponseInterceptor)
 export class JobsController {
-  constructor(private readonly jobsService: JobsService) {}
+  constructor(
+    private readonly jobsService: JobsService,
+    private readonly usersService: UsersService
+  ) {}
 
   @Post()
-  create(@Body() createJobDto: CreateJobDto): Promise<CreateJobDto> {
-    return this.jobsService.create(createJobDto);
+  async create(@Body() createJobDto: CreateJobDto): Promise<Job> {
+    /**
+     * @TODO: Need to finish the validation and assign all the values.
+     */
+    const job = new Job();
+    job.title = createJobDto.title;
+    job.description = createJobDto.description;
+    job.howToApply = createJobDto.howToApply;
+    job.isRemote = createJobDto.isRemote;
+    job.isRemoteOnly = createJobDto.isRemoteOnly;
+    job.applicationTarget = createJobDto.applicationTarget;
+    job.maxSalary = createJobDto.maxSalary;
+    job.minSalary = createJobDto.minSalary;
+    const user = await this.usersService.findOne(createJobDto.userId);
+    if (user) {
+      job.user = user;
+    }
+    return this.jobsService.create(job);
   }
 
   @Get()

@@ -1,13 +1,4 @@
-import {
-  Length,
-  IsEmail,
-  IsString,
-  IsNotEmpty,
-  MinLength,
-  IsBoolean,
-  IsNumber,
-} from "class-validator";
-// import { ApiProperty } from "@nestjs/swagger";
+import { IsString, IsBoolean, IsNumber } from "class-validator";
 
 export class CreateJobDto {
   @IsString()
@@ -43,8 +34,8 @@ export class CreateJobDto {
   @IsNumber()
   levelId: number;
 
-  // @IsNumber()
-  // jobtype_id: number;
+  @IsNumber()
+  jobTypeId: number;
 
   @IsNumber()
   currencyId: number;

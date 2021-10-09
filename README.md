@@ -10,7 +10,7 @@
 - [Docker](https://www.docker.com/products/docker-desktop)
 - [PostgresSQL](https://www.postgresql.org/download/) (Opcional)
 
-## Pimeros pasos ##
+## Primeros pasos ##
 
 Tienes dos opciones para servir el api:
 
@@ -66,3 +66,20 @@ npm run migrate:create NombreDeLaMigracion
 ```sh
 npm run migrate:run
 ```
+
+## Configurar Github OAuth
+
+1. Seguir las instrucciones de este enlace:
+https://docs.github.com/es/developers/apps/building-oauth-apps/creating-an-oauth-app
+
+2. Llenar el formulario con los siguientes datos:
+- Application name: opus-local
+- Homepage URL: http://localhost:3000
+- Application description: 
+- Authorization callback URL: http://localhost:3500/oauth-callback
+
+3. Haz click en 'Generate a new client secret. Tendrás en pantalla el client ID y el client secret.
+
+4. En el archivo .env configura:
+- GITHUB_CLIENT_ID={Client ID}
+- GITHUB_CLIENT_SECRET={Client secret}

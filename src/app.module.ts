@@ -11,6 +11,8 @@ import { JobtypesModule } from "./jobtypes/jobtypes.module";
 import { AuthModule } from "./auth/auth.module";
 import { PaymenttypesModule } from "./paymenttypes/paymenttypes.module";
 import { LocationsModule } from "./locations/locations.module";
+import { OauthModule } from './oauth/oauth.module';
+import { OauthCallbackModule } from './oauth-callback/oauth-callback.module';
 
 @Module({
   imports: [
@@ -26,6 +28,8 @@ import { LocationsModule } from "./locations/locations.module";
     JobtypesModule,
     LocationsModule,
     PaymenttypesModule,
+    OauthModule,
+    OauthCallbackModule,
   ],
   controllers: [],
   providers: [],
