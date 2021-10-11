@@ -10,3 +10,7 @@ dist/
 .DS_Store
 
 coverage/
+
+# ORM
+ormconfig.js
+ormconfig.json
