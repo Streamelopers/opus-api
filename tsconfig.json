@@ -1,5 +1,18 @@
 {
   "compilerOptions": {
+    "paths": {
+      "@modules/*": ["./src/modules/*"],
+      "@config/*": ["./src/config/*"],
+      "@database/*": ["src/database/*"],
+      "@filters/*": ["src/filters/*"],
+      "@guards/*": ["src/guards/*"],
+      "@enums/*": ["src/enums/*"],
+      "@providers/*": ["src/providers/*"],
+      "@pipes/*": ["src/pipes/*"],
+      "@interceptors/*": ["src/interceptors/*"],
+      "@utils/*": ["src/utils/*"],
+      "@common/*": ["src/common/*"]
+    },
     "module": "commonjs",
     "declaration": true,
     "removeComments": true,
