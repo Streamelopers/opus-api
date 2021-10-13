@@ -1,19 +1,47 @@
-version: '3.7'
+version: "3.8"
 
 services:
   api:
     container_name: opus-api
-    image: node:12
-    working_dir: /app
-    command: npm run start:dev
+    image: opus-api:latest
+    build:
+      context: .
+      target: development
+      dockerfile: Dockerfile
     ports:
-      - '3000:3000'
+      - ${PORT}:${PORT}
+      - 9229:9229
     volumes:
-      - ./:/app
+      - .:/api
+      - /api/node_modules
+    environment:
+      # database
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_DB=${POSTGRES_DB}
+      # application
+      - NODE_ENV=${NODE_ENV}
+      - PORT=${PORT}
+      # third party services
+      - JWT_KEY=${JWT_KEY}
+    command: npm run start:debug
+    restart: unless-stopped
+
   database:
     container_name: opus-database
     image: postgres:12
-    env_file:
-      - ./.env
+    environment:
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
     ports:
-      - '5432:5432'
+      - ${POSTGRES_PORT}:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

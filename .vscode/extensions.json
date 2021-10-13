@@ -1,0 +1,19 @@
+{
+  "recommendations": [
+    "ms-azuretools.vscode-docker",
+    "aaron-bond.better-comments",
+    "mikestead.dotenv",
+    "eamodio.gitlens",
+    "ms-vscode.vscode-typescript-next",
+    "pkief.material-icon-theme",
+    "eg2.vscode-npm-script",
+    "christian-kohler.npm-intellisense",
+    "christian-kohler.path-intellisense",
+    "esbenp.prettier-vscode",
+    "ms-vscode-remote.remote-containers",
+    "ms-vscode-remote.remote-ssh",
+    "redhat.vscode-yaml",
+    "wayou.vscode-todo-highlight",
+    "davidanson.vscode-markdownlint"
+  ]
+}
