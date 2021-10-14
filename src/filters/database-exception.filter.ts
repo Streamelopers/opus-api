@@ -3,9 +3,9 @@ import {
   Catch,
   ArgumentsHost,
   HttpStatus,
-} from '@nestjs/common';
-import { Response } from 'express';
-import { QueryFailedError } from 'typeorm';
+} from "@nestjs/common";
+import { Response } from "express";
+import { QueryFailedError } from "typeorm";
 
 @Catch(QueryFailedError)
 export class DatabaseExceptionFilter implements ExceptionFilter {
