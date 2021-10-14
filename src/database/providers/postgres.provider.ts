@@ -52,6 +52,7 @@ async function getRootDirectory() {
       await promises.access(path, constants.F_OK);
 
       return prospectivePkgJsonDir;
+      // eslint-disable-next-line no-empty
     } catch (err) {}
   }
 }
