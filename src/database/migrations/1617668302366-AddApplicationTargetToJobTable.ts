@@ -14,5 +14,6 @@ export class AddApplicationTargetToJobTable1617668302366
     );
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   public async down(queryRunner: QueryRunner): Promise<void> {}
 }
