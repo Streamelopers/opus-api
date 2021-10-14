@@ -4,8 +4,8 @@ import {
   ArgumentsHost,
   HttpException,
   Logger,
-} from '@nestjs/common';
-import { Response } from 'express';
+} from "@nestjs/common";
+import { Response } from "express";
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -17,7 +17,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const status = exception.getStatus();
     const message = exception.message;
 
-    this.logger.error('Ups, and error ocurred');
+    this.logger.error("Ups, and error ocurred");
     this.logger.error(exception);
     this.logger.error(exception.message);
 
