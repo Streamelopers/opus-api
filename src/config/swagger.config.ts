@@ -11,7 +11,13 @@ export const configSwagger = (app: INestApplication) => {
     .setDescription(description)
     .setVersion(version)
     .addBearerAuth(
-      { type: "http", scheme: "bearer", bearerFormat: "JWT" },
+      {
+        type: "http",
+        scheme: "bearer",
+        bearerFormat: "JWT",
+        in: "header",
+        name: "authorization",
+      },
       "access-token"
     )
     .build();

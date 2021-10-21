@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Reset Password</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+            crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/reset.css">
+    </head>
+
+    <body>
+        <div class="container d-flex h-100">
+            <div class="row align-self-center mx-auto col-md-6">
+                <div class="d-flex justify-content-center">
+                    <h1 class="text-white p-0 title">
+                        Reset your password
+                    </h1>
+                </div>
+                <form class="signin-form" method="POST">
+                    <div>
+                        <p id="error-box" class="error d-flex justify-content-center m-2 w-100"></p>
+                    </div>
+                    <div class="form-label-group">
+                        <input type="password" name="password" class="form-control" autofocus="true" autocomplete="off" />
+                        <label for="new_password">New password</label>
+                    </div>
+
+                    <div class="form-label-group">
+                        <input type="password" name="confirmPassword" class="form-control" autocomplete="off" />
+                        <label for="confirm_password">Confirm password</label>
+                    </div>
+
+                    <button class="btn btn-lg btn-block rounded-pill btn-signin" type="button" onclick="onSubmit()">
+                        Change my password
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <script src="/js/reset.js"></script>
+    </body>
+
+</html>

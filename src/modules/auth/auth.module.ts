@@ -1,20 +1,39 @@
+import { ConfigModule, ConfigService } from "@nestjs/config";
+import { PassportModule } from "@nestjs/passport";
+import { TypeOrmModule } from "@nestjs/typeorm";
 import { Module } from "@nestjs/common";
 import { JwtModule } from "@nestjs/jwt";
-import { PassportModule } from "@nestjs/passport";
-import { AuthService } from "./auth.service";
+
+import { SendGridModule } from "@providers/sendgrid/sendgrid.module";
+import { AuthenticationController } from "./auth.controller";
+import { UsersService } from "@modules/users/users.service";
 import { JwtStrategy } from "./strategies/jwt.strategy";
-import { ConfigModule } from "@nestjs/config";
+import { AuthenticationService } from "./auth.service";
+import { User, Token } from "@modules/users/entities";
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
-    PassportModule,
-    JwtModule.register({
-      secret: process.env.JWT_KEY,
-      signOptions: { expiresIn: "1hr" },
+    SendGridModule,
+    TypeOrmModule.forFeature([User, Token]),
+    PassportModule.register({
+      defaultStrategy: "jwt",
     }),
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory(configService: ConfigService) {
+        return {
+          secret: configService.get("JWT_SECRET"),
+          signOptions: {
+            expiresIn: 86_400,
+          },
+        };
+      },
+    }),
+    SendGridModule,
   ],
-  providers: [AuthService, JwtStrategy],
-  exports: [AuthService],
+  controllers: [AuthenticationController],
+  providers: [AuthenticationService, JwtStrategy, UsersService],
+  exports: [JwtStrategy, PassportModule],
 })
-export class AuthModule {}
+export class AuthenticationModule {}
