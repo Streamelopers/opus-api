@@ -16,7 +16,7 @@ export class Token extends BaseEntity {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
-  @ManyToOne((type) => User, (user) => user.tokens, {
+  @ManyToOne(() => User, (user) => user.tokens, {
     cascade: true,
     nullable: false,
     eager: true,

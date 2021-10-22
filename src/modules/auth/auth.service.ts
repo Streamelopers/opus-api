@@ -159,7 +159,8 @@ export class AuthenticationService {
 
   async resendToken(email: string): Promise<string> {
     const user: User = await this.usersService.getUserByEmailOrUsername(
-      (email = email)
+      null,
+      email
     );
 
     if (!user) {
@@ -177,7 +178,7 @@ export class AuthenticationService {
     return await this.sendVerificationEmail(user);
   }
 
-  async recoverPassword(email: string) {
+  async recoverPassword(email: string): Promise<string> {
     const user: User = await this.usersService.getUserByEmailOrUsername(
       null,
       email
@@ -192,11 +193,11 @@ export class AuthenticationService {
     user.generatePasswordReset();
     await user.save();
 
-    let subject = "Password change request";
-    let to = user.email;
-    let from = process.env.FROM_EMAIL;
-    let link = `http://${this.request.headers.host}/api/auth/reset?token=${user.resetPasswordToken}`;
-    let html = `<p>Hi ${user.username}</p>
+    const subject = "Password change request";
+    const to = user.email;
+    const from = process.env.FROM_EMAIL;
+    const link = `http://${this.request.headers.host}/api/auth/reset?token=${user.resetPasswordToken}`;
+    const html = `<p>Hi ${user.username}</p>
                     <p>Please click on the following <a href="${link}">link</a> to reset your password.</p> 
                     <p>If you did not request this, please ignore this email and your password will remain unchanged.</p>`;
 

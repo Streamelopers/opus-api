@@ -35,28 +35,28 @@ export class AuthenticationController {
   }
 
   @Get("validation")
-  validateEmail(@Query("email") email: string) {
+  validateEmail(@Query("email") email: string): Promise<boolean> {
     return this.authenticationService.validateEmail(email);
   }
 
   @Get("verify")
-  verify(@Query("token") token: string) {
+  verify(@Query("token") token: string): Promise<string> {
     return this.authenticationService.verify(token);
   }
 
   @Post("resend")
-  resendToken(@Body("email") email: string) {
+  resendToken(@Body("email") email: string): Promise<string> {
     return this.authenticationService.resendToken(email);
   }
 
   @Post("recover")
-  recover(@Body("email") email: string) {
+  recover(@Body("email") email: string): Promise<string> {
     return this.authenticationService.recoverPassword(email);
   }
 
   @Get("reset")
   @Render("reset")
-  async reset(@Query("token") token: string) {
+  async reset(@Query("token") token: string): Promise<void> {
     await this.authenticationService.reset(token);
   }
 
@@ -64,7 +64,7 @@ export class AuthenticationController {
   resetPassword(
     @Query("token") token: string,
     @Body("password") password: string
-  ) {
+  ): Promise<string> {
     return this.authenticationService.resetPassword(token, password);
   }
 }

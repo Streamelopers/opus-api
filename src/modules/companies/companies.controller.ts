@@ -6,7 +6,6 @@ import {
   Patch,
   Param,
   Delete,
-  Query,
   UseInterceptors,
   UseGuards,
   HttpStatus,
@@ -20,7 +19,6 @@ import { UpdateCompanyDto } from "./dto/update-company.dto";
 import { CurrentUser } from "@modules/auth/decorators";
 import { CompaniesService } from "./companies.service";
 import { JwtAuthGuard } from "@modules/auth/guards";
-import { QueryParams } from "@utils/query";
 import { ResponseCompanyDto } from "./dto";
 
 @ApiTags("Companies")
@@ -47,8 +45,8 @@ export class CompaniesController {
     ResponseInterceptor,
     new TransformInterceptor(ResponseCompanyDto)
   )
-  findAll(@Query() params: QueryParams): Promise<ResponseCompanyDto[]> {
-    return this.companiesService.findAll(params);
+  findAll(): Promise<ResponseCompanyDto[]> {
+    return this.companiesService.findAll();
   }
 
   @Get(":id")

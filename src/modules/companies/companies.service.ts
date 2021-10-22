@@ -1,12 +1,11 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Repository, Like } from "typeorm";
+import { Repository } from "typeorm";
 
 import { CreateCompanyDto } from "./dto/create-company.dto";
 import { UpdateCompanyDto } from "./dto/update-company.dto";
 import { UsersService } from "@modules/users/users.service";
 import { Company } from "./entities/company.entity";
-import { QueryParams } from "@utils/query";
 
 @Injectable()
 export class CompaniesService {
@@ -34,7 +33,7 @@ export class CompaniesService {
     return await this.companyRepository.save(createdCompany);
   }
 
-  findAll(query: QueryParams): Promise<Company[]> {
+  findAll(): Promise<Company[]> {
     return this.companyRepository.find({ where: { isActive: true } });
   }
 

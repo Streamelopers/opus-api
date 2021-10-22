@@ -9,7 +9,7 @@ import {
   UseInterceptors,
 } from "@nestjs/common";
 import { JwtAuthGuard } from "../auth/guards/auth.guard";
-import { ApiTags, ApiBearerAuth, ApiBasicAuth } from "@nestjs/swagger";
+import { ApiTags, ApiBasicAuth } from "@nestjs/swagger";
 
 import { ResponseInterceptor } from "@interceptors/response.interceptor";
 import { TransformInterceptor } from "@interceptors/index";

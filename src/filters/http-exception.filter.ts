@@ -11,7 +11,10 @@ import { Response } from "express";
 export class HttpExceptionFilter implements ExceptionFilter {
   private readonly logger = new Logger(HttpExceptionFilter.name);
 
-  catch(exception: HttpException, host: ArgumentsHost) {
+  catch(
+    exception: HttpException,
+    host: ArgumentsHost
+  ): Response<any, Record<string, any>> {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     const status = exception.getStatus();

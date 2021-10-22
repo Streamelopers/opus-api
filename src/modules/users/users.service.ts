@@ -71,7 +71,10 @@ export class UsersService {
     await this.userRepository.delete(userId);
   }
 
-  async getUserByEmailOrUsername(username?: string, email?: string) {
+  async getUserByEmailOrUsername(
+    username?: string,
+    email?: string
+  ): Promise<User> {
     return await this.userRepository.findOne({
       where: [{ username }, { email }],
     });
