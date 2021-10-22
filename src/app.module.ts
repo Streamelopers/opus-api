@@ -7,18 +7,18 @@ import { LocationsModule } from "@modules/locations/locations.module";
 import { CompaniesModule } from "@modules/companies/companies.module";
 import { JobtypesModule } from "@modules/jobtypes/jobtypes.module";
 import { PicturesModule } from "@modules/pictures/pictures.module";
+import { AuthenticationModule } from "@modules/auth/auth.module";
 import { LevelsModule } from "@modules/levels/levels.module";
 import { DatabaseModule } from "@database/database.module";
 import { UsersModule } from "@modules/users/users.module";
 import { JobsModule } from "@modules/jobs/jobs.module";
 import { TagsModule } from "@modules/tags/tags.module";
-import { AuthModule } from "@modules/auth/auth.module";
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     DatabaseModule,
-    AuthModule,
+    AuthenticationModule,
     UsersModule,
     CompaniesModule,
     CurrenciesModule,

@@ -1,57 +1,81 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository, Like } from "typeorm";
+
 import { CreateCompanyDto } from "./dto/create-company.dto";
 import { UpdateCompanyDto } from "./dto/update-company.dto";
-import { QueryParams } from "@utils/query";
+import { UsersService } from "@modules/users/users.service";
 import { Company } from "./entities/company.entity";
+import { QueryParams } from "@utils/query";
 
 @Injectable()
 export class CompaniesService {
   constructor(
     @InjectRepository(Company)
-    private companyRepository: Repository<Company>
+    private readonly companyRepository: Repository<Company>,
+    private readonly userService: UsersService
   ) {}
 
-  async create(createCompanyDto: CreateCompanyDto): Promise<CreateCompanyDto> {
-    await this.companyRepository.insert(createCompanyDto);
+  async create(
+    createCompanyDto: CreateCompanyDto,
+    userId: number
+  ): Promise<Company> {
+    const user = await this.userService.findOne(userId);
 
-    return createCompanyDto;
+    if (!user) {
+      throw new NotFoundException("User not found");
+    }
+
+    const createdCompany = this.companyRepository.create({
+      ...createCompanyDto,
+      user,
+    });
+
+    return await this.companyRepository.save(createdCompany);
   }
 
   findAll(query: QueryParams): Promise<Company[]> {
-    return this.companyRepository.find({
-      skip: query.page * query.pageSize,
-      take: query.pageSize,
-      where: {
-        isActive: true,
-        name: Like(`%${query.q}%`),
-      },
-    });
+    return this.companyRepository.find({ where: { isActive: true } });
   }
 
-  findOne(id: number): Promise<Company> {
-    return this.companyRepository.findOne({
+  async findOne(id: number): Promise<Company> {
+    const company = await this.companyRepository.findOne({
       id,
       isActive: true,
     });
+
+    if (!company) {
+      throw new NotFoundException("Company not found");
+    }
+
+    return company;
   }
 
   async update(
     id: number,
     updateCompanyDto: UpdateCompanyDto
-  ): Promise<UpdateCompanyDto> {
-    await this.companyRepository.update(id, updateCompanyDto);
+  ): Promise<Company> {
+    const company = await this.companyRepository.preload({
+      id,
+      ...updateCompanyDto,
+    });
 
-    return updateCompanyDto;
+    if (!company) {
+      throw new NotFoundException("Company not found");
+    }
+
+    return company;
   }
 
-  async remove(id: number): Promise<string> {
-    await this.companyRepository.update(id, {
+  async remove(id: number): Promise<void> {
+    const company = await this.companyRepository.preload({
+      id,
       isActive: false,
       deletedAt: new Date(),
     });
 
-    return "La empresa fue desactivado correctamente";
+    if (!company) {
+      throw new NotFoundException("Company not found");
+    }
   }
 }
