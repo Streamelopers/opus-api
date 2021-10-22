@@ -1,11 +1,4 @@
-import {
-  Length,
-  IsUrl,
-  IsInt,
-  IsString,
-  IsNotEmpty,
-  IsPositive,
-} from "class-validator";
+import { Length, IsUrl, IsString, IsNotEmpty } from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateCompanyDto {
@@ -31,10 +24,4 @@ export class CreateCompanyDto {
     maxLength: 150,
   })
   description: string;
-
-  @IsInt()
-  @IsNotEmpty()
-  @IsPositive()
-  @ApiProperty()
-  userId: number;
 }

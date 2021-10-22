@@ -9,7 +9,11 @@ import { QueryFailedError } from "typeorm";
 
 @Catch(QueryFailedError)
 export class DatabaseExceptionFilter implements ExceptionFilter {
-  catch({ message }: QueryFailedError, host: ArgumentsHost) {
+  /* tslint:disable:@typescript-eslint/no-explicit-any */
+  catch(
+    { message }: QueryFailedError,
+    host: ArgumentsHost
+  ): Response<any, Record<string, any>> {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
 

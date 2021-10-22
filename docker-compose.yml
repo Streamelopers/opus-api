@@ -25,7 +25,9 @@ services:
       - NODE_ENV=${NODE_ENV}
       - PORT=${PORT}
       # third party services
-      - JWT_KEY=${JWT_KEY}
+      - JWT_SECRET=${JWT_SECRET}
+      - SENDGRID_API_KEY=${SENDGRID_API_KEY}
+      - FROM_EMAIL=${FROM_EMAIL}
     command: npm run start:debug
     restart: unless-stopped
 

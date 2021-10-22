@@ -1,67 +1,82 @@
-import { Injectable } from "@nestjs/common";
+import {
+  Injectable,
+  BadRequestException,
+  NotFoundException,
+} from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import * as bcrypt from "bcrypt";
-import { Repository, Like } from "typeorm";
-import { User } from "./entities/user.entity";
-import { CreateUserDto } from "./dto/create-user.dto";
-import { UpdateUserDto } from "./dto/update-user.dto";
-import { QueryParams } from "@utils/query";
+import { Repository } from "typeorm";
+
+import { SignUpDto } from "@modules/auth/dtos";
+import { UpdateUserDto } from "./dtos";
+import { User } from "./entities";
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)
-    private userRepository: Repository<User>
+    private readonly userRepository: Repository<User>
   ) {}
 
-  async create(createUserDto: CreateUserDto): Promise<CreateUserDto> {
-    const saltOrRounds = 10;
-    const hash = await bcrypt.hash(createUserDto.password, saltOrRounds);
-    createUserDto.password = hash;
-    await this.userRepository.insert(createUserDto);
+  async findOne(userId: number): Promise<User> {
+    if (!userId) {
+      throw new BadRequestException("User Id must be sent");
+    }
 
-    return createUserDto;
+    const user: User = await this.userRepository.findOne(userId);
+
+    if (!user) {
+      throw new NotFoundException("User does not exist");
+    }
+
+    return user;
   }
 
-  findAll(query: QueryParams): Promise<User[]> {
-    return this.userRepository.find({
-      skip: query.page * query.pageSize,
-      take: query.pageSize,
-      where: {
-        isActive: true,
-        firstName: Like(`%${query.q}%`),
-      },
-    });
+  async find(): Promise<User[]> {
+    return await this.userRepository.find();
   }
 
-  findOne(id: number): Promise<User> {
-    return this.userRepository.findOne({
-      id,
-      isActive: true,
-    });
+  async create(signupDto: SignUpDto): Promise<User> {
+    const { name, lastname, username, email, password } = signupDto;
+
+    const user = new User();
+    user.name = name;
+    user.lastname = lastname;
+    user.username = username;
+    user.email = email;
+    user.password = password;
+
+    return await user.save();
   }
 
-  async update(
-    id: number,
-    updateUserDto: UpdateUserDto
-  ): Promise<UpdateUserDto> {
-    await this.userRepository.update(id, updateUserDto);
-
-    return updateUserDto;
-  }
-
-  async remove(id: number): Promise<string> {
-    await this.userRepository.update(id, {
-      isActive: false,
-      deletedAt: new Date(),
+  async update(userId: number, user: Partial<UpdateUserDto>): Promise<User> {
+    const updatedUser = await this.userRepository.preload({
+      id: userId,
+      ...user,
     });
 
-    return "El usuario fue desactivado correctamente";
+    if (!updatedUser) {
+      throw new NotFoundException("User does not exists");
+    }
+
+    return updatedUser;
   }
 
-  async findByEmail(email: string): Promise<User> {
+  async remove(userId: number): Promise<void> {
+    const foundUser = await this.findOne(userId);
+
+    if (!foundUser) {
+      throw new NotFoundException("User does not exist");
+    }
+
+    await this.userRepository.delete(userId);
+  }
+
+  async getUserByEmailOrUsername(
+    username?: string,
+    email?: string
+  ): Promise<User> {
     return await this.userRepository.findOne({
-      email,
+      where: [{ username }, { email }],
     });
   }
 }

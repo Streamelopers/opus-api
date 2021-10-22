@@ -1,6 +1,6 @@
 import { writeFileSync, constants, promises } from "fs";
-import { DynamicModule, Logger } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
+import { DynamicModule } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { ConnectionOptions } from "typeorm";
 import { dirname } from "path";

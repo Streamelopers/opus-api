@@ -1,9 +1,21 @@
-import { Entity, Column, OneToOne, JoinColumn } from "typeorm";
-import { Base } from "@common/entities/base";
-import { User } from "../../users/entities/user.entity";
+import {
+  Entity,
+  Column,
+  OneToOne,
+  JoinColumn,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+  BaseEntity,
+  CreateDateColumn,
+} from "typeorm";
 
-@Entity("companies")
-export class Company extends Base {
+import { User } from "@modules/users/entities/user.entity";
+
+@Entity({ name: "companies" })
+export class Company extends BaseEntity {
+  @PrimaryGeneratedColumn("increment")
+  id: number;
+
   @Column()
   name: string;
 
@@ -17,6 +29,15 @@ export class Company extends Base {
   @JoinColumn()
   user: User;
 
-  @Column({ nullable: true })
-  userId: number;
+  @Column({ default: true, name: "is_active" })
+  isActive: boolean;
+
+  @Column({ type: "date", name: "deleted_at", nullable: true })
+  deletedAt: Date;
+
+  @UpdateDateColumn({ name: "updated_at" })
+  updatedAt: Date;
+
+  @CreateDateColumn({ name: "created_at" })
+  createdAt: Date;
 }
