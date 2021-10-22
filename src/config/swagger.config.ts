@@ -5,7 +5,7 @@ const title = "OPUS API";
 const description = "An API to manage all resource from Opus.do";
 const version = "1.0";
 
-export const configSwagger = (app: INestApplication) => {
+export const configSwagger = (app: INestApplication): void => {
   const options = new DocumentBuilder()
     .setTitle(title)
     .setDescription(description)

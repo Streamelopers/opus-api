@@ -1,5 +1,5 @@
-import { IsString, IsBoolean } from 'class-validator';
-import { Exclude, Expose } from 'class-transformer';
+import { IsString, IsBoolean } from "class-validator";
+import { Exclude, Expose } from "class-transformer";
 
 @Exclude()
 export class CreatedAccountDto {

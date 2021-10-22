@@ -33,7 +33,7 @@ export class TransformInterceptor<T> implements NestInterceptor<Partial<T>, T> {
     );
   }
 
-  isValidTransformation(value: T) {
+  isValidTransformation(value: T): boolean {
     const keys = Object.keys(value);
     const validations = keys.map((k) => value[k] !== undefined);
 

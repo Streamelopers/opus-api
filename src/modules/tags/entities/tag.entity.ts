@@ -1,13 +1,8 @@
 import { Base } from "@common/entities/base";
-import { Entity, Column, JoinTable, ManyToMany } from "typeorm";
-import { Job } from "../../jobs/entities/job.entity";
+import { Entity, Column } from "typeorm";
 
 @Entity("tags")
 export class Tag extends Base {
   @Column()
   name: string;
-
-  // @ManyToMany((type) => Job, (job) => job.tags)
-  // @JoinTable()
-  // jobs: Job[];
 }

@@ -32,7 +32,7 @@ export class User extends BaseEntity {
   @Column({ type: "varchar", length: 50, unique: true, nullable: false })
   email: string;
 
-  @OneToMany((type) => Token, (token) => token.user)
+  @OneToMany(() => Token, (token) => token.user)
   tokens: Token[];
 
   @Column({ type: "varchar", nullable: false })
@@ -81,13 +81,13 @@ export class User extends BaseEntity {
   }
 
   @BeforeInsert()
-  async hashPassword() {
+  async hashPassword(): Promise<void> {
     const salt = await genSalt(8);
     this.password = await hash(this.password, salt);
   }
 
   @BeforeUpdate()
-  async hashPasswordOnUpdate() {
+  async hashPasswordOnUpdate(): Promise<void> {
     if (this.tempPassword !== this.password) {
       const salt = await genSalt(8);
       this.password = await hash(this.password, salt);

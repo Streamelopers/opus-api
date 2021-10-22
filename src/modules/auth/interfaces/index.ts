@@ -1,1 +1,1 @@
-export { JwtPayload } from './payload.interface';
+export { JwtPayload } from "./payload.interface";
