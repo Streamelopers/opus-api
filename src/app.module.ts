@@ -1,12 +1,11 @@
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { Module } from "@nestjs/common";
 
-import { PaymenttypesModule } from "@modules/paymenttypes/paymenttypes.module";
+import { PaymentTypesModule } from "@modules/payment-types/payment-types.module";
 import { CurrenciesModule } from "@modules/currencies/currencies.module";
 import { LocationsModule } from "@modules/locations/locations.module";
 import { CompaniesModule } from "@modules/companies/companies.module";
-import { JobtypesModule } from "@modules/jobtypes/jobtypes.module";
-import { PicturesModule } from "@modules/pictures/pictures.module";
+import { JobtypesModule } from "@modules/job-types/job-types.module";
 import { AuthenticationModule } from "@modules/auth/auth.module";
 import { LevelsModule } from "@modules/levels/levels.module";
 import { DatabaseModule } from "@database/database.module";
@@ -25,7 +24,6 @@ import { CloudinaryModule } from './modules/cloudinary/cloudinary.module';
     CurrenciesModule,
     JobsModule,
     TagsModule,
-    PicturesModule,
     LevelsModule,
     JobtypesModule,
     LocationsModule,

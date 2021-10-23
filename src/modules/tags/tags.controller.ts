@@ -6,48 +6,52 @@ import {
   Patch,
   Param,
   Delete,
-  Query,
   UseInterceptors,
 } from "@nestjs/common";
-import { TagsService } from "./tags.service";
-import { CreateTagDto } from "./dto/create-tag.dto";
-import { UpdateTagDto } from "./dto/update-tag.dto";
-import { QueryParams } from "@utils/query";
 import { ApiTags } from "@nestjs/swagger";
-import { ResponseInterceptor } from "@interceptors/response.interceptor";
-import { Tag } from "./entities/tag.entity";
+
+import { ResponseInterceptor, TransformInterceptor } from "@interceptors/index";
+import { CreateTagDto, UpdateTagDto, ResponseTagDto } from "./dto";
+import { TagsService } from "./tags.service";
 
 @ApiTags("Tags")
 @Controller("tags")
-@UseInterceptors(ResponseInterceptor)
 export class TagsController {
   constructor(private readonly tagsService: TagsService) {}
 
-  @Post()
-  create(@Body() createTagDto: CreateTagDto): Promise<CreateTagDto> {
-    return this.tagsService.create(createTagDto);
-  }
-
   @Get()
-  findAll(@Query() params: QueryParams): Promise<Tag[]> {
-    return this.tagsService.findAll(params);
+  @UseInterceptors(
+    ResponseInterceptor,
+    new TransformInterceptor(ResponseTagDto)
+  )
+  findAll(): Promise<ResponseTagDto[]> {
+    return this.tagsService.findAll();
   }
 
   @Get(":id")
-  findOne(@Param("id") id: string): Promise<Tag> {
-    return this.tagsService.findOne(+id);
+  findOne(@Param("id") id: number): Promise<ResponseTagDto> {
+    return this.tagsService.findOne(id);
+  }
+
+  @Post()
+  @UseInterceptors(
+    ResponseInterceptor,
+    new TransformInterceptor(ResponseTagDto)
+  )
+  create(@Body() createTagDto: CreateTagDto): Promise<ResponseTagDto> {
+    return this.tagsService.create(createTagDto);
   }
 
   @Patch(":id")
   update(
-    @Param("id") id: string,
+    @Param("id") id: number,
     @Body() updateTagDto: UpdateTagDto
-  ): Promise<UpdateTagDto> {
-    return this.tagsService.update(+id, updateTagDto);
+  ): Promise<ResponseTagDto> {
+    return this.tagsService.update(id, updateTagDto);
   }
 
   @Delete(":id")
-  remove(@Param("id") id: string): Promise<string> {
-    return this.tagsService.remove(+id);
+  remove(@Param("id") id: number): Promise<void> {
+    return this.tagsService.remove(id);
   }
 }

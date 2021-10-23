@@ -1,10 +1,9 @@
-import { Repository, Like } from "typeorm";
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { CreateLevelDto } from "./dto/create-level.dto";
-import { UpdateLevelDto } from "./dto/update-level.dto";
-import { Level } from "./entities/level.entity";
-import { QueryParams } from "@utils/query";
+import { Repository } from "typeorm";
+
+import { CreateLevelDto, UpdateLevelDto } from "./dto";
+import { Level } from "./entities";
 
 @Injectable()
 export class LevelsService {
@@ -12,45 +11,57 @@ export class LevelsService {
     @InjectRepository(Level) private levelRepository: Repository<Level>
   ) {}
 
-  async create(createLevelDto: CreateLevelDto): Promise<CreateLevelDto> {
-    await this.levelRepository.insert(createLevelDto);
-
-    return createLevelDto;
-  }
-
-  findAll(query: QueryParams): Promise<Level[]> {
+  findAll(): Promise<Level[]> {
     return this.levelRepository.find({
-      skip: query.page * query.pageSize,
-      take: query.pageSize,
       where: {
         isActive: true,
-        name: Like(`%${query.q}%`),
       },
     });
   }
 
-  findOne(id: number): Promise<Level> {
-    return this.levelRepository.findOne({
+  async findOne(id: number): Promise<Level> {
+    const level = await this.levelRepository.findOne({
       id,
       isActive: false,
     });
+
+    if (!level) {
+      throw new NotFoundException("Level not found");
+    }
+
+    return level;
   }
 
-  async update(
-    id: number,
-    updateLevelDto: UpdateLevelDto
-  ): Promise<UpdateLevelDto> {
-    await this.levelRepository.update(id, updateLevelDto);
+  async create(createLevelDto: CreateLevelDto): Promise<Level> {
+    const createdLevel = this.levelRepository.create(createLevelDto);
 
-    return updateLevelDto;
+    return await this.levelRepository.save(createdLevel);
   }
 
-  async remove(id: number): Promise<string> {
-    await this.levelRepository.update(id, {
-      isActive: false,
-      deletedAt: new Date(),
+  async update(id: number, updateLevelDto: UpdateLevelDto): Promise<Level> {
+    const updatedLevel = await this.levelRepository.preload({
+      id,
+      ...updateLevelDto,
     });
 
-    return "El level fue desactivado correctamente";
+    if (!updatedLevel) {
+      throw new NotFoundException("Level not found");
+    }
+
+    await updatedLevel.save();
+
+    return updatedLevel;
+  }
+
+  async remove(id: number): Promise<void> {
+    const deletedLevel = await this.levelRepository.preload({
+      id,
+    });
+
+    if (!deletedLevel) {
+      throw new NotFoundException("Level not found");
+    }
+
+    await deletedLevel.save();
   }
 }
