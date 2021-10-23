@@ -1,8 +1,17 @@
-import { Entity, Column } from "typeorm";
-import { Base } from "@common/entities/base";
+import {
+  Entity,
+  Column,
+  CreateDateColumn,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+  BaseEntity,
+} from "typeorm";
 
 @Entity("currencies")
-export class Currency extends Base {
+export class Currency extends BaseEntity {
+  @PrimaryGeneratedColumn("increment")
+  id: number;
+
   @Column()
   name: string;
 
@@ -10,5 +19,17 @@ export class Currency extends Base {
   symbol: string;
 
   @Column({ default: "DOP" })
-  isCode: string;
+  isoCode: string;
+
+  @Column({ default: true, name: "is_active" })
+  isActive: boolean;
+
+  @Column({ type: "date", name: "deleted_at", nullable: true })
+  deletedAt: Date;
+
+  @UpdateDateColumn({ name: "updated_at" })
+  updatedAt: Date;
+
+  @CreateDateColumn({ name: "created_at" })
+  createdAt: Date;
 }

@@ -1,10 +1,10 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Currency } from "./entities/currency.entity";
+import { Repository } from "typeorm";
+
 import { CreateCurrencyDto } from "./dto/create-currency.dto";
 import { UpdateCurrencyDto } from "./dto/update-currency.dto";
-import { QueryParams } from "@utils/query";
-import { Repository, Like } from "typeorm";
+import { Currency } from "./entities/currency.entity";
 
 @Injectable()
 export class CurrenciesService {
@@ -12,47 +12,63 @@ export class CurrenciesService {
     @InjectRepository(Currency) private currencyRepository: Repository<Currency>
   ) {}
 
-  async create(
-    createCurrencyDto: CreateCurrencyDto
-  ): Promise<CreateCurrencyDto> {
-    await this.currencyRepository.insert(createCurrencyDto);
-
-    return createCurrencyDto;
-  }
-
-  findAll(query: QueryParams): Promise<Currency[]> {
+  findAll(): Promise<Currency[]> {
     return this.currencyRepository.find({
-      skip: query.page * query.pageSize,
-      take: query.pageSize,
       where: {
         isActive: true,
-        name: Like(`%${query.q}%`),
       },
     });
   }
 
-  findOne(id: number): Promise<Currency> {
-    return this.currencyRepository.findOne({
+  async findOne(id: number): Promise<Currency> {
+    const currency = await this.currencyRepository.findOne({
       id,
       isActive: true,
     });
+
+    if (!currency) {
+      throw new NotFoundException("Currency not found");
+    }
+
+    return currency;
+  }
+
+  async create(createCurrencyDto: CreateCurrencyDto): Promise<Currency> {
+    const createdCurrency = this.currencyRepository.create(createCurrencyDto);
+    const currency = await this.currencyRepository.save(createdCurrency);
+
+    return currency;
   }
 
   async update(
     id: number,
     updateCurrencyDto: UpdateCurrencyDto
-  ): Promise<UpdateCurrencyDto> {
-    await this.currencyRepository.update(id, updateCurrencyDto);
+  ): Promise<Currency> {
+    const updatedCurrency = await this.currencyRepository.preload({
+      id,
+      ...updateCurrencyDto,
+    });
 
-    return updateCurrencyDto;
+    if (!updatedCurrency) {
+      throw new NotFoundException("Currency not found");
+    }
+
+    await updatedCurrency.save();
+
+    return updatedCurrency;
   }
 
-  async remove(id: number): Promise<string> {
-    await this.currencyRepository.update(id, {
+  async remove(id: number): Promise<void> {
+    const updatedCurrency = await this.currencyRepository.preload({
+      id,
       isActive: false,
       deletedAt: new Date(),
     });
 
-    return "El currency fue desactivado correctamente";
+    if (!updatedCurrency) {
+      throw new NotFoundException("Currency not found");
+    }
+
+    await updatedCurrency.save();
   }
 }
