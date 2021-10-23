@@ -7,45 +7,62 @@ import {
   Param,
   Delete,
   UseInterceptors,
-  Query,
+  HttpCode,
+  HttpStatus,
 } from "@nestjs/common";
+import { ApiTags } from "@nestjs/swagger";
+
+import { ResponseInterceptor, TransformInterceptor } from "@interceptors/index";
+import { CreateJobDto, UpdateJobDto, ResponseJobDto } from "./dto";
 import { JobsService } from "./jobs.service";
-import { CreateJobDto } from "./dto/create-job.dto";
-import { UpdateJobDto } from "./dto/update-job.dto";
-import { ResponseInterceptor } from "@interceptors/response.interceptor";
-import { Job } from "./entities/job.entity";
-import { QueryParams } from "@utils/query";
 
 @Controller("jobs")
-@UseInterceptors(ResponseInterceptor)
+@ApiTags("Jobs")
 export class JobsController {
   constructor(private readonly jobsService: JobsService) {}
 
-  @Post()
-  create(@Body() createJobDto: CreateJobDto): Promise<CreateJobDto> {
-    return this.jobsService.create(createJobDto);
-  }
-
   @Get()
-  findAll(@Query() params: QueryParams): Promise<Job[]> {
-    return this.jobsService.findAll(params);
+  @UseInterceptors(
+    ResponseInterceptor,
+    new TransformInterceptor(ResponseJobDto)
+  )
+  findAll(): Promise<ResponseJobDto[]> {
+    return this.jobsService.findAll();
   }
 
   @Get(":id")
-  findOne(@Param("id") id: string): Promise<Job> {
-    return this.jobsService.findOne(+id);
+  @UseInterceptors(
+    ResponseInterceptor,
+    new TransformInterceptor(ResponseJobDto)
+  )
+  findOne(@Param("id") id: number): Promise<ResponseJobDto> {
+    return this.jobsService.findOne(id);
+  }
+
+  @Post()
+  @UseInterceptors(
+    ResponseInterceptor,
+    new TransformInterceptor(ResponseJobDto)
+  )
+  create(@Body() createJobDto: CreateJobDto): Promise<ResponseJobDto> {
+    return this.jobsService.create(createJobDto);
   }
 
   @Patch(":id")
+  @UseInterceptors(
+    ResponseInterceptor,
+    new TransformInterceptor(ResponseJobDto)
+  )
   update(
-    @Param("id") id: string,
+    @Param("id") id: number,
     @Body() updateJobDto: UpdateJobDto
-  ): Promise<UpdateJobDto> {
-    return this.jobsService.update(+id, updateJobDto);
+  ): Promise<ResponseJobDto> {
+    return this.jobsService.update(id, updateJobDto);
   }
 
   @Delete(":id")
-  remove(@Param("id") id: string): Promise<string> {
-    return this.jobsService.remove(+id);
+  @HttpCode(HttpStatus.NO_CONTENT)
+  remove(@Param("id") id: number): Promise<void> {
+    return this.jobsService.remove(id);
   }
 }

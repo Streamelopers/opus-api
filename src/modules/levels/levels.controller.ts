@@ -6,48 +6,63 @@ import {
   Patch,
   Param,
   Delete,
-  Query,
   UseInterceptors,
+  HttpCode,
+  HttpStatus,
 } from "@nestjs/common";
-import { LevelsService } from "./levels.service";
-import { CreateLevelDto } from "./dto/create-level.dto";
-import { UpdateLevelDto } from "./dto/update-level.dto";
-import { QueryParams } from "@utils/query";
 import { ApiTags } from "@nestjs/swagger";
-import { ResponseInterceptor } from "@interceptors/response.interceptor";
-import { Level } from "./entities/level.entity";
+
+import { ResponseInterceptor, TransformInterceptor } from "@interceptors/index";
+import { CreateLevelDto, UpdateLevelDto, ResponseLevelDto } from "./dto";
+import { LevelsService } from "./levels.service";
 
 @ApiTags("Levels")
 @Controller("levels")
-@UseInterceptors(ResponseInterceptor)
 export class LevelsController {
   constructor(private readonly levelsService: LevelsService) {}
 
-  @Post()
-  create(@Body() createLevelDto: CreateLevelDto): Promise<CreateLevelDto> {
-    return this.levelsService.create(createLevelDto);
-  }
-
   @Get()
-  findAll(@Query() params: QueryParams): Promise<Level[]> {
-    return this.levelsService.findAll(params);
+  @UseInterceptors(
+    ResponseInterceptor,
+    new TransformInterceptor(ResponseLevelDto)
+  )
+  findAll(): Promise<ResponseLevelDto[]> {
+    return this.levelsService.findAll();
   }
 
   @Get(":id")
-  findOne(@Param("id") id: string): Promise<Level> {
-    return this.levelsService.findOne(+id);
+  @UseInterceptors(
+    ResponseInterceptor,
+    new TransformInterceptor(ResponseLevelDto)
+  )
+  findOne(@Param("id") id: number): Promise<ResponseLevelDto> {
+    return this.levelsService.findOne(id);
+  }
+
+  @Post()
+  @UseInterceptors(
+    ResponseInterceptor,
+    new TransformInterceptor(ResponseLevelDto)
+  )
+  create(@Body() createLevelDto: CreateLevelDto): Promise<ResponseLevelDto> {
+    return this.levelsService.create(createLevelDto);
   }
 
   @Patch(":id")
+  @UseInterceptors(
+    ResponseInterceptor,
+    new TransformInterceptor(ResponseLevelDto)
+  )
   update(
-    @Param("id") id: string,
+    @Param("id") id: number,
     @Body() updateLevelDto: UpdateLevelDto
-  ): Promise<UpdateLevelDto> {
-    return this.levelsService.update(+id, updateLevelDto);
+  ): Promise<ResponseLevelDto> {
+    return this.levelsService.update(id, updateLevelDto);
   }
 
   @Delete(":id")
-  remove(@Param("id") id: string): Promise<string> {
-    return this.levelsService.remove(+id);
+  @HttpCode(HttpStatus.NO_CONTENT)
+  remove(@Param("id") id: number): Promise<void> {
+    return this.levelsService.remove(id);
   }
 }
