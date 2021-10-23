@@ -7,49 +7,68 @@ import {
   Param,
   Delete,
   UseInterceptors,
-  Query,
+  HttpCode,
+  HttpStatus,
 } from "@nestjs/common";
-import { LocationsService } from "./locations.service";
-import { CreateLocationDto } from "./dto/create-location.dto";
-import { UpdateLocationDto } from "./dto/update-location.dto";
-import { QueryParams } from "@utils/query";
 import { ApiTags } from "@nestjs/swagger";
-import { ResponseInterceptor } from "@interceptors/response.interceptor";
-import { Location } from "./entities/location.entity";
+
+import {
+  CreateLocationDto,
+  UpdateLocationDto,
+  ResponseLocationDto,
+} from "./dto";
+import { TransformInterceptor, ResponseInterceptor } from "@interceptors/index";
+import { LocationsService } from "./locations.service";
 
 @ApiTags("Locations")
 @Controller("locations")
-@UseInterceptors(ResponseInterceptor)
 export class LocationsController {
   constructor(private readonly locationsService: LocationsService) {}
 
-  @Post()
-  create(
-    @Body() createLocationDto: CreateLocationDto
-  ): Promise<CreateLocationDto> {
-    return this.locationsService.create(createLocationDto);
-  }
-
   @Get()
-  findAll(@Query() params: QueryParams): Promise<Location[]> {
-    return this.locationsService.findAll(params);
+  @UseInterceptors(
+    ResponseInterceptor,
+    new TransformInterceptor(ResponseLocationDto)
+  )
+  findAll(): Promise<ResponseLocationDto[]> {
+    return this.locationsService.findAll();
   }
 
   @Get(":id")
-  findOne(@Param("id") id: string): Promise<Location> {
+  @UseInterceptors(
+    ResponseInterceptor,
+    new TransformInterceptor(ResponseLocationDto)
+  )
+  findOne(@Param("id") id: string): Promise<ResponseLocationDto> {
     return this.locationsService.findOne(+id);
   }
 
+  @Post()
+  @UseInterceptors(
+    ResponseInterceptor,
+    new TransformInterceptor(ResponseLocationDto)
+  )
+  create(
+    @Body() createLocationDto: CreateLocationDto
+  ): Promise<ResponseLocationDto> {
+    return this.locationsService.create(createLocationDto);
+  }
+
   @Patch(":id")
+  @UseInterceptors(
+    ResponseInterceptor,
+    new TransformInterceptor(ResponseLocationDto)
+  )
   update(
     @Param("id") id: string,
     @Body() updateLocationDto: UpdateLocationDto
-  ): Promise<UpdateLocationDto> {
+  ): Promise<ResponseLocationDto> {
     return this.locationsService.update(+id, updateLocationDto);
   }
 
   @Delete(":id")
-  remove(@Param("id") id: string): Promise<string> {
-    return this.locationsService.remove(+id);
+  @HttpCode(HttpStatus.NO_CONTENT)
+  remove(@Param("id") id: number): Promise<void> {
+    return this.locationsService.remove(id);
   }
 }

@@ -1,51 +1,60 @@
-import { Repository, Like } from "typeorm";
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { CreateTagDto } from "./dto/create-tag.dto";
-import { UpdateTagDto } from "./dto/update-tag.dto";
-import { Tag } from "./entities/tag.entity";
-import { QueryParams } from "@utils/query";
+import { Repository } from "typeorm";
+
+import { CreateTagDto, UpdateTagDto } from "./dto";
+import { Tag } from "./entities";
 
 @Injectable()
 export class TagsService {
   constructor(@InjectRepository(Tag) private tagRepository: Repository<Tag>) {}
 
-  async create(createTagDto: CreateTagDto): Promise<CreateTagDto> {
-    await this.tagRepository.insert(createTagDto);
-
-    return createTagDto;
-  }
-
-  findAll(query: QueryParams): Promise<Tag[]> {
+  findAll(): Promise<Tag[]> {
     return this.tagRepository.find({
-      skip: query.page * query.pageSize,
-      take: query.pageSize,
       where: {
         isActive: true,
-        name: Like(`%${query.q}%`),
       },
     });
   }
 
-  findOne(id: number): Promise<Tag> {
-    return this.tagRepository.findOne({
+  async findOne(id: number): Promise<Tag> {
+    const tag = await this.tagRepository.findOne({
       id,
       isActive: true,
     });
+
+    if (!tag) {
+      throw new NotFoundException("Tag not found");
+    }
+
+    return tag;
   }
 
-  async update(id: number, updateTagDto: UpdateTagDto): Promise<UpdateTagDto> {
-    await this.tagRepository.update(id, updateTagDto);
+  async create(createTagDto: CreateTagDto): Promise<Tag> {
+    const createdTag = this.tagRepository.create(createTagDto);
 
-    return updateTagDto;
+    return await this.tagRepository.save(createdTag);
   }
 
-  async remove(id: number): Promise<string> {
-    await this.tagRepository.update(id, {
+  async update(id: number, updateTagDto: UpdateTagDto): Promise<Tag> {
+    const tag = await this.tagRepository.preload({ id, ...updateTagDto });
+
+    if (!tag) {
+      throw new NotFoundException("Tag not found");
+    }
+
+    return tag;
+  }
+
+  async remove(id: number): Promise<void> {
+    const tag = await this.tagRepository.preload({
+      id,
       isActive: false,
       deletedAt: new Date(),
     });
 
-    return "El tag fue desactivado correctamente";
+    if (!tag) {
+      throw new NotFoundException("Tag not found");
+    }
   }
 }
