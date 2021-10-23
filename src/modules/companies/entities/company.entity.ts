@@ -26,7 +26,7 @@ export class Company extends BaseEntity {
   description: string;
 
   @OneToOne(() => User)
-  @JoinColumn()
+  @JoinColumn({ name: "user_id" })
   user: User;
 
   @Column({ default: true, name: "is_active" })

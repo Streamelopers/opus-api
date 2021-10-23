@@ -1,23 +1,30 @@
 import {
   Entity,
   Column,
-  // JoinColumn,
-  // OneToOne,
-  // OneToMany,
-  // JoinTable,
+  BaseEntity,
+  UpdateDateColumn,
+  CreateDateColumn,
+  PrimaryGeneratedColumn,
+  OneToOne,
+  JoinColumn,
+  OneToMany,
+  JoinTable,
 } from "typeorm";
-import { Base } from "@common/entities/base";
-// import { Jobtype } from "src/jobtypes/entities/jobtype.entity";
-// import { User } from "src/users/entities/user.entity";
-// import { Level } from "src/levels/entities/level.entity";
-// import { Tag } from "../../tags/entities/tag.entity";
-// import { Company } from "src/companies/entities/company.entity";
-// import { Currency } from "src/currencies/entities/currency.entity";
-// import { Paymenttype } from "src/paymenttypes/entities/paymenttype.entity";
-// import { Location } from "src/locations/entities/location.entity";
 
-@Entity("jobs")
-export class Job extends Base {
+import { PaymentType } from "@modules/payment-types/entities";
+import { Currency } from "@modules/currencies/entities";
+import { Location } from "@modules/locations/entities";
+import { Company } from "@modules/companies/entities";
+import { JobType } from "@modules/job-types/entities";
+import { Level } from "@modules/levels/entities";
+import { User } from "@modules/users/entities";
+import { Tag } from "@modules/tags/entities";
+
+@Entity({ name: "jobs" })
+export class Job extends BaseEntity {
+  @PrimaryGeneratedColumn("increment")
+  id: number;
+
   @Column()
   title: string;
 
@@ -36,62 +43,50 @@ export class Job extends Base {
   @Column({ name: "is_remote" })
   isRemote: boolean;
 
-  @Column({ name: "is_remote_only" })
-  isRemoteOnly: boolean;
-
   @Column({ name: "application_target " })
   applicationTarget: string;
 
-  // @OneToOne(() => User)
-  // @JoinColumn()
-  // user: User;
+  @OneToOne(() => User)
+  @JoinColumn({ name: "user_id" })
+  user: User;
 
-  // @Column({ nullable: true })
-  // userId: number;
+  @OneToOne(() => Company)
+  @JoinColumn()
+  company: Company;
 
-  // @OneToOne(() => Company)
-  // @JoinColumn()
-  // company: Company;
+  @OneToOne(() => Level)
+  @JoinColumn()
+  level: Level;
 
-  // @Column({ nullable: true })
-  // companyId: number;
+  @OneToOne(() => JobType)
+  @JoinColumn()
+  jobtype: JobType;
 
-  // @OneToOne(() => Level)
-  // @JoinColumn()
-  // level: Level;
+  @OneToOne(() => Currency)
+  @JoinColumn()
+  currency: Currency;
 
-  // @Column({ nullable: true })
-  // levelId: number;
+  @OneToOne(() => Location)
+  @JoinColumn()
+  location: Location;
 
-  // @OneToOne(() => Jobtype)
-  // @JoinColumn()
-  // jobtype: Jobtype;
+  @OneToOne(() => PaymentType)
+  @JoinColumn()
+  paymenttype: PaymentType;
 
-  // @Column({ nullable: true })
-  // jobtypeId: number;
+  @OneToMany(() => Tag, (tag) => tag.jobs)
+  @JoinTable({ name: "job_tags" })
+  tags: Tag[];
 
-  // @OneToOne(() => Currency)
-  // @JoinColumn()
-  // currency: Currency;
+  @Column({ default: true, name: "is_active" })
+  isActive: boolean;
 
-  // @Column({ nullable: true })
-  // currencyId: number;
+  @Column({ type: "date", name: "deleted_at", nullable: true })
+  deletedAt: Date;
 
-  // @OneToOne(() => Location)
-  // @JoinColumn()
-  // location: Location;
+  @UpdateDateColumn({ name: "updated_at" })
+  updatedAt: Date;
 
-  // @Column({ nullable: true })
-  // locationId: number;
-
-  // @OneToOne(() => Paymenttype)
-  // @JoinColumn()
-  // paymenttype: Paymenttype;
-
-  // @Column({ nullable: true })
-  // paymenttypeId: number;
-
-  // @OneToMany((type) => Tag, (tag) => tag.jobs)
-  // @JoinTable()
-  // tags: Tag[];
+  @CreateDateColumn({ name: "created_at" })
+  createdAt: Date;
 }

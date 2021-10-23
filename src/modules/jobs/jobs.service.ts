@@ -1,10 +1,9 @@
-import { Injectable } from "@nestjs/common";
-import { CreateJobDto } from "./dto/create-job.dto";
-import { UpdateJobDto } from "./dto/update-job.dto";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Like, Repository } from "typeorm";
-import { Job } from "./entities/job.entity";
-import { QueryParams } from "@utils/query";
+import { Repository } from "typeorm";
+
+import { CreateJobDto, UpdateJobDto } from "./dto";
+import { Job } from "./entities";
 
 @Injectable()
 export class JobsService {
@@ -13,43 +12,59 @@ export class JobsService {
     private jobRepository: Repository<Job>
   ) {}
 
-  async create(createJobDto: CreateJobDto): Promise<CreateJobDto> {
-    await this.jobRepository.insert(createJobDto);
-
-    return createJobDto;
-  }
-
-  findAll(query: QueryParams): Promise<Job[]> {
+  findAll(): Promise<Job[]> {
     return this.jobRepository.find({
-      skip: query.page * query.pageSize,
-      take: query.pageSize,
       where: {
         isActive: true,
-        title: Like(`%${query.q}%`),
-        description: Like(`%${query.q}%`),
       },
     });
   }
 
-  findOne(id: number): Promise<Job> {
-    return this.jobRepository.findOne({
+  async findOne(id: number): Promise<Job> {
+    const job = await this.jobRepository.findOne({
       id,
       isActive: true,
     });
+
+    if (!job) {
+      throw new NotFoundException("Job not found");
+    }
+
+    return job;
   }
 
-  async update(id: number, updateJobDto: UpdateJobDto): Promise<UpdateJobDto> {
-    await this.jobRepository.update(id, updateJobDto);
+  async create(createJobDto: CreateJobDto): Promise<Job> {
+    const createdJob = this.jobRepository.create(createJobDto);
 
-    return updateJobDto;
+    return await this.jobRepository.save(createdJob);
   }
 
-  async remove(id: number): Promise<string> {
-    await this.jobRepository.update(id, {
+  async update(id: number, updateJobDto: UpdateJobDto): Promise<Job> {
+    const updatedJob = await this.jobRepository.preload({
+      id,
+      ...updateJobDto,
+    });
+
+    if (!updatedJob) {
+      throw new NotFoundException("Job not found");
+    }
+
+    await updatedJob.save();
+
+    return updatedJob;
+  }
+
+  async remove(id: number): Promise<void> {
+    const deletedJob = await this.jobRepository.preload({
+      id,
       isActive: false,
       deletedAt: new Date(),
     });
 
-    return "La publicación fue eliminada de forma correcta";
+    if (!deletedJob) {
+      throw new NotFoundException("Job not found");
+    }
+
+    await deletedJob.save();
   }
 }
