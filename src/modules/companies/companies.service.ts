@@ -63,6 +63,8 @@ export class CompaniesService {
       throw new NotFoundException("Company not found");
     }
 
+    await company.save();
+
     return company;
   }
 
@@ -76,5 +78,7 @@ export class CompaniesService {
     if (!company) {
       throw new NotFoundException("Company not found");
     }
+
+    await company.save();
   }
 }

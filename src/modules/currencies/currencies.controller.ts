@@ -6,50 +6,67 @@ import {
   Patch,
   Param,
   Delete,
-  Query,
   UseInterceptors,
+  HttpCode,
+  HttpStatus,
 } from "@nestjs/common";
-import { CurrenciesService } from "./currencies.service";
+import { ApiTags } from "@nestjs/swagger";
+
+import { TransformInterceptor, ResponseInterceptor } from "@interceptors/index";
 import { CreateCurrencyDto } from "./dto/create-currency.dto";
 import { UpdateCurrencyDto } from "./dto/update-currency.dto";
-import { QueryParams } from "@utils/query";
-import { ApiTags } from "@nestjs/swagger";
-import { ResponseInterceptor } from "@interceptors/response.interceptor";
-import { Currency } from "./entities/currency.entity";
+import { CurrenciesService } from "./currencies.service";
+import { ResponseCurrencyDto } from "./dto";
 
 @ApiTags("Currencies")
 @Controller("currencies")
-@UseInterceptors(ResponseInterceptor)
 export class CurrenciesController {
   constructor(private readonly currenciesService: CurrenciesService) {}
 
   @Post()
+  @UseInterceptors(
+    ResponseInterceptor,
+    new TransformInterceptor(ResponseCurrencyDto)
+  )
   create(
     @Body() createCurrencyDto: CreateCurrencyDto
-  ): Promise<CreateCurrencyDto> {
+  ): Promise<ResponseCurrencyDto> {
     return this.currenciesService.create(createCurrencyDto);
   }
 
   @Get()
-  findAll(@Query() params: QueryParams): Promise<Currency[]> {
-    return this.currenciesService.findAll(params);
+  @UseInterceptors(
+    ResponseInterceptor,
+    new TransformInterceptor(ResponseCurrencyDto)
+  )
+  findAll(): Promise<CreateCurrencyDto[]> {
+    return this.currenciesService.findAll();
   }
 
   @Get(":id")
-  findOne(@Param("id") id: string): Promise<Currency> {
-    return this.currenciesService.findOne(+id);
+  @UseInterceptors(
+    ResponseInterceptor,
+    new TransformInterceptor(ResponseCurrencyDto)
+  )
+  findOne(@Param("id") id: number): Promise<CreateCurrencyDto> {
+    return this.currenciesService.findOne(id);
   }
 
   @Patch(":id")
+  @UseInterceptors(
+    ResponseInterceptor,
+    new TransformInterceptor(ResponseCurrencyDto)
+  )
   update(
-    @Param("id") id: string,
+    @Param("id") id: number,
     @Body() updateCurrencyDto: UpdateCurrencyDto
-  ): Promise<UpdateCurrencyDto> {
-    return this.currenciesService.update(+id, updateCurrencyDto);
+  ): Promise<ResponseCurrencyDto> {
+    return this.currenciesService.update(id, updateCurrencyDto);
   }
 
   @Delete(":id")
-  remove(@Param("id") id: string): Promise<string> {
-    return this.currenciesService.remove(+id);
+  @HttpCode(HttpStatus.NO_CONTENT)
+  remove(@Param("id") id: number): Promise<void> {
+    return this.currenciesService.remove(id);
   }
 }
