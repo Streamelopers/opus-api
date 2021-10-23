@@ -28,6 +28,9 @@ services:
       - JWT_SECRET=${JWT_SECRET}
       - SENDGRID_API_KEY=${SENDGRID_API_KEY}
       - FROM_EMAIL=${FROM_EMAIL}
+      - CLOUDINARY_CLOUD_NAME=${CLOUDINARY_CLOUD_NAME}
+      - CLOUDINARY_API_KEY=${CLOUDINARY_API_KEY}
+      - CLOUDINARY_API_SECRET=${CLOUDINARY_API_SECRET}
     command: npm run start:debug
     restart: unless-stopped
 
