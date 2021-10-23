@@ -10,4 +10,13 @@ export class CreateLevelDto {
     maxLength: 20,
   })
   name: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @Length(5, 200)
+  @ApiProperty({
+    minLength: 5,
+    maxLength: 200,
+  })
+  description: string;
 }
