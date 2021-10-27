@@ -12,7 +12,7 @@ import { DatabaseModule } from "@database/database.module";
 import { UsersModule } from "@modules/users/users.module";
 import { JobsModule } from "@modules/jobs/jobs.module";
 import { TagsModule } from "@modules/tags/tags.module";
-import { CloudinaryModule } from './modules/cloudinary/cloudinary.module';
+import { CloudinaryModule } from "./modules/cloudinary/cloudinary.module";
 
 @Module({
   imports: [
