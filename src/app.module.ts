@@ -27,7 +27,7 @@ import { CloudinaryModule } from "./modules/cloudinary/cloudinary.module";
     LevelsModule,
     JobtypesModule,
     LocationsModule,
-    PaymenttypesModule,
+    PaymentTypesModule,
     CloudinaryModule,
   ],
 })
