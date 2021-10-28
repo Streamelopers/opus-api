@@ -1,1 +1,1 @@
-export const CLOUDINARY = 'CLOUDINARY';
+export const CLOUDINARY = "CLOUDINARY";
