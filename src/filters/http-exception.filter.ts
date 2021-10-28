@@ -20,10 +20,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const status = exception.getStatus();
     const message = exception.message;
 
-    this.logger.error("Ups, and error ocurred");
-    this.logger.error(exception);
-    this.logger.error(exception.message);
-
     const managedResponse = {
       success: false,
       data: {
@@ -32,6 +28,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
         timestamp: new Date().toISOString(),
       },
     };
+
+    this.logger.error(exception.message);
 
     return response.status(status).json(managedResponse);
   }

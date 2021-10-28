@@ -1,9 +1,11 @@
-import { IsString, IsNumber } from "class-validator";
+import { IsString, IsNumber, IsEnum } from "class-validator";
 import { Expose, Exclude } from "class-transformer";
 import { ApiProperty } from "@nestjs/swagger";
 
+import { Identities } from "@modules/auth/common/enums";
+
 @Exclude()
-export class ResponseUserDto {
+export class SignInResponseDto {
   @Expose()
   @IsNumber()
   @ApiProperty({ type: Number })
@@ -18,4 +20,13 @@ export class ResponseUserDto {
   @IsString()
   @ApiProperty({ type: String })
   readonly email: string;
+
+  @Expose()
+  @IsEnum(Identities)
+  @ApiProperty({ enum: Identities })
+  readonly identity: string;
+
+  @Expose()
+  @ApiProperty({ type: String })
+  readonly token: string;
 }

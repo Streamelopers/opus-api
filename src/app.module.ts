@@ -12,10 +12,14 @@ import { DatabaseModule } from "@database/database.module";
 import { UsersModule } from "@modules/users/users.module";
 import { JobsModule } from "@modules/jobs/jobs.module";
 import { TagsModule } from "@modules/tags/tags.module";
+import { validationSchema } from "@config/index";
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      validationSchema,
+    }),
     DatabaseModule,
     AuthenticationModule,
     UsersModule,

@@ -12,6 +12,20 @@
       "restart": true,
       "address": "0.0.0.0",
       "skipFiles": ["<node_internals>/**"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch API",
+      "runtimeArgs": [
+        "-r",
+        "ts-node/register",
+        "-r",
+        "tsconfig-paths/register"
+      ],
+      "args": ["${workspaceFolder}/src/main.ts"],
+      "autoAttachChildProcesses": true,
+      "console": "integratedTerminal"
     }
   ]
 }
