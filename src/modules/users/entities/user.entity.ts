@@ -5,13 +5,8 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  BeforeInsert,
-  BeforeUpdate,
-  AfterLoad,
   OneToMany,
 } from "typeorm";
-import { genSaltSync, hashSync } from "bcrypt";
-import { randomBytes } from "crypto";
 
 import { Identity } from "@modules/auth/common/entities";
 

@@ -6,7 +6,6 @@ import {
 import { InjectRepository } from "@nestjs/typeorm";
 import { FindOneOptions, Repository } from "typeorm";
 
-import { SignUpDto } from "@modules/auth/basic/dtos";
 import { UpdateUserDto } from "./dtos";
 import { User } from "./entities";
 
