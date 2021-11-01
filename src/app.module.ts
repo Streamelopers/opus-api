@@ -2,6 +2,7 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 import { Module } from "@nestjs/common";
 
 import { PaymentTypesModule } from "@modules/payment-types/payment-types.module";
+import { CloudinaryModule } from "./modules/cloudinary/cloudinary.module";
 import { CurrenciesModule } from "@modules/currencies/currencies.module";
 import { LocationsModule } from "@modules/locations/locations.module";
 import { CompaniesModule } from "@modules/companies/companies.module";
@@ -31,6 +32,7 @@ import { validationSchema } from "@config/index";
     JobtypesModule,
     LocationsModule,
     PaymentTypesModule,
+    CloudinaryModule,
   ],
 })
 export class AppModule {
