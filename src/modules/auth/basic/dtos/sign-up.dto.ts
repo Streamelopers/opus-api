@@ -23,13 +23,6 @@ export class SignUpDto {
   lastname: string;
 
   @IsNotEmpty()
-  @IsString()
-  @MaxLength(30)
-  @MinLength(4)
-  @ApiProperty({ type: String })
-  username: string;
-
-  @IsNotEmpty()
   @IsEmail()
   @MaxLength(50)
   @ApiProperty({ type: String })

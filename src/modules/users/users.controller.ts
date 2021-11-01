@@ -8,7 +8,7 @@ import {
   UseGuards,
   UseInterceptors,
 } from "@nestjs/common";
-import { JwtAuthGuard } from "../auth/guards/auth.guard";
+import { JwtAuthGuard } from "../auth/common/guards/auth.guard";
 import { ApiTags, ApiBasicAuth } from "@nestjs/swagger";
 
 import { ResponseInterceptor } from "@interceptors/response.interceptor";
@@ -46,10 +46,10 @@ export class UsersController {
   @Patch(":id")
   @UseInterceptors(new TransformInterceptor(ResponseUserDto))
   update(
-    @Param("id") id: string,
+    @Param("id") id: number,
     @Body() updateUserDto: UpdateUserDto
-  ): Promise<UpdateUserDto> {
-    return this.usersService.update(+id, updateUserDto);
+  ): Promise<ResponseUserDto> {
+    return this.usersService.update(id, updateUserDto);
   }
 
   // @ApiBearerAuth()
