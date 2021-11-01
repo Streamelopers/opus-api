@@ -4,9 +4,8 @@ import {
   NotFoundException,
 } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
+import { FindOneOptions, Repository } from "typeorm";
 
-import { SignUpDto } from "@modules/auth/dtos";
 import { UpdateUserDto } from "./dtos";
 import { User } from "./entities";
 
@@ -35,22 +34,9 @@ export class UsersService {
     return await this.userRepository.find();
   }
 
-  async create(signupDto: SignUpDto): Promise<User> {
-    const { name, lastname, username, email, password } = signupDto;
-
-    const user = new User();
-    user.name = name;
-    user.lastname = lastname;
-    user.username = username;
-    user.email = email;
-    user.password = password;
-
-    return await user.save();
-  }
-
-  async update(userId: number, user: Partial<UpdateUserDto>): Promise<User> {
+  async update(id: number, user: UpdateUserDto): Promise<User> {
     const updatedUser = await this.userRepository.preload({
-      id: userId,
+      id,
       ...user,
     });
 
@@ -69,6 +55,10 @@ export class UsersService {
     }
 
     await this.userRepository.delete(userId);
+  }
+
+  findOneBy(options: FindOneOptions<User>) {
+    return this.userRepository.findOne(options);
   }
 
   async getUserByEmailOrUsername(

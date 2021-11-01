@@ -16,9 +16,9 @@ import { ApiBasicAuth, ApiTags } from "@nestjs/swagger";
 import { ResponseInterceptor, TransformInterceptor } from "@interceptors/index";
 import { CreateCompanyDto } from "./dto/create-company.dto";
 import { UpdateCompanyDto } from "./dto/update-company.dto";
-import { CurrentUser } from "@modules/auth/decorators";
+import { CurrentUser } from "@modules/auth/common/decorators";
 import { CompaniesService } from "./companies.service";
-import { JwtAuthGuard } from "@modules/auth/guards";
+import { JwtAuthGuard } from "@modules/auth/common/guards";
 import { ResponseCompanyDto } from "./dto";
 
 @ApiTags("Companies")

@@ -2,6 +2,7 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 import { Module } from "@nestjs/common";
 
 import { PaymentTypesModule } from "@modules/payment-types/payment-types.module";
+import { CloudinaryModule } from "./modules/cloudinary/cloudinary.module";
 import { CurrenciesModule } from "@modules/currencies/currencies.module";
 import { LocationsModule } from "@modules/locations/locations.module";
 import { CompaniesModule } from "@modules/companies/companies.module";
@@ -12,11 +13,14 @@ import { DatabaseModule } from "@database/database.module";
 import { UsersModule } from "@modules/users/users.module";
 import { JobsModule } from "@modules/jobs/jobs.module";
 import { TagsModule } from "@modules/tags/tags.module";
-import { CloudinaryModule } from "./modules/cloudinary/cloudinary.module";
+import { validationSchema } from "@config/index";
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      validationSchema,
+    }),
     DatabaseModule,
     AuthenticationModule,
     UsersModule,
