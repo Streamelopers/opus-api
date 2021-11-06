@@ -77,9 +77,10 @@ export class BasicAuthController {
 
   @Post("reset")
   resetPassword(@Body() resetPasswordDto: ResetPasswordDto): Promise<void> {
-    return this.authenticationService.resetPassword(
-      resetPasswordDto.token,
-      resetPasswordDto.password
-    );
+    return this.authenticationService.resetPassword({
+      email: resetPasswordDto.email,
+      token: resetPasswordDto.token,
+      password: resetPasswordDto.password,
+    });
   }
 }
