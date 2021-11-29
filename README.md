@@ -32,7 +32,7 @@ Este es el servicio que gestiona la información de [Opus](https://opus.do).
 
 ¿Te gustaría colaborar? A continuación se detallan los pasos a seguir para ponerse manos a la obra.
 
-### Dependecias
+### Dependencias
 
 - [Visual Studio Code](https://code.visualstudio.com/download)
 - [Node.js](https://nodejs.org/en/download/)
