@@ -132,3 +132,5 @@ La información expuesta a través de este servicio proviene de la base de datos
 - [Jose M. Segura Polanco](https://github.com/DarkCode01)
 - [Jadhiel Vélez](https://github.com/Jadhielv)
 - [Marluan Espiritusanto](https://github.com/marluanespiritusanto)
+- [Niurmiguel Gonzalez](https://github.com/Niurmiguel)
+- [Danny Feliz](https://github.com/DannyFeliz)
