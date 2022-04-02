@@ -69,7 +69,7 @@
     "@types/passport": "^1.0.6",
     "@types/passport-github2": "^1.2.5",
     "@types/passport-jwt": "^3.0.6",
-    "@types/supertest": "^2.0.11",
+    "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^4.15.2",
     "@typescript-eslint/parser": "^4.15.2",
     "eslint": "^7.20.0",
