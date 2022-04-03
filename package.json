@@ -34,7 +34,7 @@
     "@nestjs/mapped-types": "^1.0.1",
     "@nestjs/passport": "^8.2.1",
     "@nestjs/platform-express": "^8.4.2",
-    "@nestjs/swagger": "^5.1.0",
+    "@nestjs/swagger": "^5.2.1",
     "@nestjs/typeorm": "^8.0.3",
     "@sendgrid/mail": "^7.6.2",
     "bcrypt": "^5.0.1",
