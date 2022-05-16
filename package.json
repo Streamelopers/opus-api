@@ -41,7 +41,7 @@
     "buffer-to-stream": "^1.0.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
-    "cloudinary": "^1.29.1",
+    "cloudinary": "^1.30.0",
     "compression": "^1.7.4",
     "dotenv": "^8.2.0",
     "helmet": "^4.6.0",
