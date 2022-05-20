@@ -36,7 +36,7 @@
     "@nestjs/platform-express": "^8.4.5",
     "@nestjs/swagger": "^5.2.1",
     "@nestjs/typeorm": "^8.0.3",
-    "@sendgrid/mail": "^7.6.2",
+    "@sendgrid/mail": "^7.7.0",
     "bcrypt": "^5.0.1",
     "buffer-to-stream": "^1.0.0",
     "class-transformer": "^0.5.1",
