@@ -33,7 +33,7 @@
     "@nestjs/jwt": "^10.2.0",
     "@nestjs/mapped-types": "^1.2.2",
     "@nestjs/passport": "^10.0.3",
-    "@nestjs/platform-express": "^10.3.7",
+    "@nestjs/platform-express": "^10.4.6",
     "@nestjs/swagger": "^7.3.0",
     "@nestjs/typeorm": "^10.0.2",
     "@sendgrid/mail": "^8.1.1",
